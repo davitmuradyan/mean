@@ -1,8 +1,11 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-lg-6">
-      <div *ngIf="alert" class="alert alert-danger" role="alert">
-          {{message}}
+      <div *ngIf="wrongEmail" class="alert alert-danger" role="alert">
+        {{wrongEmail}}
+      </div>
+      <div *ngIf="wrongUsername" class="alert alert-danger" role="alert">
+        {{wrongUsername}}
       </div>
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form-group">

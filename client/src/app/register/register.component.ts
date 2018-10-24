@@ -12,8 +12,8 @@ import { ModalDirective } from 'angular-bootstrap-md';
 export class RegisterComponent implements OnInit {
 
   form: FormGroup
-  alert = false
-  message = ''
+  wrongEmail = ''
+  wrongUsername = ''
 
   @ViewChild('frame') modalRef: ModalDirective
 
@@ -40,24 +40,20 @@ export class RegisterComponent implements OnInit {
   onChangeEmail() {
     this.authService.checkUserEmail(this.form.value.email)
     .subscribe(() => {
-      //TODO: check if there is no errors before
-      this.alert = false
+      this.wrongEmail = ''
     },
     (error) => {
-      this.alert = true
-      this.message = error.error.message
+      this.wrongEmail = error.error.message
     })
   }
 
   onChangeUsername() {
     this.authService.checkUsername(this.form.value.username)
     .subscribe(() => {
-      //TODO: check if there is no errors before
-      this.alert = false
+      this.wrongUsername = ''
     },
     (error) => {
-      this.alert = true
-      this.message = error.error.message
+      this.wrongUsername = error.error.message
     })
   }
 
