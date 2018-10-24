@@ -18,14 +18,23 @@ export class AuthService {
         return this.http.post<any>('http://localhost:3000/login', user)
     }
 
-    verifyEmail(authToken: String) {
-        return this.http.put(`http://localhost:3000/verify-email/${authToken}`, {authToken: null, verified: true})
+    verifyEmail(authToken: String): Observable<any> {
+        return this.http.put<any>(`http://localhost:3000/verify-email/${authToken}`, {authToken: null, verified: true})
+    }
+
+    checkUserEmail(email: String): Observable<any> {
+        return this.http.post<any>('http://localhost:3000/checkemail', {email})
+    }
+
+    checkUsername(username: String): Observable<any> {
+        return this.http.post<any>('http://localhost:3000/checkusername', {username})
     }
 
     storeToken(user: string) {
         localStorage.setItem('user', user)
     }
 
+    //TODO: take only token
     getToken() {
         return JSON.parse(localStorage.getItem('user'))
     }

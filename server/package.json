@@ -6,7 +6,8 @@
   "scripts": {
     "server": "nodemon index.js",
     "client": "cd ../client && npm run start",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "install-dependencies": "npm i && cd ../client && npm i"
   },
   "author": "Davit Muradyan",
   "license": "MIT",
@@ -16,7 +17,6 @@
     "concurrently": "^4.0.1",
     "cors": "^2.8.4",
     "crypto-random-string": "^1.0.0",
-    "email-verification": "^0.4.6",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.3.4",

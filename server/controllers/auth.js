@@ -34,7 +34,8 @@ module.exports.login = async (req, res) => {
                     userEmail: candidate.email,
                     username: candidate.username,
                     firstname: candidate.firstname,
-                    lastname: candidate.lastname
+                    lastname: candidate.lastname,
+                    id: candidate._id
                 })
             }
         }
@@ -48,7 +49,7 @@ module.exports.register = async (req, res) => {
         const candidate = await User.findOne( {$or: [{username: req.body.username}, {email: req.body.email}]} )
         if (candidate) {
             res.status(409).json({
-                message: `User ${req.body.username} already exists`
+                message: `User already exists`
             })
         }
         else {
@@ -79,4 +80,28 @@ module.exports.verifyEmail = async (req, res) => {
     } catch (error) {
         res.status(500).json(error)
     }
+}
+
+module.exports.checkEmail = async (req, res) => {
+    const candidate = await User.findOne({email: req.body.email})
+    if (candidate) {
+        res.status(409).json({
+            message: `User with ${req.body.email} email already exists`
+        })
+    } 
+    res.status(200).json({
+        message: 'Free email'
+    })
+}
+
+module.exports.checkUsername = async (req, res) => {
+    const candidate = await User.findOne({username: req.body.username})
+    if (candidate) {
+        res.status(409).json({
+            message: `User with ${req.body.username} username already exists`
+        })
+    } 
+    res.status(200).json({
+        message: 'Free username'
+    })
 }
