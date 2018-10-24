@@ -1,0 +1,77 @@
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark blue">
+  <mdb-navbar-brand>
+    <a class="navbar-brand" href="#">
+      Mean product
+    </a>
+  </mdb-navbar-brand>
+  <links>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link waves-light" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link waves-light" mdbWavesEffect>Features</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link waves-light" mdbWavesEffect>Courses</a>
+        </li>
+        <li class="nav-item dropdown" dropdown>
+            <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+              Basic dropdown
+              <span class="caret"></span>
+            </a>
+            <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                <a class="dropdown-item waves-light" mdbWavesEffect href="#">Action</a>
+                <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>
+                <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a>
+                <div class="divider dropdown-divider"></div>
+                <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
+            </div>
+        </li>
+    </ul>
+    <div class="md-form mt-0" *ngIf="!user">
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link waves-light" [routerLink]="['/login']" mdbWavesEffect>Login</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link waves-light"  mdbWavesEffect>/</a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link waves-light" [routerLink]="['/register']" mdbWavesEffect>Register</a>
+          </li>
+      </ul>
+    </div>
+  </links>
+</mdb-navbar>
+
+<router-outlet></router-outlet>
+
+<footer class="page-footer font-small blue pt-4">
+    <div class="container-fluid text-center text-md-left">
+      <div class="row">
+        <div class="col-md-6 mt-md-0 mt-3">
+          <h5 class="text-uppercase">Mean Content</h5>
+          <p>Find some solutions for some courses.</p>
+        </div>
+        <hr class="clearfix w-100 d-md-none pb-3">
+        <div class="col-md-3 mb-md-0 mb-3">
+            <h5 class="text-uppercase">Courses</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a href="#!">Statistics</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3 mb-md-0 mb-3">
+            <h5 class="text-uppercase">Fun</h5>
+            <ul class="list-unstyled">
+              <li>
+                <a href="#!">Mechanics</a>
+              </li>
+            </ul>
+          </div>
+      </div>
+    </div>
+    <div class="footer-copyright text-center py-3">© 2018 Copyright</div>
+  </footer>

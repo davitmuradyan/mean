@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <div *ngIf="alert" class="alert alert-danger" role="alert">
+          {{message}}
+      </div>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            id="username" 
+            placeholder="Username" 
+            formControlName="username"
+            [ngClass]="{'is-invalid': form.get('username').invalid && form.get('username').touched}"
+          >
+          <span 
+            *ngIf="form.get('username').invalid && form.get('username').touched"
+            class="invalid-feedback" 
+            style="display: block"
+          >
+              Username can't be blank
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input 
+            type="password" 
+            class="form-control" 
+            id="password" 
+            placeholder="Password" 
+            formControlName="password"
+            [ngClass]="{'is-invalid': form.get('password').invalid && form.get('password').touched}"
+          >
+          <span *ngIf="form.get('password').invalid && form.get('password').touched">
+            <span 
+              *ngIf="form.get('password').errors['required']" 
+              class="invalid-feedback" 
+              style="display: block"
+            >
+              Password can't be blank
+            </span>
+            <span
+              *ngIf="form.get('password').errors['minlength']" 
+              class="invalid-feedback" 
+              style="display: block"
+            >
+              Password can't be less than {{form.get('password').errors['minlength']['requiredLength']}}
+              Currently it is {{form.get('password').errors['minlength']['actualLength']}}
+            </span>
+          </span>
+        </div>
+        <button type="submit" class="btn btn-default" [disabled]="form.invalid || loading">Login</button>
+      </form>
+      <div *ngIf="loading">
+        <app-loader></app-loader>
+      </div>
+    </div>
+  </div>
+</div>
+
+
