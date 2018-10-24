@@ -31,7 +31,7 @@ export class AuthService {
     }
 
     storeToken(user: string) {
-        localStorage.setItem('user', user)
+        localStorage.setItem('user', JSON.stringify(user))
     }
 
     //TODO: take only token

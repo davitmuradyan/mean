@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.form.value)
      .subscribe((data) => {
        console.log(data)
-        this.authService.storeToken(JSON.stringify(data))
+        this.authService.storeToken(data)
         this.loading = false
         this.router.navigate(['/main'])
      },

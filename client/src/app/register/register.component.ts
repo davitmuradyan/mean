@@ -40,8 +40,7 @@ export class RegisterComponent implements OnInit {
   onChangeEmail() {
     this.authService.checkUserEmail(this.form.value.email)
     .subscribe(() => {
-      if (this.alert)
-        return false
+      //TODO: check if there is no errors before
       this.alert = false
     },
     (error) => {
@@ -53,8 +52,7 @@ export class RegisterComponent implements OnInit {
   onChangeUsername() {
     this.authService.checkUsername(this.form.value.username)
     .subscribe(() => {
-      if (this.alert)
-        return false
+      //TODO: check if there is no errors before
       this.alert = false
     },
     (error) => {

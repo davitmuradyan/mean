@@ -76,7 +76,18 @@ module.exports.verifyEmail = async (req, res) => {
             {authToken: req.params.authToken}, 
             req.body,
         )
-        res.status(200).json(user)
+        const accessToken = jwt.sign({
+            username: user.username
+        }, JWT_SECRET_KEY, { expiresIn: "6 hours"})
+        const newUser = {
+            accessToken,
+            userEmail: user.email,
+            username: user.username,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            id: user._id
+        }
+        res.status(200).json(newUser)
     } catch (error) {
         res.status(500).json(error)
     }

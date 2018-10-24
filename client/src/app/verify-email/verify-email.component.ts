@@ -20,8 +20,9 @@ export class VerifyEmailComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe( params => {
       this.authService.verifyEmail(params['authToken']).subscribe(
-        () => {
-          this.router.navigate(['/login'])
+        (data) => {
+          this.authService.storeToken(data)
+          this.router.navigate(['/main'])
         },
         error => {
          console.log(error) 
