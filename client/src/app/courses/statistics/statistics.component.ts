@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {StatService} from '../../shared/services/stat.service';
 
 @Component({
   selector: 'app-statistics',
@@ -7,84 +8,143 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatisticsComponent implements OnInit {
 
-  finalMean = null
-  finalVariance = null
-  sorted = null
-  kos = null
-  finalMedian = null
-  finalMode = null
+  finalMean = null;
+  finalVariance = null;
+  sorted = null;
+  kos = null;
+  finalMedian = null;
+  finalMode = null;
+  datasets = [];
+  hidden = false;
+  dataSetToSave;
+  showEdit = false;
 
-  constructor() { }
+  @ViewChild('newData') newDatasetRef: ElementRef;
+
+  constructor(private statService: StatService) { }
 
   ngOnInit() {
+    this.fetch();
   }
 
   calculateMean(dataset, from = false) {
-      let sum = 0
+      let sum = 0;
       dataset.map( item => {
-        sum += +item
-      })
+        sum += +item;
+      });
       if (from) {
-        const mean = sum/dataset.length
-        return mean
+        const mean = sum / dataset.length;
+        return mean;
       }
-      this.finalMean = sum/dataset.length
-      return this.finalMean
+      this.finalMean = sum / dataset.length;
+      return this.finalMean;
   }
 
   calculateVariance(dataset) {
-    let localMean = this.calculateMean(dataset, true)
-    let sum = 0
+    const localMean = this.calculateMean(dataset, true);
+    let sum = 0;
     dataset.map( item => {
-      sum += (+item - localMean)**2
-    })
-    this.finalVariance = sum/dataset.length
-    return this.finalVariance
+      sum += (+item - localMean) ** 2;
+    });
+    this.finalVariance = sum / dataset.length;
+    return this.finalVariance;
   }
 
   sortData(dataset: any, from = false) {
-    dataset = dataset.map(Number)
-    if (from) 
-      return dataset.sort((a,b) => a - b)
-    this.sorted = dataset.sort((a,b) => a - b)
-    return this.sorted
+    dataset = dataset.map(Number);
+    if (from) {
+      return dataset.sort((a, b) => a - b);
+    }
+    this.sorted = dataset.sort((a, b) => a - b);
+    return this.sorted;
   }
 
   kthOrderStatistics(dataset, stat) {
-    const sorted = this.sortData(dataset, true)
-    this.kos = sorted[+stat - 1]
-    return this.kos
+    const sorted = this.sortData(dataset, true);
+    this.kos = sorted[+stat - 1];
+    return this.kos;
   }
 
-  calculateMedian(dataset, from = false) {
-    const sorted = this.sortData(dataset, true)
-    const len = sorted.length
+  calculateMedian(dataset) {
+    const sorted = this.sortData(dataset, true);
+    const len = sorted.length;
     if (len % 2 === 0) {
-      console.log(sorted[(len / 2)])
-      this.finalMedian = (sorted[(len / 2) - 1] + sorted[(len / 2)])/2
+      console.log(sorted[(len / 2)]);
+      this.finalMedian = (sorted[(len / 2) - 1] + sorted[(len / 2)]) / 2;
     } else {
-      this.finalMedian = sorted[(len  + 1)/2 - 1]
+      this.finalMedian = sorted[(len  + 1) / 2 - 1];
     }
-    return this.finalMedian
+    return this.finalMedian;
   }
 
   calculateMode(dataset) {
     let mf = 1;
     let m = 0;
     let item;
-    for (let i=0; i<dataset.length; i++) {
-      for (let j=i; j<dataset.length; j++) {
-        if (dataset[i] == dataset[j])
+    for (let i = 0; i < dataset.length; i++) {
+      for (let j = i; j < dataset.length; j++) {
+        if (dataset[i] === dataset[j]) {
           m++;
-        if (mf<m) {
-          mf=m; 
+        }
+        if (mf < m) {
+          mf = m;
           item = dataset[i];
         }
       }
-      m=0;
+      m = 0;
     }
-    this.finalMode = item
-    return this.finalMode
+    this.finalMode = item;
+    return this.finalMode;
   }
-  
+
+  remove(id) {
+    this.statService.remove(id)
+      .subscribe(() => {
+        this.fetch();
+      }, error => {
+        console.log(error);
+      });
+  }
+
+  edit(dataset) {
+    dataset.editMode = !dataset.editMode;
+  }
+
+  update(dataset) {
+    const newDataset = this.newDatasetRef.nativeElement.value.split(',').map(Number);
+    this.statService.update(dataset._id, newDataset)
+      .subscribe((data) => {
+        this.fetch();
+      }, (error) => {
+        console.log(error);
+      });
+  }
+
+  fetch() {
+    this.datasets = [];
+    this.statService.fetch()
+      .subscribe((data) => {
+        data.map(set => {
+          set.editMode = false;
+          this.datasets.push(set);
+        });
+      }, error => {
+        console.log(error);
+      });
+  }
+
+  save() {
+    const dataset = this.dataSetToSave.split(',').map(Number);
+    this.statService.create(dataset)
+      .subscribe(data => {
+       this.fetch();
+       this.dataSetToSave = null;
+      }, error => {
+        console.log(error);
+      });
+  }
+
+  showHide() {
+    this.hidden = !this.hidden;
+  }
 }

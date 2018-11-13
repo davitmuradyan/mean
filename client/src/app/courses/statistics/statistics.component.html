@@ -1,6 +1,31 @@
 <div class="container ">
   <div class="row justify-content-md-center">
     <h2>Some functions of descriptive statistics</h2>
+  </div>
+  <div class="row justify-content-end">
+    <div class="col-lg-4 hide-small" style="position: absolute; left: 20px;">
+      <h3>Manage your Data sets</h3>
+      <h5>Add new Data set</h5>
+      <input type="text" class="form-control" [(ngModel)]="dataSetToSave">
+      <button class="btn btn-default" (click)="save()">Save</button>
+      <h5>View my Data sets</h5>
+      <button class="btn btn-default" (click)="showHide()" [disabled]="datasets.length === 0">{{hidden ? 'Hide' : 'Show'}}</button>
+      <span *ngIf="datasets.length === 0">You don't have any dataset saved.</span>
+      <div *ngIf="hidden" style="max-height: 100px">
+        <div class="alert alert-primary" *ngFor="let d of datasets" >
+          <div class="overflow">{{ d.data }}</div>
+          <button class="btn btn-sm btn-danger fa fa-remove positioning" (click)="remove(d._id)"></button>
+          <button class="btn btn-sm btn-primary fa fa-edit positioning" (click)="edit(d)"></button>
+          <button
+            class="btn btn-sm btn-success fa fa-check positioning"
+            (click)="update(d)"
+            *ngIf="d.editMode"
+          >
+          </button>
+          <input type="text" class="form-control" [value]="d.data" *ngIf="d.editMode" #newData>
+        </div>
+      </div>
+    </div>
     <div class="col-lg-8">
       <h3>Mean</h3>
       <div class="form-group">
@@ -12,6 +37,8 @@
         </span>
       </div>
     </div>
+  </div>
+  <div class="row justify-content-end">
     <div class="col-lg-8">
       <h3>Median</h3>
       <div class="form-group">
@@ -23,6 +50,8 @@
         </span>
       </div>
     </div>
+  </div>
+  <div class="row justify-content-md-end">
     <div class="col-lg-8">
       <h3>Mode</h3>
       <div class="form-group">
@@ -34,17 +63,21 @@
         </span>
       </div>
     </div>
+  </div>
+  <div class="row justify-content-md-end">
     <div class="col-lg-8">
-        <h3>Variance</h3>
-        <div class="form-group">
-          <label for="variance">Calculate the Variance</label>
-          <input #variance type="text" class="form-control" id="variance">
-          <button class="btn btn-default" (click)="calculateVariance(variance.value.split(','))">Calculate</button>
-          <span *ngIf="finalVariance">
-            Variance for this dataset is {{finalVariance | number:'.1-2'}}
-          </span>
-        </div>
+      <h3>Variance</h3>
+      <div class="form-group">
+        <label for="variance">Calculate the Variance</label>
+        <input #variance type="text" class="form-control" id="variance">
+        <button class="btn btn-default" (click)="calculateVariance(variance.value.split(','))">Calculate</button>
+        <span *ngIf="finalVariance">
+          Variance for this dataset is {{finalVariance | number:'.1-2'}}
+        </span>
       </div>
+      </div>
+  </div>
+  <div class="row justify-content-md-end">
     <div class="col-lg-8">
       <h3>Sort</h3>
       <div class="form-group">
@@ -56,28 +89,30 @@
         </span>
       </div>
     </div>
+  </div>
+  <div class="row justify-content-md-end">
     <div class="col-lg-8">
-        <h3>K-th order statistics</h3>
-        <div class="form-group">
-          <div class="row">
-          <div class="col-lg-8">
-              <label for="kthod">Dataset</label>
-              <input #kthOrderData type="text" class="form-control" id="kthod">
-          </div>
-          <div class="col-lg-4">
-              <label for="kthos">K-th order stat</label>
-              <input #kthOrderStat type="text" class="form-control" id="kthos">
-          </div>
-          </div>
-          <button class="btn btn-default" (click)="kthOrderStatistics(kthOrderData.value.split(','), kthOrderStat.value)">Calculate</button>
-          <span *ngIf="kos">
-            {{kthOrderStat.value}}-{{
-              kthOrderStat.value == 1 ? 'st' : 
-              kthOrderStat.value == 2 ? 'nd' : 
-              kthOrderStat.value == 3 ? 'rd' : 'th'
-            }} order statistics for this dataset is {{kos}}
-          </span>
+      <h3>K-th order statistics</h3>
+      <div class="form-group">
+        <div class="row">
+        <div class="col-lg-8">
+            <label for="kthod">Dataset</label>
+            <input #kthOrderData type="text" class="form-control" id="kthod">
         </div>
+        <div class="col-lg-4">
+            <label for="kthos">K-th order stat</label>
+            <input #kthOrderStat type="text" class="form-control" id="kthos">
+        </div>
+        </div>
+        <button class="btn btn-default" (click)="kthOrderStatistics(kthOrderData.value.split(','), kthOrderStat.value)">Calculate</button>
+        <span *ngIf="kos">
+          {{kthOrderStat.value}}-{{
+            kthOrderStat.value == 1 ? 'st' :
+            kthOrderStat.value == 2 ? 'nd' :
+            kthOrderStat.value == 3 ? 'rd' : 'th'
+          }} order statistics for this dataset is {{kos}}
+        </span>
+      </div>
       </div>
   </div>
 </div>

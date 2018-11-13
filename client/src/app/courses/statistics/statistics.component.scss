@@ -1,3 +1,22 @@
 button {
   margin-left: 0;
 }
+
+.positioning {
+  float: right;
+  position: relative;
+  bottom: 35px;
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 993px) {
+  .hide-small {
+    display: none;
+  }
+}
+
+.overflow {
+  width: 225px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

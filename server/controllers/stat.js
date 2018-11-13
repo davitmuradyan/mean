@@ -65,6 +65,13 @@ module.exports.update = async (req, res) => {
       const oldDataset = {
         _id: req.params._id
       };
+      req.body.dataset.map(item => {
+        if (typeof item !== "number") {
+          res.status(400).json({
+            message: `Ooops! Dataset can\'t contain anything which is not NUMBER. Please remove ${item}`
+          });
+        }
+      });
       const newDataset = await StatDataset.findOneAndUpdate(oldDataset, {
         data: req.body.dataset
       }, { new: true });

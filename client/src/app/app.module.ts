@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
@@ -16,6 +16,7 @@ import {CoursesComponent} from "./courses/courses.component";
 import {StatisticsComponent} from "./courses/statistics/statistics.component";
 import {NumericalComponent} from "./courses/numerical/numerical.component";
 import {Calc3Component} from "./courses/calc3/calc3.component";
+import {TokenInterceptor} from "./shared/classes/token.interceptor";
 
 @NgModule({
   declarations: [
@@ -39,7 +40,13 @@ import {Calc3Component} from "./courses/calc3/calc3.component";
     HttpClientModule,
     MDBBootstrapModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+      useClass: TokenInterceptor
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

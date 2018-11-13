@@ -8,17 +8,17 @@ import { AuthService } from '../../services/auth.service';
 })
 export class AuthLayoutComponent implements OnDestroy, DoCheck {
 
-  user = null
+  user = null;
 
   constructor(private authService: AuthService) { }
 
   ngOnDestroy() {
-    this.user = null
+    this.user = null;
   }
 
-  //TODO: replace this lyfecycle method by more optimized code
+  // TODO: replace this lyfecycle method by more optimized code
   ngDoCheck() {
-    this.user = this.authService.isAuthenticated()
+    this.user = this.authService.isAuthenticated();
   }
 
 }
