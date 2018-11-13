@@ -27,7 +27,8 @@ module.exports.login = async (req, res) => {
                 })
             } else {
                 const accessToken = jwt.sign({
-                    username: candidate.username
+                    username: candidate.username,
+                    _id: candidate._id
                 }, JWT_SECRET_KEY, { expiresIn: "6 hours"})
                 res.status(200).json({
                     accessToken,
