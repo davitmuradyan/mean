@@ -11,10 +11,10 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  form: FormGroup
-  alert = false
-  message = ''
-  loading = false
+  form: FormGroup;
+  alert = false;
+  message = '';
+  loading = false;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -26,18 +26,17 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.loading = true
+    this.loading = true;
     this.authService.login(this.form.value)
      .subscribe((data) => {
-       console.log(data)
-        this.authService.storeToken(data)
-        this.loading = false
-        this.router.navigate(['/main'])
+        this.authService.storeToken(data);
+        this.loading = false;
+        this.router.navigate(['/main']);
      },
     (error) => {
-      this.loading = false
-      this.alert = true
-      this.message = error.error.message
+      this.loading = false;
+      this.alert = true;
+      this.message = error.error.message;
     })
   }
 

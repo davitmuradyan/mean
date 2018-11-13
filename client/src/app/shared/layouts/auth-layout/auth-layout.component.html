@@ -1,6 +1,6 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark blue">
   <mdb-navbar-brand>
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" [routerLink]="['/']">
       Mean product
     </a>
   </mdb-navbar-brand>
@@ -13,7 +13,7 @@
             <a class="nav-link waves-light" mdbWavesEffect>Features</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link waves-light" mdbWavesEffect>Courses</a>
+            <a [routerLink]="['/courses']" class="nav-link waves-light" mdbWavesEffect>Courses</a>
         </li>
         <li class="nav-item dropdown" dropdown>
             <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
@@ -59,7 +59,13 @@
             <h5 class="text-uppercase">Courses</h5>
             <ul class="list-unstyled">
               <li>
-                <a href="#!">Statistics</a>
+                <a [routerLink]="['/courses', 'statistics']">Statistics</a>
+              </li>
+              <li>
+                <a [routerLink]="['/courses', 'numerical']">Numerical Analysis</a>
+              </li>
+              <li>
+                <a [routerLink]="['/courses', 'calc3']">Calculus 3</a>
               </li>
             </ul>
           </div>

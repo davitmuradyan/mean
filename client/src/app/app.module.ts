@@ -12,6 +12,10 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { MainComponent } from './main/main.component';
+import {CoursesComponent} from "./courses/courses.component";
+import {StatisticsComponent} from "./courses/statistics/statistics.component";
+import {NumericalComponent} from "./courses/numerical/numerical.component";
+import {Calc3Component} from "./courses/calc3/calc3.component";
 
 @NgModule({
   declarations: [
@@ -21,7 +25,11 @@ import { MainComponent } from './main/main.component';
     AuthLayoutComponent,
     LoaderComponent,
     VerifyEmailComponent,
-    MainComponent
+    MainComponent,
+    CoursesComponent,
+    StatisticsComponent,
+    NumericalComponent,
+    Calc3Component
   ],
   imports: [
     BrowserModule,
