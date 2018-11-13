@@ -45,18 +45,18 @@
           </span>
         </div>
       </div>
-      <div class="col-lg-8">
-        <h3>Sort</h3>
-        <div class="form-group">
-          <label for="sort">Sort data</label>
-          <input #sort type="text" class="form-control" id="sort">
-          <button class="btn btn-default" (click)="sortData(sort.value.split(','))">Sort</button>
-          <span *ngIf="sorted">
-            Sorted dataset is {{sorted}}
-          </span>
-        </div>
+    <div class="col-lg-8">
+      <h3>Sort</h3>
+      <div class="form-group">
+        <label for="sort">Sort data</label>
+        <input #sort type="text" class="form-control" id="sort">
+        <button class="btn btn-default" (click)="sortData(sort.value.split(','))">Sort</button>
+        <span *ngIf="sorted">
+          Sorted dataset is {{sorted}}
+        </span>
       </div>
-      <div class="col-lg-8">
+    </div>
+    <div class="col-lg-8">
         <h3>K-th order statistics</h3>
         <div class="form-group">
           <div class="row">
