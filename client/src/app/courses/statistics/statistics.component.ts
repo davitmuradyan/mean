@@ -18,6 +18,9 @@ export class StatisticsComponent implements OnInit {
   hidden = false;
   dataSetToSave;
   showEdit = false;
+  canSaveDataset = false;
+  canUpdateDataset = false;
+  message = '';
 
   @ViewChild('newData') newDatasetRef: ElementRef;
 
@@ -115,7 +118,9 @@ export class StatisticsComponent implements OnInit {
     this.statService.update(dataset._id, newDataset)
       .subscribe((data) => {
         this.fetch();
+        this.message = '';
       }, (error) => {
+        this.message = error.error.message
         console.log(error);
       });
   }
@@ -139,12 +144,32 @@ export class StatisticsComponent implements OnInit {
       .subscribe(data => {
        this.fetch();
        this.dataSetToSave = null;
+       this.message = '';
       }, error => {
+        this.message = error.error.message
         console.log(error);
       });
   }
 
   showHide() {
     this.hidden = !this.hidden;
+  }
+
+  onKeyUp(event: Event) {
+    const commaSeparatedRegExp = /^\w+(,\w+)*$/;
+    if (commaSeparatedRegExp.test(this.dataSetToSave)) {
+      this.canSaveDataset = true;
+    }
+    else {
+      this.canSaveDataset = false;
+    }
+    if(this.newDatasetRef) {
+      if (commaSeparatedRegExp.test(this.newDatasetRef.nativeElement.value)) {
+        this.canUpdateDataset = true;
+      }
+      else {
+        this.canUpdateDataset = false;
+      }
+    }
   }
 }
