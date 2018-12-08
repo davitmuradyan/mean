@@ -10,8 +10,9 @@ module.exports.addDataset = async (req, res) => {
       req.body.dataset.map(item => {
         if (typeof item !== "number") {
           res.status(400).json({
-            message: `Ooops! Dataset can\'t contain anything which is not NUMBER. Please remove ${item}`
+            message: `Ops! Dataset can contain only NUMBER.`
           });
+          throw Error;
         }
       });
       const dataset = await new StatDataset({
@@ -68,8 +69,9 @@ module.exports.update = async (req, res) => {
       req.body.dataset.map(item => {
         if (typeof item !== "number") {
           res.status(400).json({
-            message: `Ooops! Dataset can\'t contain anything which is not NUMBER. Please remove ${item}`
+            message: `Ops! Dataset can contain only NUMBER.`
           });
+          throw Error;
         }
       });
       const newDataset = await StatDataset.findOneAndUpdate(oldDataset, {
