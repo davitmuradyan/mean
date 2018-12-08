@@ -21,3 +21,6 @@
 
 # misc
 npm-debug.log
+
+# credentials
+/constants/dev.credentials.js

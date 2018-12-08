@@ -29,7 +29,13 @@ export class AuthService {
     return this.http.post<any>('http://localhost:3000/checkusername', {username});
   }
 
-  storeToken(user: string) {
+  // uploadImage(image: File) {
+  //   const fd = new FormData();
+  //   fd.append('image', image, image.name)
+  //   return this.http.post('http://localhost:3000/upload', fd);
+  // }
+
+  storeToken(user: string): void {
     localStorage.setItem('user', JSON.stringify(user));
   }
 
@@ -45,11 +51,11 @@ export class AuthService {
     return JSON.parse(localStorage.getItem('user'));
   }
 
-  isAuthenticated() {
+  isAuthenticated(): boolean {
     return !!this.getToken();
   }
 
-  logout() {
+  logout(): void {
     localStorage.clear();
   }
 }
