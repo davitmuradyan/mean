@@ -29,11 +29,16 @@ export class AuthService {
     return this.http.post<any>('http://localhost:3000/checkusername', {username});
   }
 
-  // uploadImage(image: File) {
-  //   const fd = new FormData();
-  //   fd.append('image', image, image.name)
-  //   return this.http.post('http://localhost:3000/upload', fd);
-  // }
+  editProfile(user, image?: File) {
+    const fd = new FormData();
+    if (image) {
+      fd.append('image', image, image.name);
+    }
+    fd.append('firstname', user.firstname);
+    fd.append('lastname', user.lastname);
+    fd.append('username', user.username);
+    return this.http.put('http://localhost:3000/edit-profile', fd);
+  }
 
   storeToken(user: string): void {
     localStorage.setItem('user', JSON.stringify(user));
@@ -53,6 +58,15 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     return !!this.getToken();
+  }
+
+  updateLocalStorage(user) {
+    const loggedInUser = this.getUser();
+    loggedInUser.imgSrc = user.imgSrc;
+    loggedInUser.firstname = user.firstname;
+    loggedInUser.lastname = user.lastname;
+    loggedInUser.username = user.username;
+    this.storeToken(loggedInUser);
   }
 
   logout(): void {

@@ -33,6 +33,10 @@ const User = new Schema({
     authToken: {
         type: String,
         default: null
+    },
+    imgSrc: {
+        type: String,
+        required: false
     }
 });
 

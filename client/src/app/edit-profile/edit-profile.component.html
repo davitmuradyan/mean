@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="first">First name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="first"
+            placeholder="First Name"
+            formControlName="firstname"
+            [ngClass]="{'is-invalid': form.get('firstname').invalid && form.get('firstname').touched}"
+          >
+          <span
+            *ngIf="form.get('firstname').invalid && form.get('firstname').touched"
+            class="invalid-feedback"
+            style="display: block"
+          >
+              Firstname can't be blank
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="last">Last name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="last"
+            placeholder="Last Name"
+            formControlName="lastname"
+            [ngClass]="{'is-invalid': form.get('lastname').invalid && form.get('lastname').touched}"
+          >
+          <span
+            *ngIf="form.get('lastname').invalid && form.get('lastname').touched"
+            class="invalid-feedback"
+            style="display: block"
+          >
+              Lastname can't be blank
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            placeholder="Username"
+            formControlName="username"
+            [ngClass]="{'is-invalid': form.get('username').invalid && form.get('username').touched}"
+          >
+          <span
+            *ngIf="form.get('username').invalid && form.get('username').touched"
+            class="invalid-feedback"
+            style="display: block"
+          >
+                Username can't be blank
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="img">Upload your profile picture</label>
+          <input
+            type="file"
+            class="d-none"
+            id="img"
+            (change)="onFileChange($event)"
+            #img
+          >
+          <button class="btn btn-primary" (click)="img.click()" type="button">Upload</button>
+          <div *ngIf="imagePreview">
+            <img [src]="imagePreview" class="img-responsive">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-default" [disabled]="form.invalid || alert">Update My Profile</button>
+      </form>
+    </div>
+  </div>
+</div>

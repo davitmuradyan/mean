@@ -16,6 +16,7 @@ mongoose.connect(MONGO_URI, { useNewUrlParser: true }, () => {
 app.use(passport.initialize());
 require('./middlewares/passport')(passport);
 app.use(cors());
+app.use('/uploads', express.static('uploads'));
 app.use(bodyParser({extended: true}));
 app.use(bodyParser.json());
 app.use(authRoutes);

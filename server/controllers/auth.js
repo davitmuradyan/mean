@@ -36,7 +36,8 @@ module.exports.login = async (req, res) => {
           username: candidate.username,
           firstname: candidate.firstname,
           lastname: candidate.lastname,
-          id: candidate._id
+          id: candidate._id,
+          imgSrc: candidate.imgSrc
         })
       }
     }
@@ -120,10 +121,21 @@ module.exports.checkUsername = async (req, res) => {
   })
 };
 
-module.exports.upload = async (req, res) => {
+module.exports.editprofile = async (req, res) => {
   try {
-    console.log(req.file)
+    if (req.user) {
+      const user = await User.findById(req.user._id);
+      const updatedUser = await User.findOneAndUpdate(req.user._id, {
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        username: req.body.username,
+        imgSrc: req.file ? req.file.path : user.imgSrc
+      }, { new: true });
+      res.status(200).json(updatedUser)
+    } else {
+      return res.status(400).json({message: 'Bad request'})
+    }
   } catch (e) {
     throw e
   }
-}
+};
