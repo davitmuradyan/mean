@@ -1,7 +1,12 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
+
+      <div >
+      <img class="img" [src]="image">
       <h1>Welcome {{user.firstname}}!</h1>
+      </div>
+      <button class="btn btn-primary" (click)="editProfile()">Edit profile</button>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet tempor nibh, quis pellentesque massa.
          Sed et convallis odio. Sed egestas molestie turpis, quis scelerisque tortor. 
          Proin sed lobortis enim. Sed pretium eget neque id lobortis. 

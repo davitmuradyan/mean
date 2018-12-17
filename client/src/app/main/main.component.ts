@@ -9,17 +9,23 @@ import { Router } from '@angular/router';
 })
 export class MainComponent implements OnInit {
 
-  user = {}
+  user;
+  image = '';
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.user = this.authService.getUser()
+    this.user = this.authService.getUser();
+    this.image = `http://localhost:3000/${this.user.imgSrc}`;
   }
 
   logout() {
-    this.authService.logout()
-    this.router.navigate(['/login'])
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
+
+  editProfile() {
+    this.router.navigate(['/edit-profile']);
   }
 
 }

@@ -17,6 +17,7 @@ import { StatisticsComponent } from './courses/statistics/statistics.component';
 import { NumericalComponent } from './courses/numerical/numerical.component';
 import { Calc3Component } from './courses/calc3/calc3.component';
 import { TokenInterceptor } from './shared/classes/token.interceptor';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { TokenInterceptor } from './shared/classes/token.interceptor';
     CoursesComponent,
     StatisticsComponent,
     NumericalComponent,
-    Calc3Component
+    Calc3Component,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
