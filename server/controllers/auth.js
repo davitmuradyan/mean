@@ -47,10 +47,7 @@ module.exports.login = async (req, res) => {
 };
 
 module.exports.register = async (req, res) => {
-  console.log(req.file)
-  console.log(req.body.fd.image)
   try {
-    console.log(444,req.file)
     const candidate = await User.findOne( {$or: [{username: req.body.username}, {email: req.body.email}]} )
     if (candidate) {
       res.status(409).json({
