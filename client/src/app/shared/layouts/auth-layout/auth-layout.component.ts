@@ -1,5 +1,6 @@
-import { Component, DoCheck, OnDestroy } from '@angular/core';
+import {AfterViewInit, Component, DoCheck, OnDestroy, OnInit} from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-auth-layout',
@@ -9,8 +10,10 @@ import { AuthService } from '../../services/auth.service';
 export class AuthLayoutComponent implements OnDestroy, DoCheck {
 
   user = null;
+  image = '';
+  isAuth = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnDestroy() {
     this.user = null;
@@ -18,7 +21,18 @@ export class AuthLayoutComponent implements OnDestroy, DoCheck {
 
   // TODO: replace this lyfecycle method by more optimized code
   ngDoCheck() {
-    this.user = this.authService.isAuthenticated();
+    this.isAuth = this.authService.isAuthenticated();
+    if (this.isAuth) {
+      this.user = this.authService.getUser();
+      this.image = `http://localhost:3000/${this.user.imgSrc}`;
+    } else {
+      this.image = '';
+    }
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/']);
   }
 
 }

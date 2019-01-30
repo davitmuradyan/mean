@@ -35,7 +35,7 @@
             </div>
         </li>
     </ul>
-    <div class="md-form mt-0" *ngIf="!user">
+    <div class="md-form mt-0" *ngIf="!isAuth">
       <ul class="navbar-nav mr-auto">
           <li class="nav-item" routerLinkActive="active">
               <a class="nav-link waves-light" [routerLink]="['/login']" mdbWavesEffect>Login</a>
@@ -47,6 +47,17 @@
               <a class="nav-link waves-light" [routerLink]="['/register']" mdbWavesEffect>Register</a>
           </li>
       </ul>
+    </div>
+    <div class="nav-item dropdown" dropdown *ngIf="isAuth">
+      <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+        <img [src]="image" alt="dsasa" class="nav-image">
+      </a>
+      <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+        <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/']">My profile</a>
+        <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/settings']">Settings</a>
+        <div class="divider dropdown-divider"></div>
+        <a class="dropdown-item waves-light" mdbWavesEffect (click)="logout()">Logout</a>
+      </div>
     </div>
   </links>
 </mdb-navbar>
