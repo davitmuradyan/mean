@@ -15,6 +15,8 @@ export class EditProfileComponent implements OnInit {
   image: File;
   imagePreview;
   user: User;
+  profileUpdated = false;
+  loading = false;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -42,7 +44,13 @@ export class EditProfileComponent implements OnInit {
   onSubmit() {
     this.authService.editProfile(this.form.value, this.image)
       .subscribe((user) => {
+        this.loading = true;
         this.authService.updateLocalStorage(user);
+        this.profileUpdated = true;
+        this.loading = false;
+        setTimeout(() => {
+          this.profileUpdated = false;
+        }, 2000)
       }, (error) => {
         console.log(error);
       });

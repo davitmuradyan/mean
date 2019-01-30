@@ -1,6 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-6">
+      <div class="alert alert-success" role="alert" style="margin-top: 10px;" *ngIf="profileUpdated">
+          Your profile has been updated successfully!
+      </div>
+      <app-loader *ngIf="loading"></app-loader>
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="first">First name</label>
@@ -70,7 +74,7 @@
             <img [src]="imagePreview" class="img-responsive">
           </div>
         </div>
-        <button type="submit" class="btn btn-default" [disabled]="form.invalid || alert">Update My Profile</button>
+        <button type="submit" class="btn btn-default" [disabled]="form.invalid || alert || loading">Update My Profile</button>
       </form>
     </div>
   </div>
