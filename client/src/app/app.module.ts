@@ -18,6 +18,9 @@ import { NumericalComponent } from './courses/numerical/numerical.component';
 import { Calc3Component } from './courses/calc3/calc3.component';
 import { TokenInterceptor } from './shared/classes/token.interceptor';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { DataStructuresComponent } from './courses/data-structures/data-structures.component';
+import { MechanicsComponent } from './courses/mechanics/mechanics.component';
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [
@@ -32,7 +35,9 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     StatisticsComponent,
     NumericalComponent,
     Calc3Component,
-    EditProfileComponent
+    EditProfileComponent,
+    DataStructuresComponent,
+    MechanicsComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +45,8 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    FontAwesomeModule,
   ],
   providers: [
     {

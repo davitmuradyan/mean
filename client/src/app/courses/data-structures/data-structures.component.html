@@ -1,0 +1,238 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <h1 class="mb-20">Visual implementations of some data structures</h1>
+  </div>
+  <!--STACK IMPLEMENTATION START-->
+  <div class="row justify-content-md-center">
+    <h2 class="mb-20">Stack</h2>
+  </div>
+  <div class="row justify-content-md-left">
+    <div class="col-lg-4">
+      <label for="stack">Enter element to push to stack:</label>
+      <input #stackItem class="form-control" id="stack" (keyup)="checkStackInputEmpty($event)" />
+      <button
+        class="btn btn-primary"
+        (click)="
+          stack.insert(stackItem.value);
+          stackMessage='You inserted item ' + stackItem.value;
+          stackItem.value = null;
+          stackInputNotEmpty = false;
+        "
+        [disabled]="!stackInputNotEmpty"
+      >
+        Push
+      </button>
+      <button
+        class="btn btn-primary"
+        (click)="stackMessage='The top item ' + stack.remove() + ' was removed'"
+        [disabled]="stack.isEmpty()"
+      >
+        Pop
+      </button>
+      <button
+        class="btn btn-primary"
+        (click)="stackMessage='The top item is ' + stack.peek()" [disabled]="stack.isEmpty()"
+      >
+        Top
+      </button>
+      <button
+        class="btn btn-primary"
+        (click)="stackMessage='The length of stack is ' + stack.length()"
+      >
+        length
+      </button>
+      <button
+        class="btn btn-primary"
+        (click)="stackMessage=stack.isEmpty() ? 'The stack is empty' : 'The stack is not empty'"
+      >
+        Is empty
+      </button>
+    </div>
+    <div class="col-lg-4 mb-20">
+      <div class="line">
+        <div class="stack" *ngFor="let item of stack.stack.reverse()">
+          {{item}}
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 mb-20" *ngIf="stackMessage">
+      <div class="alert alert-success">{{stackMessage}}</div>
+    </div>
+  </div>
+  <!--STACK IMPLEMENTATION END-->
+  <hr>
+  <!--QUEUE IMPLEMENTATION START-->
+  <div class="row justify-content-md-center">
+    <h2 class="mb-20">Queue</h2>
+  </div>
+  <div class="row justify-content-md-left">
+    <div class="col-lg-4">
+      <label for="queue">Enter element to push to queue:</label>
+      <input #queueItem class="form-control" id="queue" (keyup)="checkQueueInputEmpty($event)" />
+      <button
+        class="btn btn-primary"
+        (click)="
+          queue.enqueue(queueItem.value);
+          queueMessage='You inserted item ' + queueItem.value;
+          queueItem.value = null;
+          queueInputNotEmpty = false;
+        "
+        [disabled]="!queueInputNotEmpty"
+      >
+        enqueue
+      </button>
+      <button
+        class="btn btn-primary"
+        (click)="queueMessage='The top item ' + queue.peek() + ' was removed'; queue.dequeue()"
+        [disabled]="queue.isEmpty()"
+      >
+        dequeue
+      </button>
+      <button
+        class="btn btn-primary"
+        (click)="queueMessage='The first item is ' + queue.peek()" [disabled]="queue.isEmpty()"
+      >
+        Top
+      </button>
+      <button
+        class="btn btn-primary"
+        (click)="queueMessage='The length of queue is ' + queue.len()"
+      >
+        length
+      </button>
+      <button
+        class="btn btn-primary"
+        (click)="queueMessage=queue.isEmpty() ? 'The queue is empty' : 'The queue is not empty'"
+      >
+        Is empty
+      </button>
+    </div>
+    <div class="col-lg-4 mb-20">
+      <div class="lineQueue">
+        <div class="stack" *ngFor="let item of queue.queue">
+          {{item}}
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 mb-20" *ngIf="queueMessage">
+      <div class="alert alert-success">{{queueMessage}}</div>
+    </div>
+  </div>
+  <!--QUEUE IMPLEMENTATION END-->
+  <hr>
+  <!--PRIORITY QUEUE IMPLEMENTATION START-->
+  <div class="row justify-content-md-center">
+    <h2 class="mb-20">Priority Queue</h2>
+  </div>
+  <div class="row justify-content-md-left">
+    <div class="col-lg-4">
+      <label for="priorityQueue">Enter element to push to priority queue:</label>
+      <input #prQueueItem class="form-control" id="priorityQueue" (keyup)="checkPrQueueInputEmpty($event)" />
+      <mdb-checkbox #isPriority [default]="true">Has priority</mdb-checkbox>
+      <button
+        class="btn btn-primary"
+        (click)="
+          prQueue.enqueue(prQueueItem.value, isPriority.checked);
+          concatQueues();
+          prQueueMessage='You inserted item ' + prQueueItem.value;
+          prQueueItem.value = null;
+          prQueueInputNotEmpty = false;
+        "
+        [disabled]="!prQueueInputNotEmpty"
+      >
+        enqueue
+      </button>
+      <button
+        class="btn btn-primary"
+        (click)="prQueueMessage='The top item ' + prQueue.peek() + ' was removed'; prQueue.dequeue()"
+        [disabled]="prQueue.isEmpty()"
+      >
+        dequeue
+      </button>
+      <button
+        class="btn btn-primary"
+        (click)="prQueueMessage='The first item is ' + prQueue.peek()" [disabled]="prQueue.isEmpty()"
+      >
+        Top
+      </button>
+      <button
+        class="btn btn-primary"
+        (click)="prQueueMessage='The length of priority queue is ' + prQueue.len()"
+      >
+        length
+      </button>
+      <button
+        class="btn btn-primary"
+        (click)="prQueueMessage=prQueue.isEmpty() ? 'The priority queue is empty' : 'The queue is not empty'"
+      >
+        Is empty
+      </button>
+    </div>
+    <div class="col-lg-4 mb-20">
+      <div class="lineQueue">
+        <div class="stack" *ngFor="let item of concatQueues()">
+          {{item}}
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 mb-20" *ngIf="prQueueMessage">
+      <div class="alert alert-success">{{prQueueMessage}}</div>
+    </div>
+  </div>
+  <!--PRIORITY QUEUE IMPLEMENTATION END-->
+  <hr>
+  <!--LINKED LIST IMPLEMENTATION START-->
+  <div class="row justify-content-md-center">
+    <h2 class="mb-20">Linked list</h2>
+  </div>
+  <div class="row justify-content-md-left">
+    <div class="col-lg-4">
+      <label for="linkedList">Enter element to push to linkedList:</label>
+      <input #LL class="form-control" id="linkedList" (keyup)="checkLinkedListInputEmpty($event)" />
+      <button
+        class="btn btn-primary"
+        (click)="addNode(LL.value); LL.value = null; linkedListInputNotEmpty = false"
+        [disabled]="!linkedListInputNotEmpty"
+      >
+        Create Node
+      </button>
+      <button
+        class="btn btn-primary"
+        (click)="linkedList.pop(); linkedListArray.pop()"
+        [disabled]="linkedList.isEmpty()"
+      >
+        Pop
+      </button>
+      <!--<button-->
+        <!--class="btn btn-primary"-->
+        <!--(click)="linkedList.pop(); linkedListArray.pop()"-->
+        <!--[disabled]="linkedList.isEmpty()"-->
+      <!--&gt;-->
+        <!--Get-->
+      <!--</button>-->
+      <!--<button-->
+        <!--class="btn btn-primary"-->
+        <!--(click)="linkedList.get(); linkedListArray.pop()"-->
+        <!--[disabled]="linkedList.isEmpty()"-->
+      <!--&gt;-->
+        <!--Delete-->
+      <!--</button>-->
+      <!--<button-->
+        <!--class="btn btn-primary"-->
+        <!--(click)="linkedList.pop(); linkedListArray.pop()"-->
+      <!--&gt;-->
+        <!--is Empty-->
+      <!--</button>-->
+      <hr>
+    </div>
+  </div>
+  <div class="row justify-content-md-left">
+    <div style="display: inline-block" *ngFor="let item of linkedListArray; index as i">
+      <div class="node">
+        {{item}}
+      </div>
+      <fa-icon *ngIf="!(i + 1 === linkedListArray.length)" [icon]="faLongArrowAltRight"></fa-icon>
+    </div>
+  </div>
+  <!--LINKED LIST IMPLEMENTATION END-->
+</div>
