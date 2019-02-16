@@ -1,0 +1,26 @@
+{
+  "name": "cs-community",
+  "version": "1.0.0",
+  "description": "Go to server directory and install dependencies both for server and client ```sh $ cd server $ npm run install-dependencies ``` When installation finished run both  ```sh $ npm run dev ``` ### Note If you are using linux or mac, change the dev script to  ```sh npm run server & npm run client ```",
+  "main": "index.js",
+  "scripts": {
+    "server:dev": "cd packages/server && npm run server",
+    "client:dev": "cd packages/client && npm run start",
+    "build:client": "cd packages/client && npm run build --prod",
+    "dev:all": "npm-run-all --parallel server:dev client:dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davitmuradyan/mean.git"
+  },
+  "author": "Davit Muradyan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davitmuradyan/mean/issues"
+  },
+  "homepage": "https://github.com/davitmuradyan/mean#readme",
+  "devDependencies": {
+    "lerna": "^3.10.5",
+    "npm-run-all": "^4.1.5"
+  }
+}
