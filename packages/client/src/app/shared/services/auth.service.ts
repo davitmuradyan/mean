@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../interfaces';
 import { Observable } from 'rxjs';
+import { serverUrl } from '../constants';
 
 @Injectable({
   providedIn: 'root'
@@ -10,23 +11,23 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   register(user: User): Observable<User> {
-    return this.http.post<User>('http://localhost:3000/register', user);
+    return this.http.post<User>(`${serverUrl}/register`, user);
   }
 
   login(user: User): Observable<any> {
-    return this.http.post<any>('http://localhost:3000/login', user);
+    return this.http.post<any>(`${serverUrl}/login`, user);
   }
 
   verifyEmail(authToken: String): Observable<any> {
-    return this.http.put<any>(`http://localhost:3000/verify-email/${authToken}`, {authToken: null, verified: true});
+    return this.http.put<any>(`${serverUrl}/verify-email/${authToken}`, {authToken: null, verified: true});
   }
 
   checkUserEmail(email: String): Observable<any> {
-    return this.http.post<any>('http://localhost:3000/checkemail', {email});
+    return this.http.post<any>(`${serverUrl}/checkemail`, {email});
   }
 
   checkUsername(username: String): Observable<any> {
-    return this.http.post<any>('http://localhost:3000/checkusername', {username});
+    return this.http.post<any>(`${serverUrl}/checkusername`, {username});
   }
 
   editProfile(user, image?: File) {
@@ -37,7 +38,7 @@ export class AuthService {
     fd.append('firstname', user.firstname);
     fd.append('lastname', user.lastname);
     fd.append('username', user.username);
-    return this.http.put('http://localhost:3000/edit-profile', fd);
+    return this.http.put(`${serverUrl}/edit-profile`, fd);
   }
 
   storeToken(user: string): void {
