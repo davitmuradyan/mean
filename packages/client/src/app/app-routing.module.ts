@@ -12,6 +12,8 @@ import {StatisticsComponent} from './courses/statistics/statistics.component';
 import {NumericalComponent} from './courses/numerical/numerical.component';
 import {Calc3Component} from './courses/calc3/calc3.component';
 import {EditProfileComponent} from './edit-profile/edit-profile.component';
+import {DataStructuresComponent} from "./courses/data-structures/data-structures.component";
+import {MechanicsComponent} from "./courses/mechanics/mechanics.component";
 
 const routes: Routes = [
   {path: '', component: AuthLayoutComponent,  children: [
@@ -23,6 +25,8 @@ const routes: Routes = [
     {path: 'courses/statistics', component: StatisticsComponent},
     {path: 'courses/numerical', component: NumericalComponent},
     {path: 'courses/calc3', component: Calc3Component},
+    {path: 'courses/data-structures', component: DataStructuresComponent},
+    {path: 'courses/mechanics', component: MechanicsComponent},
     {path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuardService]}
   ]},
   {path: 'email-verification/:authToken', component: VerifyEmailComponent}
