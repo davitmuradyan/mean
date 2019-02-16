@@ -7,7 +7,7 @@
   <links>
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            <a class="nav-link waves-light" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
+            <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/']">Home</a>
         </li>
         <li class="nav-item">
             <a class="nav-link waves-light" mdbWavesEffect>Features</a>
@@ -64,7 +64,7 @@
 
 <router-outlet></router-outlet>
 
-<footer class="page-footer font-small blue pt-4">
+<footer class="page-footer font-small blue pt-4" style="margin-top: 30px;">
     <div class="container-fluid text-center text-md-left">
       <div class="row">
         <div class="col-md-6 mt-md-0 mt-3">
@@ -73,24 +73,31 @@
         </div>
         <hr class="clearfix w-100 d-md-none pb-3">
         <div class="col-md-3 mb-md-0 mb-3">
-            <h5 class="text-uppercase">Courses</h5>
-            <ul class="list-unstyled">
-              <li>
-                <a [routerLink]="['/courses', 'statistics']">Statistics</a>
-              </li>
-              <li>
-                <a [routerLink]="['/courses', 'numerical']">Numerical Analysis</a>
-              </li>
-              <li>
-                <a [routerLink]="['/courses', 'calc3']">Calculus 3</a>
-              </li>
-            </ul>
+          <ul class="list-unstyled">
+            <li>
+              <a [routerLink]="['/courses', 'statistics']">Statistics</a>
+            </li>
+            <li>
+              <a [routerLink]="['/courses', 'numerical']">Numerical Analysis</a>
+            </li>
+            <li>
+              <a [routerLink]="['/courses', 'calc3']">Calculus 3</a>
+            </li>
+            <li>
+              <a [routerLink]="['/courses', 'data-structures']">Data structures</a>
+            </li>
+            <li>
+              <a [routerLink]="['/courses', 'mechanics']">Mechanics</a>
+            </li>
+          </ul>
           </div>
           <div class="col-md-3 mb-md-0 mb-3">
-            <h5 class="text-uppercase">Fun</h5>
             <ul class="list-unstyled">
               <li>
-                <a href="#!">Mechanics</a>
+                <a [routerLink]="['/about']">About</a>
+              </li>
+              <li>
+                <a [routerLink]="['/contact-us']">Contact us</a>
               </li>
             </ul>
           </div>
