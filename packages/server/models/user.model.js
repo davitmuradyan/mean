@@ -37,7 +37,12 @@ const User = new Schema({
     imgSrc: {
         type: String,
         required: false
-    }
+    },
+    type: {
+      type: String,
+      required: true,
+      default: 'student'
+    },
 });
 
 module.exports = mongoose.model('User', User);

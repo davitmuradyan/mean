@@ -7,6 +7,7 @@ const cors = require('cors');
 
 const authRoutes = require('./routes/auth');
 const statRoutes = require('./routes/stat');
+const courseRoutes = require('./routes/course');
 const { MONGO_URI } = require('./constants/constants');
 
 mongoose.connect(MONGO_URI, { useNewUrlParser: true }, () => {
@@ -21,5 +22,6 @@ app.use(bodyParser({extended: true}));
 app.use(bodyParser.json());
 app.use(authRoutes);
 app.use('/dataset', statRoutes);
+app.use('/course', courseRoutes);
 
 module.exports = app;
