@@ -17,10 +17,10 @@ export class StatisticsComponent implements OnInit {
   datasets = [];
   hidden = false;
   dataSetToSave;
-  showEdit = false;
   canSaveDataset = false;
   canUpdateDataset = false;
   message = '';
+  finalTrimmedMean = null;
 
   @ViewChild('newData') newDatasetRef: ElementRef;
 
@@ -41,6 +41,14 @@ export class StatisticsComponent implements OnInit {
       }
       this.finalMean = sum / dataset.length;
       return this.finalMean;
+  }
+
+  calculateTrimmedMean(dataset, trim = 1) {
+    dataset = this.sortData(dataset, true);
+    dataset.splice(0, trim);
+    dataset.splice(dataset.length - trim, trim);
+    this.finalTrimmedMean = this.calculateMean(dataset, true);
+    return this.finalTrimmedMean;
   }
 
   calculateVariance(dataset) {
@@ -120,7 +128,7 @@ export class StatisticsComponent implements OnInit {
         this.fetch();
         this.message = '';
       }, (error) => {
-        this.message = error.error.message
+        this.message = error.error.message;
         console.log(error);
       });
   }
@@ -157,19 +165,9 @@ export class StatisticsComponent implements OnInit {
 
   onKeyUp(event: Event) {
     const commaSeparatedRegExp = /^\w+(,\w+)*$/;
-    if (commaSeparatedRegExp.test(this.dataSetToSave)) {
-      this.canSaveDataset = true;
-    }
-    else {
-      this.canSaveDataset = false;
-    }
+    this.canSaveDataset = commaSeparatedRegExp.test(this.dataSetToSave);
     if(this.newDatasetRef) {
-      if (commaSeparatedRegExp.test(this.newDatasetRef.nativeElement.value)) {
-        this.canUpdateDataset = true;
-      }
-      else {
-        this.canUpdateDataset = false;
-      }
+      this.canUpdateDataset = commaSeparatedRegExp.test(this.newDatasetRef.nativeElement.value);
     }
   }
 }
