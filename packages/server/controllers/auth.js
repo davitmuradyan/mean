@@ -114,10 +114,11 @@ module.exports.checkUsername = async (req, res) => {
     res.status(409).json({
       message: `User with ${req.body.username} username already exists`
     })
+  } else {
+    res.status(200).json({
+      message: 'Free username'
+    })
   }
-  res.status(200).json({
-    message: 'Free username'
-  })
 };
 
 module.exports.editprofile = async (req, res) => {

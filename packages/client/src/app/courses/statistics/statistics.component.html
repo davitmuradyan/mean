@@ -6,17 +6,52 @@
     <div class="col-lg-4 hide-small" style="position: absolute; left: 20px;">
       <h3>Manage your Data sets</h3>
       <h5>Add new Data set</h5>
-      <input type="text" class="form-control" [(ngModel)]="dataSetToSave" (keyup)="onKeyUp($event)">
-      <span *ngIf="message" class="invalid-feedback" style="display: block;">{{ message }}</span>
-      <button class="btn btn-default" (click)="save()" [disabled]="!canSaveDataset">Save</button>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="dataSetToSave"
+        (keyup)="onKeyUp($event)"
+      >
+      <span
+        *ngIf="message"
+        class="invalid-feedback"
+        style="display: block;"
+      >
+        {{ message }}
+      </span>
+      <button
+        class="btn btn-default"
+        (click)="save()"
+        [disabled]="!canSaveDataset"
+      >
+        Save
+      </button>
       <h5>View my Data sets</h5>
-      <button class="btn btn-default" (click)="showHide()" [disabled]="datasets.length === 0">{{hidden ? 'Hide' : 'Show'}}</button>
-      <span *ngIf="datasets.length === 0">You don't have any dataset saved.</span>
+      <button
+        class="btn btn-default"
+        (click)="showHide()"
+        [disabled]="datasets.length === 0"
+      >
+        {{hidden ? 'Hide' : 'Show'}}
+      </button>
+      <span
+        *ngIf="datasets.length === 0"
+      >
+        You don't have any dataset saved.
+      </span>
       <div *ngIf="hidden" style="max-height: 100px">
         <div class="alert alert-primary" *ngFor="let d of datasets" >
           <div class="overflow">{{ d.data }}</div>
-          <button class="btn btn-sm btn-danger fa fa-remove positioning" (click)="remove(d._id)"></button>
-          <button class="btn btn-sm btn-primary fa fa-edit positioning" (click)="edit(d)"></button>
+          <button
+            class="btn btn-sm btn-danger fa fa-remove positioning"
+            (click)="remove(d._id)"
+          >
+          </button>
+          <button
+            class="btn btn-sm btn-primary fa fa-edit positioning"
+            (click)="edit(d)"
+          >
+          </button>
           <button
             class="btn btn-sm btn-success fa fa-check positioning"
             (click)="update(d)"
@@ -24,7 +59,14 @@
             [disabled]="!canUpdateDataset"
           >
           </button>
-          <input type="text" class="form-control" [value]="d.data" *ngIf="d.editMode" #newData (keyup)="onKeyUp($event)">
+          <input
+            type="text"
+            class="form-control"
+            [value]="d.data"
+            *ngIf="d.editMode"
+            #newData
+            (keyup)="onKeyUp($event)"
+          >
         </div>
       </div>
     </div>
@@ -33,9 +75,40 @@
       <div class="form-group">
         <label for="mean">Calculate the mean</label>
         <input #mean type="text" class="form-control" id="mean">
-        <button class="btn btn-default" (click)="calculateMean(mean.value.split(','))">Calculate</button>
+        <button
+          class="btn btn-default"
+          (click)="calculateMean(mean.value.split(','))"
+        >
+          Calculate
+        </button>
         <span *ngIf="finalMean">
           Mean for this dataset is {{finalMean | number:'.1-2'}}
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-end">
+    <div class="col-lg-8">
+      <h3>Trimmed Mean</h3>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-lg-8">
+            <label for="trimmedMean">Calculate the trimmed mean</label>
+            <input #trimmedMean type="text" class="form-control" id="trimmedMean">
+          </div>
+          <div class="col-lg-4">
+            <label for="trimNumber">Number of elements to trim</label>
+            <input #trimNumber type="text" class="form-control" id="trimNumber">
+          </div>
+        </div>
+        <button
+          class="btn btn-default"
+          (click)="calculateTrimmedMean(trimmedMean.value.split(','), trimNumber.value)"
+        >
+          Calculate
+        </button>
+        <span *ngIf="finalTrimmedMean">
+          Trimmed mean for this dataset is {{finalTrimmedMean | number:'.1-2'}}
         </span>
       </div>
     </div>
@@ -46,7 +119,12 @@
       <div class="form-group">
         <label for="median">Calculate the median</label>
         <input #median type="text" class="form-control" id="median">
-        <button class="btn btn-default" (click)="calculateMedian(median.value.split(','))">Calculate</button>
+        <button
+          class="btn btn-default"
+          (click)="calculateMedian(median.value.split(','))"
+        >
+          Calculate
+        </button>
         <span *ngIf="finalMedian">
           Median for this dataset is {{finalMedian | number:'.1-2'}}
         </span>
@@ -59,7 +137,12 @@
       <div class="form-group">
         <label for="mode">Calculate the mode</label>
         <input #mode type="text" class="form-control" id="mode">
-        <button class="btn btn-default" (click)="calculateMode(mode.value.split(','))">Calculate</button>
+        <button
+          class="btn btn-default"
+          (click)="calculateMode(mode.value.split(','))"
+        >
+          Calculate
+        </button>
         <span *ngIf="finalMode">
           Mode for this dataset is {{finalMode | number:'.1-2'}}
         </span>
@@ -72,7 +155,12 @@
       <div class="form-group">
         <label for="variance">Calculate the Variance</label>
         <input #variance type="text" class="form-control" id="variance">
-        <button class="btn btn-default" (click)="calculateVariance(variance.value.split(','))">Calculate</button>
+        <button
+          class="btn btn-default"
+          (click)="calculateVariance(variance.value.split(','))"
+        >
+          Calculate
+        </button>
         <span *ngIf="finalVariance">
           Variance for this dataset is {{finalVariance | number:'.1-2'}}
         </span>
@@ -85,7 +173,12 @@
       <div class="form-group">
         <label for="sort">Sort data</label>
         <input #sort type="text" class="form-control" id="sort">
-        <button class="btn btn-default" (click)="sortData(sort.value.split(','))">Sort</button>
+        <button
+          class="btn btn-default"
+          (click)="sortData(sort.value.split(','))"
+        >
+          Sort
+        </button>
         <span *ngIf="sorted">
           Sorted dataset is {{sorted}}
         </span>
@@ -106,7 +199,12 @@
             <input #kthOrderStat type="text" class="form-control" id="kthos">
         </div>
         </div>
-        <button class="btn btn-default" (click)="kthOrderStatistics(kthOrderData.value.split(','), kthOrderStat.value)">Calculate</button>
+        <button
+          class="btn btn-default"
+          (click)="kthOrderStatistics(kthOrderData.value.split(','), kthOrderStat.value)"
+        >
+          Calculate
+        </button>
         <span *ngIf="kos">
           {{kthOrderStat.value}}-{{
             kthOrderStat.value == 1 ? 'st' :

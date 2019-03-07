@@ -1,3 +1,59 @@
-<p>
-  numerical works!
-</p>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <h1>Solutions to numerical analysis problems</h1>
+  </div>
+  <form [formGroup]="form">
+    <div class="row justify-content-md-center">
+      <div class="col-lg-8">
+        <h3>Absolute Error</h3>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-lg-8">
+              <label for="p">Value of p</label>
+              <input type="text" class="form-control" id="p" formControlName="p">
+            </div>
+            <div class="col-lg-4">
+              <label for="p*">Value of p*</label>
+              <input type="text" class="form-control" id="p*" formControlName="pStar">
+            </div>
+          </div>
+          <button
+            class="btn btn-default"
+            (click)="calculateAbsErr()"
+          >
+            Calculate
+          </button>
+          <span *ngIf="absErr">
+            Absolute error is {{absErr}}
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col-lg-8">
+        <h3>Relative Error</h3>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-lg-8">
+              <label for="r">Value of p</label>
+              <input type="text" class="form-control" id="r" formControlName="r">
+            </div>
+            <div class="col-lg-4">
+              <label for="r*">Value of p*</label>
+              <input type="text" class="form-control" id="r*" formControlName="rStar">
+            </div>
+          </div>
+          <button
+            class="btn btn-default"
+            (click)="calculateRelErr()"
+          >
+            Calculate
+          </button>
+          <span *ngIf="relErr">
+            Relative error is {{relErr}}
+          </span>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
