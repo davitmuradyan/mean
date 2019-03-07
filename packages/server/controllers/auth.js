@@ -28,7 +28,8 @@ module.exports.login = async (req, res) => {
       } else {
         const accessToken = jwt.sign({
           username: candidate.username,
-          _id: candidate._id
+          _id: candidate._id,
+          type: candidate.type,
         }, JWT_SECRET_KEY, { expiresIn: "6 hours"});
         res.status(200).json({
           accessToken,
@@ -37,7 +38,8 @@ module.exports.login = async (req, res) => {
           firstname: candidate.firstname,
           lastname: candidate.lastname,
           id: candidate._id,
-          imgSrc: candidate.imgSrc
+          imgSrc: candidate.imgSrc,
+          type: candidate.type,
         })
       }
     }
