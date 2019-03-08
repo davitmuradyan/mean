@@ -154,7 +154,7 @@ export class StatisticsComponent implements OnInit {
        this.dataSetToSave = null;
        this.message = '';
       }, error => {
-        this.message = error.error.message
+        this.message = error.error.message;
         console.log(error);
       });
   }
@@ -166,7 +166,7 @@ export class StatisticsComponent implements OnInit {
   onKeyUp(event: Event) {
     const commaSeparatedRegExp = /^\w+(,\w+)*$/;
     this.canSaveDataset = commaSeparatedRegExp.test(this.dataSetToSave);
-    if(this.newDatasetRef) {
+    if (this.newDatasetRef) {
       this.canUpdateDataset = commaSeparatedRegExp.test(this.newDatasetRef.nativeElement.value);
     }
   }

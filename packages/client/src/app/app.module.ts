@@ -20,7 +20,10 @@ import { TokenInterceptor } from './shared/classes/token.interceptor';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { DataStructuresComponent } from './courses/data-structures/data-structures.component';
 import { MechanicsComponent } from './courses/mechanics/mechanics.component';
-import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FeaturesComponent } from './features/features.component';
+import { CreateCourseComponent } from './create-course/create-course.component';
+import { CreateSolutionComponent } from './create-solution/create-solution.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,10 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
     Calc3Component,
     EditProfileComponent,
     DataStructuresComponent,
-    MechanicsComponent
+    MechanicsComponent,
+    FeaturesComponent,
+    CreateCourseComponent,
+    CreateSolutionComponent,
   ],
   imports: [
     BrowserModule,

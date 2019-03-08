@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../shared/services/auth.service';
 import { Router } from '@angular/router';
@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   alert = false;
   message = '';
   loading = false;
+  @Input() fromModal: string;
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -30,7 +31,7 @@ export class LoginComponent implements OnInit {
      .subscribe((data) => {
         this.authService.storeToken(data);
         this.loading = false;
-        this.router.navigate(['/main']);
+        this.fromModal ? this.router.navigate([`/${this.fromModal}`]) : this.router.navigate(['/main']);
      },
     (error) => {
       this.loading = false;

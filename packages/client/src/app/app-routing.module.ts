@@ -7,13 +7,16 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { MainComponent } from './main/main.component';
 import { AuthGuardService } from './shared/guards/authGuard.service';
 import { LoginGuardService } from './shared/guards/loginGuard.service';
-import {CoursesComponent} from './courses/courses.component';
-import {StatisticsComponent} from './courses/statistics/statistics.component';
-import {NumericalComponent} from './courses/numerical/numerical.component';
-import {Calc3Component} from './courses/calc3/calc3.component';
-import {EditProfileComponent} from './edit-profile/edit-profile.component';
-import {DataStructuresComponent} from "./courses/data-structures/data-structures.component";
-import {MechanicsComponent} from "./courses/mechanics/mechanics.component";
+import { CoursesComponent } from './courses/courses.component';
+import { StatisticsComponent } from './courses/statistics/statistics.component';
+import { NumericalComponent } from './courses/numerical/numerical.component';
+import { Calc3Component } from './courses/calc3/calc3.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { DataStructuresComponent } from './courses/data-structures/data-structures.component';
+import { MechanicsComponent } from './courses/mechanics/mechanics.component';
+import { FeaturesComponent } from './features/features.component';
+import { CreateCourseComponent } from './create-course/create-course.component';
+import { CreateSolutionComponent } from './create-solution/create-solution.component';
 
 const routes: Routes = [
   {path: '', component: AuthLayoutComponent,  children: [
@@ -27,7 +30,10 @@ const routes: Routes = [
     {path: 'courses/calc3', component: Calc3Component},
     {path: 'courses/data-structures', component: DataStructuresComponent},
     {path: 'courses/mechanics', component: MechanicsComponent},
-    {path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuardService]}
+    {path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuardService]},
+    {path: 'features', component: FeaturesComponent},
+    {path: 'create-course', component: CreateCourseComponent, canActivate: [AuthGuardService]},
+    {path: 'create-solution', component: CreateSolutionComponent, canActivate: [AuthGuardService]},
   ]},
   {path: 'email-verification/:authToken', component: VerifyEmailComponent}
 ];

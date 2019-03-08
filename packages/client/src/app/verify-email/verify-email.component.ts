@@ -9,11 +9,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class VerifyEmailComponent implements OnInit {
 
-  accessToken = ''
-
   constructor(
-    private authService: AuthService, 
-    private activatedRoute: ActivatedRoute, 
+    private authService: AuthService,
+    private activatedRoute: ActivatedRoute,
     private router: Router
     ) { }
 
@@ -21,14 +19,14 @@ export class VerifyEmailComponent implements OnInit {
     this.activatedRoute.params.subscribe( params => {
       this.authService.verifyEmail(params['authToken']).subscribe(
         (data) => {
-          this.authService.storeToken(data)
-          this.router.navigate(['/main'])
+          this.authService.storeToken(data);
+          this.router.navigate(['/main']);
         },
         error => {
-         console.log(error) 
+         console.log(error);
         }
-      )
-    })
+      );
+    });
   }
 
 }

@@ -4,6 +4,7 @@ const passport = require('passport');
 const courseController = require('../controllers/course');
 const checkIfAdmin = require('../middlewares/checkIfAdmin');
 
-router.post('/', passport.authenticate('jwt', { session:false }), checkIfAdmin, courseController.createCourse);
+router.post('/', passport.authenticate('jwt', { session:false }), courseController.createCourse);
+router.get('/', passport.authenticate('jwt', { session:false }), courseController.getAllCourses);
 
 module.exports = router;
