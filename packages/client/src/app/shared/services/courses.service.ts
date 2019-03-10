@@ -13,8 +13,8 @@ export class CoursesService {
     return this.http.post<any>(`${serverUrl}/course`, course);
   }
 
-  fetch(): Observable<any> {
-    return this.http.get<any>(`${serverUrl}/course`);
+  fetch(userCourses = false): Observable<any> {
+    return this.http.get<any>(`${serverUrl}/course?usersCourses=${userCourses}`);
   }
 
   getSingleCourse(id): Observable<any> {

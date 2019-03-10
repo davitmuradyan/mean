@@ -1,4 +1,5 @@
 const Solution = require('../models/solution.model');
+const Course = require('../models/course.model');
 
 module.exports.createSolution = async (req, res, next) => {
     try {
@@ -43,5 +44,16 @@ module.exports.createSolution = async (req, res, next) => {
 };
 
 module.exports.getSolutions = async (req, res, next) => {
-
+    try {
+        const solutions = await Solution.find({userSubmitted: req.user._id});
+        if (solutions.length > 0) {
+            res.status(200).json(solutions);
+            next();
+        } else {
+            res.status(404).json({message: 'You have not created any course.'});
+            next()
+        }
+    } catch (e) {
+        throw e;
+    }
 };

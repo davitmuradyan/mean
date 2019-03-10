@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <h1>My submitted courses</h1>
+  </div>
+  <div class="row justify-content-md-center" *ngIf="courses$">
+    <mdb-card *ngFor="let course of courses$" class="card">
+      <!--Card content-->
+      <mdb-card-body>
+        <!--Title-->
+        <mdb-card-title>
+          <h4>{{course.courseName}}</h4>
+          <p>Status: <span class="status {{course.status | lowercase}}">{{course.status}}</span></p>
+        </mdb-card-title>
+
+        <!--Text-->
+        <mdb-card-text>
+          Feedback: {{course.feedback ? course.feedback : 'You don\'t have a feedback yet'}}
+        </mdb-card-text>
+
+        <a href="#" mdbBtn color="primary" mdbWavesEffect>View</a>
+      </mdb-card-body>
+    </mdb-card>
+  </div>
+  <div class="row justify-content-md-center" *ngIf="!courses$">
+    <h4 style="font-style: italic; color: darkgray">You don't have any submitted course</h4>
+  </div>
+</div>

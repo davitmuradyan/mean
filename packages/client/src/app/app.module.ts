@@ -24,6 +24,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FeaturesComponent } from './features/features.component';
 import { CreateCourseComponent } from './create-course/create-course.component';
 import { CreateSolutionComponent } from './create-solution/create-solution.component';
+import { CourseSubmissionsComponent } from './course-submissions/course-submissions.component';
+import { ProblemSubmissionsComponent } from './problem-submissions/problem-submissions.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { CreateSolutionComponent } from './create-solution/create-solution.compo
     FeaturesComponent,
     CreateCourseComponent,
     CreateSolutionComponent,
+    CourseSubmissionsComponent,
+    ProblemSubmissionsComponent,
   ],
   imports: [
     BrowserModule,

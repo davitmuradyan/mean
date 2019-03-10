@@ -38,6 +38,6 @@ module.exports.getAllCourses = async (req, res, next) => {
         next()
     }
   } catch (e) {
-
+    throw e;
   }
 };

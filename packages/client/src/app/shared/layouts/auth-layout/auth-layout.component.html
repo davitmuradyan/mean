@@ -6,46 +6,58 @@
   </mdb-navbar-brand>
   <links>
     <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-            <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/']">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/features']">Features</a>
-        </li>
-        <li class="nav-item" routerLinkActive="active">
-            <a
-              [routerLink]="['/courses']"
-              class="nav-link waves-light"
-              mdbWavesEffect
-            >
-              Courses
-            </a>
-        </li>
-        <li class="nav-item dropdown" *ngIf="isAuth" dropdown>
-            <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-              Submissions
-              <span class="caret"></span>
-            </a>
-            <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-                <a class="dropdown-item waves-light" mdbWavesEffect href="#">Course submissions</a>
-                <a class="dropdown-item waves-light" mdbWavesEffect href="#">Problem submissions</a>
-                <a class="dropdown-item waves-light" mdbWavesEffect href="#">Review submissions</a>
-                <div class="divider dropdown-divider"></div>
-                <a class="dropdown-item waves-light" mdbWavesEffect href="#">Feedback</a>
-            </div>
-        </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/']">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/features']">Features</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a
+          [routerLink]="['/courses']"
+          class="nav-link waves-light"
+          mdbWavesEffect
+        >
+          Courses
+        </a>
+      </li>
+      <li class="nav-item dropdown" *ngIf="isAuth" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          Submissions
+          <span class="caret"></span>
+        </a>
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+          <a
+            class="dropdown-item waves-light"
+            mdbWavesEffect
+            [routerLink]="['/course-submissions']"
+          >
+            Course submissions
+          </a>
+          <a
+            class="dropdown-item waves-light"
+            mdbWavesEffect
+            [routerLink]="['/problem-submissions']"
+          >
+            Problem submissions
+          </a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Review submissions</a>
+          <div class="divider dropdown-divider"></div>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Feedback</a>
+        </div>
+      </li>
     </ul>
     <div class="md-form mt-0" *ngIf="!isAuth">
       <ul class="navbar-nav mr-auto">
-          <li class="nav-item" routerLinkActive="active">
-              <a class="nav-link waves-light" [routerLink]="['/login']" mdbWavesEffect>Login</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link waves-light"  mdbWavesEffect>/</a>
-          </li>
-          <li class="nav-item" routerLinkActive="active">
-              <a class="nav-link waves-light" [routerLink]="['/register']" mdbWavesEffect>Register</a>
-          </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link waves-light" [routerLink]="['/login']" mdbWavesEffect>Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-light"  mdbWavesEffect>/</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link waves-light" [routerLink]="['/register']" mdbWavesEffect>Register</a>
+        </li>
       </ul>
     </div>
     <div class="nav-item dropdown" dropdown *ngIf="isAuth">
@@ -65,43 +77,43 @@
 <router-outlet></router-outlet>
 
 <footer class="page-footer font-small blue pt-4" style="margin-top: 30px;">
-    <div class="container-fluid text-center text-md-left">
-      <div class="row">
-        <div class="col-md-6 mt-md-0 mt-3">
-          <h5 class="text-uppercase">Mean Content</h5>
-          <p>Find some solutions for some courses.</p>
+  <div class="container-fluid text-center text-md-left">
+    <div class="row">
+      <div class="col-md-6 mt-md-0 mt-3">
+        <h5 class="text-uppercase">Mean Content</h5>
+        <p>Find some solutions for some courses.</p>
+      </div>
+      <hr class="clearfix w-100 d-md-none pb-3">
+      <div class="col-md-3 mb-md-0 mb-3">
+        <ul class="list-unstyled">
+          <li>
+            <a [routerLink]="['/courses', 'statistics']">Statistics</a>
+          </li>
+          <li>
+            <a [routerLink]="['/courses', 'numerical']">Numerical Analysis</a>
+          </li>
+          <li>
+            <a [routerLink]="['/courses', 'calc3']">Calculus 3</a>
+          </li>
+          <li>
+            <a [routerLink]="['/courses', 'data-structures']">Data structures</a>
+          </li>
+          <li>
+            <a [routerLink]="['/courses', 'mechanics']">Mechanics</a>
+          </li>
+        </ul>
         </div>
-        <hr class="clearfix w-100 d-md-none pb-3">
         <div class="col-md-3 mb-md-0 mb-3">
           <ul class="list-unstyled">
             <li>
-              <a [routerLink]="['/courses', 'statistics']">Statistics</a>
+              <a [routerLink]="['/about']">About</a>
             </li>
             <li>
-              <a [routerLink]="['/courses', 'numerical']">Numerical Analysis</a>
-            </li>
-            <li>
-              <a [routerLink]="['/courses', 'calc3']">Calculus 3</a>
-            </li>
-            <li>
-              <a [routerLink]="['/courses', 'data-structures']">Data structures</a>
-            </li>
-            <li>
-              <a [routerLink]="['/courses', 'mechanics']">Mechanics</a>
+              <a [routerLink]="['/contact-us']">Contact us</a>
             </li>
           </ul>
-          </div>
-          <div class="col-md-3 mb-md-0 mb-3">
-            <ul class="list-unstyled">
-              <li>
-                <a [routerLink]="['/about']">About</a>
-              </li>
-              <li>
-                <a [routerLink]="['/contact-us']">Contact us</a>
-              </li>
-            </ul>
-          </div>
-      </div>
+        </div>
     </div>
-    <div class="footer-copyright text-center py-3">© 2019 Copyright</div>
+  </div>
+  <div class="footer-copyright text-center py-3">© 2019 Copyright</div>
   </footer>

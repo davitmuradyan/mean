@@ -17,6 +17,8 @@ import { MechanicsComponent } from './courses/mechanics/mechanics.component';
 import { FeaturesComponent } from './features/features.component';
 import { CreateCourseComponent } from './create-course/create-course.component';
 import { CreateSolutionComponent } from './create-solution/create-solution.component';
+import { CourseSubmissionsComponent } from './course-submissions/course-submissions.component';
+import { ProblemSubmissionsComponent } from './problem-submissions/problem-submissions.component';
 
 const routes: Routes = [
   {path: '', component: AuthLayoutComponent,  children: [
@@ -34,6 +36,8 @@ const routes: Routes = [
     {path: 'features', component: FeaturesComponent},
     {path: 'create-course', component: CreateCourseComponent, canActivate: [AuthGuardService]},
     {path: 'create-solution', component: CreateSolutionComponent, canActivate: [AuthGuardService]},
+    {path: 'course-submissions', component: CourseSubmissionsComponent, canActivate: [AuthGuardService]},
+    {path: 'problem-submissions', component: ProblemSubmissionsComponent, canActivate: [AuthGuardService]},
   ]},
   {path: 'email-verification/:authToken', component: VerifyEmailComponent}
 ];

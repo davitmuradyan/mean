@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <h1>My submitted problems</h1>
+  </div>
+  <div class="row justify-content-md-center" *ngIf="solutions$">
+    <mdb-card *ngFor="let solution of solutions$" class="card">
+      <mdb-card-body>
+        <mdb-card-title>
+          <h4>{{solution.solution}}</h4>
+          <p>Status: <span class="status {{solution.status | lowercase}}">&nbsp;{{solution.status}}&nbsp;</span></p>
+        </mdb-card-title>
+        <mdb-card-text>
+          Feedback: {{solution.feedback ? solution.feedback : 'You don\'t have a feedback yet'}}
+        </mdb-card-text>
+        <a href="#" mdbBtn color="primary" mdbWavesEffect>View</a>
+      </mdb-card-body>
+    </mdb-card>
+  </div>
+  <div class="row justify-content-md-center" *ngIf="!solutions$">
+    <h4 style="font-style: italic; color: darkgray">You don't have any submitted problem</h4>
+  </div>
+</div>
