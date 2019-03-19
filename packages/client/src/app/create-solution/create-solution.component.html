@@ -140,14 +140,7 @@
         </div>
         <div class="form-group">
           <label for="solution">Write the solution function here (in JavaScript):</label>
-          <textarea
-            type="text"
-            class="form-control md-textarea"
-            id="solution"
-            placeholder="Solution"
-            formControlName="solution"
-            mdbInput
-          ></textarea>
+          <ngx-monaco-editor id="solution" class="form-control" [options]="editorOptions" formControlName="solution"></ngx-monaco-editor>
         </div>
         <div class="form-group">
           <label for="comments">If you have additional comments, write them here:</label>

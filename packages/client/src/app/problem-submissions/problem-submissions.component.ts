@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SolutionService } from '../shared/services/solution.service';
-import {Subscription} from "rxjs";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-problem-submissions',
@@ -16,7 +16,6 @@ export class ProblemSubmissionsComponent implements OnInit {
   ngOnInit() {
     this.solutionService.fetch().subscribe(solutions => {
       this.solutions$ = solutions;
-      console.log(solutions)
     });
   }
 

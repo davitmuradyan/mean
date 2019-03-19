@@ -16,6 +16,7 @@ export class CreateSolutionComponent implements OnInit {
   alertClass: string;
   courses$: Subscription;
   @ViewChild('alert') alert: ElementRef;
+  editorOptions = {theme: 'vs-light', language: 'typescript'};
 
   constructor(private courseService: CoursesService, private solutionService: SolutionService) {  }
 

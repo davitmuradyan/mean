@@ -26,6 +26,7 @@ import { CreateCourseComponent } from './create-course/create-course.component';
 import { CreateSolutionComponent } from './create-solution/create-solution.component';
 import { CourseSubmissionsComponent } from './course-submissions/course-submissions.component';
 import { ProblemSubmissionsComponent } from './problem-submissions/problem-submissions.component';
+import { MonacoEditorModule } from 'ngx-monaco-editor';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { ProblemSubmissionsComponent } from './problem-submissions/problem-submi
     HttpClientModule,
     MDBBootstrapModule.forRoot(),
     FontAwesomeModule,
+    MonacoEditorModule.forRoot(),
   ],
   providers: [
     {
