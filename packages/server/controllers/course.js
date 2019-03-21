@@ -29,10 +29,11 @@ module.exports.createCourse = async (req, res, next) => {
 
 module.exports.getAllCourses = async (req, res, next) => {
   try {
-    const courses = await Course.find({userCreated: req.user._id});
+    const courses = await Course.find({userCreated: req.user._id}).skip(+req.query.offset).limit(5);
+    const count = await Course.count();
     if (courses.length > 0) {
-        res.status(200).json(courses);
-        next();
+      res.status(200).json({courses, length: count});
+      next();
     } else {
         res.status(404).json({message: 'You have not created any course.'});
         next()

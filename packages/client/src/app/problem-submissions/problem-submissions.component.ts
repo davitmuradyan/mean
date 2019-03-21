@@ -16,6 +16,9 @@ export class ProblemSubmissionsComponent implements OnInit {
   ngOnInit() {
     this.solutionService.fetch().subscribe(solutions => {
       this.solutions$ = solutions;
+      // Future functions evaluating
+      // const sol = new Function(`return ${solutions[5].solution}`);
+      // console.log(+sol()([1, 2, 3, 4, 5, 6]).toFixed(2));
     });
   }
 

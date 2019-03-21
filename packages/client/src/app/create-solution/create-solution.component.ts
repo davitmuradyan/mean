@@ -22,7 +22,7 @@ export class CreateSolutionComponent implements OnInit {
 
   ngOnInit() {
     this.courseService.fetch().subscribe(data => {
-      this.courses$ = data;
+      this.courses$ = data.courses;
     }, error => console.log(error));
     this.form = new FormGroup({
       courseName: new FormControl(null),

@@ -1,5 +1,5 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {StatService} from '../../shared/services/stat.service';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { StatService } from '../../shared/services/stat.service';
 
 @Component({
   selector: 'app-statistics',

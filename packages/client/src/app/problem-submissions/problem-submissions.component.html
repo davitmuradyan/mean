@@ -6,7 +6,7 @@
     <mdb-card *ngFor="let solution of solutions$" class="card">
       <mdb-card-body>
         <mdb-card-title>
-          <h4>{{solution.solution}}</h4>
+          <h4>{{solution.name}}</h4>
           <p>Status: <span class="status {{solution.status | lowercase}}">&nbsp;{{solution.status}}&nbsp;</span></p>
         </mdb-card-title>
         <mdb-card-text>

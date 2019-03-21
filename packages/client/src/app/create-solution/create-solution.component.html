@@ -10,13 +10,21 @@
   </div>
   <div class="row justify-content-center">
     <div class="col-lg-6">
+      <!--Form Start-->
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <!--Select Course Start-->
         <div class="form-group">
           <label for="courseName">For which course is the solution?</label>
-          <select class="browser-default custom-select" id="courseName" formControlName="courseName">
+          <select
+            class="browser-default custom-select"
+            id="courseName"
+            formControlName="courseName"
+          >
             <option *ngFor="let course of courses$" [value]="course._id">{{course.courseName}}</option>
           </select>
         </div>
+        <!--Select Course End-->
+        <!--Problem Name Start-->
         <div class="form-group">
           <label for="problem">Name of the problem:</label>
           <input
@@ -37,6 +45,8 @@
             </span>
           </span>
         </div>
+        <!--Problem Name End-->
+        <!--Function Name Start-->
         <div class="form-group">
           <label for="functionName">Name of the Function:</label>
           <input
@@ -57,6 +67,8 @@
             </span>
           </span>
         </div>
+        <!--Function Name End-->
+        <!--Number Of Parameters Start-->
         <div class="form-group">
           <label for="numberOfInputs">Number of parameters:</label>
           <input
@@ -78,6 +90,8 @@
             </span>
           </span>
         </div>
+        <!--Number Of Parameters End-->
+        <!--Names Of Parameters Start-->
         <div class="form-group">
           <label for="parameters">Names of parameters(comma separated):</label>
           <input
@@ -98,6 +112,8 @@
             </span>
           </span>
         </div>
+        <!--Names Of Parameters End-->
+        <!--Test Case Input Start-->
         <div class="form-group">
           <label for="testCaseInput">Write one test case input:</label>
           <input
@@ -118,6 +134,8 @@
             </span>
           </span>
         </div>
+        <!--Test Case Input End-->
+        <!--Test Case Output Start-->
         <div class="form-group">
           <label for="testCaseOutput">Write one test case output:</label>
           <input
@@ -138,10 +156,14 @@
             </span>
           </span>
         </div>
+        <!--Test Case Output End-->
+        <!--Solution Start-->
         <div class="form-group">
           <label for="solution">Write the solution function here (in JavaScript):</label>
           <ngx-monaco-editor id="solution" class="form-control" [options]="editorOptions" formControlName="solution"></ngx-monaco-editor>
         </div>
+        <!--Solution End-->
+        <!--Comments Start-->
         <div class="form-group">
           <label for="comments">If you have additional comments, write them here:</label>
           <textarea
@@ -153,8 +175,10 @@
             mdbInput
           ></textarea>
         </div>
+        <!--Comments ENd-->
         <button type="submit" class="btn btn-default" [disabled]="form.invalid">Create course</button>
       </form>
+      <!--Form End-->
     </div>
   </div>
 </div>

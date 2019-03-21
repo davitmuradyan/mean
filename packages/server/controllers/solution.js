@@ -1,5 +1,4 @@
 const Solution = require('../models/solution.model');
-const Course = require('../models/course.model');
 
 module.exports.createSolution = async (req, res, next) => {
     try {
@@ -27,12 +26,12 @@ module.exports.createSolution = async (req, res, next) => {
             functionName,
             comments,
             numberOfInputs,
-            parameters,
+            parameters: parameters.split(','),
             testCaseInput,
             testCaseOutput,
             solution,
             userSubmitted: req.user._id,
-            status: 'Pending',
+            status: 'pending',
         }).save();
         res.status(201).json({
             message: `Solution with title ${newSolution.functionName} created successfully!`
