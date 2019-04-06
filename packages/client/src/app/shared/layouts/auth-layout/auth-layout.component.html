@@ -1,83 +1,84 @@
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark blue">
-  <mdb-navbar-brand>
-    <a class="navbar-brand" [routerLink]="['/']">
-      Mean product
-    </a>
-  </mdb-navbar-brand>
-  <links>
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/']">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/features']">Features</a>
-      </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a
-          [routerLink]="['/courses']"
-          class="nav-link waves-light"
-          mdbWavesEffect
-        >
-          Courses
-        </a>
-      </li>
-      <li class="nav-item dropdown" *ngIf="isAuth" dropdown>
-        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-          Submissions
-          <span class="caret"></span>
-        </a>
-        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a
-            class="dropdown-item waves-light"
-            mdbWavesEffect
-            [routerLink]="['/course-submissions']"
-            [queryParams]="{ offset: '0' }"
-          >
-            Course submissions
-          </a>
-          <a
-            class="dropdown-item waves-light"
-            mdbWavesEffect
-            [routerLink]="['/problem-submissions']"
-          >
-            Problem submissions
-          </a>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Review submissions</a>
-          <div class="divider dropdown-divider"></div>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Feedback</a>
-        </div>
-      </li>
-    </ul>
-    <div class="md-form mt-0" *ngIf="!isAuth">
+<div class="flex-display">
+  <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark blue" style="margin-bottom: 30px;">
+    <mdb-navbar-brand>
+      <a class="navbar-brand" [routerLink]="['/']">
+        Mean product
+      </a>
+    </mdb-navbar-brand>
+    <links>
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link waves-light" [routerLink]="['/login']" mdbWavesEffect>Login</a>
+        <li class="nav-item">
+          <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/']">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link waves-light"  mdbWavesEffect>/</a>
+          <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/features']">Features</a>
         </li>
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link waves-light" [routerLink]="['/register']" mdbWavesEffect>Register</a>
+          <a
+            [routerLink]="['/courses']"
+            class="nav-link waves-light"
+            mdbWavesEffect
+          >
+            Courses
+          </a>
+        </li>
+        <li class="nav-item dropdown" *ngIf="isAuth" dropdown>
+          <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+            Submissions
+            <span class="caret"></span>
+          </a>
+          <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+            <a
+              class="dropdown-item waves-light"
+              mdbWavesEffect
+              [routerLink]="['/course-submissions']"
+              [queryParams]="{ offset: '0' }"
+            >
+              Course submissions
+            </a>
+            <a
+              class="dropdown-item waves-light"
+              mdbWavesEffect
+              [routerLink]="['/problem-submissions']"
+            >
+              Problem submissions
+            </a>
+            <a class="dropdown-item waves-light" mdbWavesEffect href="#">Review submissions</a>
+            <div class="divider dropdown-divider"></div>
+            <a class="dropdown-item waves-light" mdbWavesEffect href="#">Feedback</a>
+          </div>
         </li>
       </ul>
-    </div>
-    <div class="nav-item dropdown" dropdown *ngIf="isAuth">
-      <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
-        <img [src]="image" alt="dsasa" class="nav-image">
-      </a>
-      <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-        <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/']">My profile</a>
-        <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/settings']">Settings</a>
-        <div class="divider dropdown-divider"></div>
-        <a class="dropdown-item waves-light" mdbWavesEffect (click)="logout()">Logout</a>
+      <div class="md-form mt-0" *ngIf="!isAuth">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link waves-light" [routerLink]="['/login']" mdbWavesEffect>Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-light"  mdbWavesEffect>/</a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link waves-light" [routerLink]="['/register']" mdbWavesEffect>Register</a>
+          </li>
+        </ul>
       </div>
-    </div>
-  </links>
-</mdb-navbar>
-
-<router-outlet></router-outlet>
-
-<footer class="page-footer font-small blue pt-4" style="margin-top: 30px;">
+      <div class="nav-item dropdown" dropdown *ngIf="isAuth">
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          <img [src]="image" alt="dsasa" class="nav-image">
+        </a>
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/']">My profile</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/settings']">Settings</a>
+          <div class="divider dropdown-divider"></div>
+          <a class="dropdown-item waves-light" mdbWavesEffect (click)="logout()">Logout</a>
+        </div>
+      </div>
+    </links>
+  </mdb-navbar>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+  <footer class="page-footer font-small blue pt-4" style="margin-top: 30px;">
   <div class="container-fluid text-center text-md-left">
     <div class="row">
       <div class="col-md-6 mt-md-0 mt-3">
@@ -118,3 +119,4 @@
   </div>
   <div class="footer-copyright text-center py-3">© 2019 Copyright</div>
   </footer>
+</div>
