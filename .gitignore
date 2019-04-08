@@ -1,4 +1,5 @@
 /node_modules
+/packages/server/constants/dev.credentials.js
 .idea
 .project
 .classpath
