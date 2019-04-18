@@ -29,7 +29,7 @@ const Solution = new Schema({
         required: true,
     },
     testCaseInput: {
-        type: String,
+        type: Array,
         required: true,
     },
     testCaseOutput: {

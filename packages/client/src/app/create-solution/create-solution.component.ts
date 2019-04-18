@@ -38,6 +38,7 @@ export class CreateSolutionComponent implements OnInit {
   }
 
   onSubmit() {
+    this.form.value.testCaseInput = this.form.value.testCaseInput.split(' ');
     this.solutionService.create(this.form.value).subscribe(courseMessage => {
       this.alertClass = 'success';
       this.message = courseMessage.message;

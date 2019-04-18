@@ -1,0 +1,16 @@
+.status {
+  font-size: 12px;
+  color: white;
+  max-height: 16px;
+  margin: 3px;
+  border-radius: 15%;
+  &.pending {
+    background: #ff8040;
+  };
+  &.approved {
+    background: green;
+  }
+  &.rejected {
+    background: red;
+  }
+}

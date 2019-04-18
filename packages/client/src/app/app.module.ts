@@ -27,6 +27,11 @@ import { CreateSolutionComponent } from './create-solution/create-solution.compo
 import { CourseSubmissionsComponent } from './course-submissions/course-submissions.component';
 import { ProblemSubmissionsComponent } from './problem-submissions/problem-submissions.component';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { ProblemReviewComponent } from './review-submissions/problem-review/problem-review.component';
+import { TrimPipe } from './shared/pipes/trim.pipe';
+import { AddSpacePipe } from './shared/pipes/add-space.pipe';
+import { ReviewSubmissionsComponent } from './review-submissions/review-submissions.component';
+import { CourseReviewComponent } from './review-submissions/course-review/course-review.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +54,11 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
     CreateSolutionComponent,
     CourseSubmissionsComponent,
     ProblemSubmissionsComponent,
+    ProblemReviewComponent,
+    TrimPipe,
+    AddSpacePipe,
+    ReviewSubmissionsComponent,
+    CourseReviewComponent,
   ],
   imports: [
     BrowserModule,

@@ -19,6 +19,10 @@ import { CreateCourseComponent } from './create-course/create-course.component';
 import { CreateSolutionComponent } from './create-solution/create-solution.component';
 import { CourseSubmissionsComponent } from './course-submissions/course-submissions.component';
 import { ProblemSubmissionsComponent } from './problem-submissions/problem-submissions.component';
+import { ProblemReviewComponent } from './review-submissions/problem-review/problem-review.component';
+import { ReviewSubmissionsComponent } from './review-submissions/review-submissions.component';
+import { AdminGuardService } from './shared/guards/adminGuard.service';
+import { CourseReviewComponent } from './review-submissions/course-review/course-review.component';
 
 const routes: Routes = [
   {path: '', component: AuthLayoutComponent,  children: [
@@ -38,6 +42,9 @@ const routes: Routes = [
     {path: 'create-solution', component: CreateSolutionComponent, canActivate: [AuthGuardService]},
     {path: 'course-submissions', component: CourseSubmissionsComponent, canActivate: [AuthGuardService]},
     {path: 'problem-submissions', component: ProblemSubmissionsComponent, canActivate: [AuthGuardService]},
+    {path: 'review-submissions', component: ReviewSubmissionsComponent, canActivate: [AuthGuardService, AdminGuardService]},
+    {path: 'review-submissions/problem/:_id', component: ProblemReviewComponent, canActivate: [AuthGuardService, AdminGuardService]},
+    {path: 'review-submissions/course/:_id', component: CourseReviewComponent, canActivate: [AuthGuardService, AdminGuardService]},
   ]},
   {path: 'email-verification/:authToken', component: VerifyEmailComponent}
 ];

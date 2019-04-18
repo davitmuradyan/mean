@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { serverUrl } from '../constants/index';
+import { Course } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +20,9 @@ export class CoursesService {
 
   getSingleCourse(id): Observable<any> {
     return this.http.get(`${serverUrl}/course/${id}`);
+  }
+
+  update(course: Course): Observable<Course> {
+    return  this.http.put<Course>(`${serverUrl}/course/${course._id}`, course);
   }
 }
