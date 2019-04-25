@@ -31,7 +31,6 @@ export class CourseReviewComponent implements OnInit, OnDestroy {
     this.sub1$ = this.activatedRoute.params.subscribe(param => {
       this.coursesService.getSingleCourse(param._id).subscribe(course => {
         this.course = course;
-        console.log(course);
       }, error => {
 
       });

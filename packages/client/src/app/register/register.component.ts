@@ -60,22 +60,4 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  // onFileChange(e) {
-  //   const reader = new FileReader();
-  //   if (e.target.files && e.target.files.length > 0) {
-  //     const file = e.target.files[0];
-  //     this.image = file;
-  //     reader.onload = () => {
-  //       this.imagePreview = reader.result;
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  //   console.log(77 )
-  //   this.authService.uploadImage(this.image).subscribe((data) => {
-  //     console.log(data);
-  //   }, (error) => {
-  //     console.log(error)
-  //   });
-  // }
-
 }

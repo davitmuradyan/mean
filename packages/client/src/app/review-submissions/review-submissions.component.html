@@ -33,6 +33,7 @@
           </button>
         </mdb-card-body>
       </mdb-card>
+      <span *ngIf="courses.courses.length === 0" class="pending-message">No pending course submissions.</span>
     </div>
     <div *ngIf="solutions" class="col-md-6">
       <mdb-card *ngFor="let solution of solutions" class="card" style="margin-bottom: 25px">
@@ -54,6 +55,7 @@
           </button>
         </mdb-card-body>
       </mdb-card>
+      <span *ngIf="solutions.length === 0" class="pending-message">No pending solution submissions.</span>
     </div>
   </div>
 </div>

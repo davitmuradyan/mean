@@ -45,7 +45,7 @@ const Solution = new Schema({
     },
     status: {
         type: String,
-        default: 'Pending',
+        default: 'pending',
     },
 });
 

@@ -53,9 +53,47 @@ module.exports.getSolutions = async (req, res, next) => {
 module.exports.getSingle = async (req, res, next) => {
   try {
       const solution = await Solution.findById(req.params.id);
-      console.log(solution);
       solution ? res.status(200).json(solution) : res.status(404).json({ message: 'Solution not found' });
       next();
+  } catch (e) {
+      res.status(500).json(e);
+  }
+};
+
+module.exports.updateSolution = async (req, res, next) => {
+  try {
+      const {
+          course,
+          name,
+          solution,
+          parameters,
+          numberOfInputs,
+          testCaseInput,
+          testCaseOutput,
+          functionName,
+          comments,
+          status,
+      } = req.body;
+      const solutionNew = await Solution.findOneAndUpdate(
+          { _id: req.params.id },
+          {
+              course,
+              name,
+              solution,
+              parameters,
+              numberOfInputs,
+              testCaseInput,
+              testCaseOutput,
+              functionName,
+              comments,
+              status,
+          },
+          { new: true }
+      );
+      console.log(solutionNew)
+      res.status(200).json(solutionNew);
+      next();
+
   } catch (e) {
       res.status(500).json(e);
   }

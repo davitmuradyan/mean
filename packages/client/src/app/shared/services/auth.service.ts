@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../interfaces';
 import { Observable } from 'rxjs';
-import { serverUrl } from '../constants';
+import { environment } from '../../../environments/environment';
+
+const { baseUrl } = environment;
 
 @Injectable({
   providedIn: 'root'
@@ -11,23 +13,23 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   register(user: User): Observable<User> {
-    return this.http.post<User>(`${serverUrl}/register`, user);
+    return this.http.post<User>(`${baseUrl}/register`, user);
   }
 
   login(user: User): Observable<any> {
-    return this.http.post<any>(`${serverUrl}/login`, user);
+    return this.http.post<any>(`${baseUrl}/login`, user);
   }
 
   verifyEmail(authToken: String): Observable<any> {
-    return this.http.put<any>(`${serverUrl}/verify-email/${authToken}`, {authToken: null, verified: true});
+    return this.http.put<any>(`${baseUrl}/verify-email/${authToken}`, {authToken: null, verified: true});
   }
 
   checkUserEmail(email: String): Observable<any> {
-    return this.http.post<any>(`${serverUrl}/checkemail`, {email});
+    return this.http.post<any>(`${baseUrl}/checkemail`, {email});
   }
 
   checkUsername(username: String): Observable<any> {
-    return this.http.post<any>(`${serverUrl}/checkusername`, {username});
+    return this.http.post<any>(`${baseUrl}/checkusername`, {username});
   }
 
   editProfile(user, image?: File) {
@@ -38,7 +40,7 @@ export class AuthService {
     fd.append('firstname', user.firstname);
     fd.append('lastname', user.lastname);
     fd.append('username', user.username);
-    return this.http.put(`${serverUrl}/edit-profile`, fd);
+    return this.http.put(`${baseUrl}/edit-profile`, fd);
   }
 
   storeToken(user: string): void {

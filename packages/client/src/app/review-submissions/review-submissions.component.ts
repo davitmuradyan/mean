@@ -2,7 +2,10 @@ import {Component, OnDestroy} from '@angular/core';
 import { CoursesService } from '../shared/services/courses.service';
 import { SolutionService } from '../shared/services/solution.service';
 import { Subscription } from 'rxjs';
-import {Courses, Solution} from '../shared/interfaces';
+import { Courses, Solution } from '../shared/interfaces';
+import { STATUSES } from '../shared/constants';
+
+const { STATUS_PENDING } = STATUSES;
 
 @Component({
   selector: 'app-review-submissions',
@@ -20,8 +23,12 @@ export class ReviewSubmissionsComponent implements OnDestroy {
 
   loadCourses() {
     this.sub1$ = this.coursesService.fetch().subscribe(courses => {
-      this.courses = courses;
-      console.log(courses)
+      this.courses = {
+        courses: courses.courses.filter(course => {
+          return course.status === STATUS_PENDING;
+        }),
+        length: courses.length,
+      };
     }, error => {
       console.log(error);
     });
@@ -29,8 +36,7 @@ export class ReviewSubmissionsComponent implements OnDestroy {
 
   loadSolutions() {
     this.sub2$ = this.solutionsService.fetch().subscribe(solutions => {
-      this.solutions = solutions;
-      console.log(solutions)
+      this.solutions = solutions.filter(solution => solution.status === STATUS_PENDING);
     }, error => {
       console.log(error);
     });
