@@ -23,6 +23,7 @@ import { ProblemReviewComponent } from './review-submissions/problem-review/prob
 import { ReviewSubmissionsComponent } from './review-submissions/review-submissions.component';
 import { AdminGuardService } from './shared/guards/adminGuard.service';
 import { CourseReviewComponent } from './review-submissions/course-review/course-review.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   {path: '', component: AuthLayoutComponent,  children: [
@@ -46,7 +47,8 @@ const routes: Routes = [
     {path: 'review-submissions/problem/:_id', component: ProblemReviewComponent, canActivate: [AuthGuardService, AdminGuardService]},
     {path: 'review-submissions/course/:_id', component: CourseReviewComponent, canActivate: [AuthGuardService, AdminGuardService]},
   ]},
-  {path: 'email-verification/:authToken', component: VerifyEmailComponent}
+  {path: 'email-verification/:authToken', component: VerifyEmailComponent},
+  {path: '**', component: NotFoundComponent}
 ];
 
 @NgModule({
