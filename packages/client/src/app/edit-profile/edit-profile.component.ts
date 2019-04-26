@@ -50,7 +50,7 @@ export class EditProfileComponent implements OnInit {
         this.loading = false;
         setTimeout(() => {
           this.profileUpdated = false;
-        }, 2000)
+        }, 2000);
       }, (error) => {
         console.log(error);
       });

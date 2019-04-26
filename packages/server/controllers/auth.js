@@ -30,7 +30,7 @@ module.exports.login = async (req, res) => {
           username: candidate.username,
           _id: candidate._id,
           type: candidate.type,
-        }, JWT_SECRET_KEY, { expiresIn: "6 hours"});
+        }, JWT_SECRET_KEY, { expiresIn: "24 hours"});
         res.status(200).json({
           accessToken,
           userEmail: candidate.email,

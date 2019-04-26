@@ -50,3 +50,39 @@ export interface LinkedList {
   isEmpty: any;
   print: any;
 }
+
+export interface Solution {
+  comments: string[];
+  course: string;
+  functionName: string;
+  name: string;
+  numberOfInputs: number;
+  parameters: string[];
+  solution: string;
+  status: string;
+  testCaseInput: any;
+  testCaseOutput: string;
+  userSubmitted: string;
+  _id: string;
+}
+
+export interface Course {
+  comments: string;
+  feedback: string;
+  courseName: string;
+  needDB: boolean;
+  problems: string[];
+  status: string;
+  userCreated: string;
+  _id: string;
+}
+
+export interface Courses {
+  courses: Course[];
+  length: number;
+}
+
+export interface Solutions {
+  solutions: Solution[];
+  length: number;
+}

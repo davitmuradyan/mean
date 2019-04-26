@@ -3,14 +3,10 @@ const Solution = require('../models/solution.model');
 module.exports.createSolution = async (req, res, next) => {
     try {
         const {
-            courseName,
-            problem,
-            comments,
-            functionName,
-            numberOfInputs,
-            parameters,
-            testCaseInput,
-            testCaseOutput,
+            courseName, problem,
+            comments, functionName,
+            numberOfInputs, parameters,
+            testCaseInput, testCaseOutput,
             solution
         } = req.body;
         const solutionModel = await Solution.findOne({functionName});
@@ -23,14 +19,11 @@ module.exports.createSolution = async (req, res, next) => {
         const newSolution = await new Solution({
             course: courseName,
             name: problem,
-            functionName,
-            comments,
+            functionName, comments,
             numberOfInputs,
             parameters: parameters.split(','),
-            testCaseInput,
-            testCaseOutput,
-            solution,
-            userSubmitted: req.user._id,
+            testCaseInput, testCaseOutput,
+            solution, userSubmitted: req.user._id,
             status: 'pending',
         }).save();
         res.status(201).json({
@@ -55,4 +48,53 @@ module.exports.getSolutions = async (req, res, next) => {
     } catch (e) {
         throw e;
     }
+};
+
+module.exports.getSingle = async (req, res, next) => {
+  try {
+      const solution = await Solution.findById(req.params.id);
+      solution ? res.status(200).json(solution) : res.status(404).json({ message: 'Solution not found' });
+      next();
+  } catch (e) {
+      res.status(500).json(e);
+  }
+};
+
+module.exports.updateSolution = async (req, res, next) => {
+  try {
+      const {
+          course,
+          name,
+          solution,
+          parameters,
+          numberOfInputs,
+          testCaseInput,
+          testCaseOutput,
+          functionName,
+          comments,
+          status,
+      } = req.body;
+      const solutionNew = await Solution.findOneAndUpdate(
+          { _id: req.params.id },
+          {
+              course,
+              name,
+              solution,
+              parameters,
+              numberOfInputs,
+              testCaseInput,
+              testCaseOutput,
+              functionName,
+              comments,
+              status,
+          },
+          { new: true }
+      );
+      console.log(solutionNew)
+      res.status(200).json(solutionNew);
+      next();
+
+  } catch (e) {
+      res.status(500).json(e);
+  }
 };

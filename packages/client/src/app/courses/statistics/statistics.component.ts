@@ -80,7 +80,6 @@ export class StatisticsComponent implements OnInit {
     const sorted = this.sortData(dataset, true);
     const len = sorted.length;
     if (len % 2 === 0) {
-      console.log(sorted[(len / 2)]);
       this.finalMedian = (sorted[(len / 2) - 1] + sorted[(len / 2)]) / 2;
     } else {
       this.finalMedian = sorted[(len  + 1) / 2 - 1];

@@ -17,6 +17,9 @@ const Course = new Schema({
     comments: {
         type: String,
     },
+    feedback: {
+      type: String,
+    },
     userCreated: {
         ref: 'User',
         type: Schema.Types.ObjectId,

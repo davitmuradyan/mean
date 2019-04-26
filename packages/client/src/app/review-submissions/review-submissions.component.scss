@@ -1,0 +1,18 @@
+.status {
+  font-size: 12px;
+  color: white;
+  &.pending {
+    background: #ff8040;
+  };
+  &.approved {
+    background: green;
+  }
+  &.rejected {
+    background: red;
+  }
+}
+
+.pending-message {
+  font-weight: bold;
+  padding-left: 5px;
+}

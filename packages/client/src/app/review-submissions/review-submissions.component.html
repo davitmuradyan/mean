@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <button class="btn btn-default" (click)="loadCourses()">Load Course submissions</button>
+    </div>
+    <div class="col-md-6">
+      <button class="btn btn-default" (click)="loadSolutions()">Load Solution Submissions</button>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 30px">
+    <div *ngIf="courses" class="col-md-6">
+      <mdb-card *ngFor="let course of courses.courses" class="card">
+        <!--Card content-->
+        <mdb-card-body>
+          <!--Title-->
+          <mdb-card-title>
+            <h4>{{course.courseName}}</h4>
+            <p>Status: <span class="status {{course.status | lowercase}}">&nbsp;{{course.status}}&nbsp;</span></p>
+          </mdb-card-title>
+
+          <!--Text-->
+          <mdb-card-text>
+            User comments: {{course.comments ? course.comments : 'User didn\'t left any comment!'}}
+          </mdb-card-text>
+
+          <button
+            [routerLink]="['/review-submissions/course/', course._id | trim | lowercase]"
+            mdbBtn
+            color="primary"
+            mdbWavesEffect
+          >
+            Review
+          </button>
+        </mdb-card-body>
+      </mdb-card>
+      <span *ngIf="courses.courses.length === 0" class="pending-message">No pending course submissions.</span>
+    </div>
+    <div *ngIf="solutions" class="col-md-6">
+      <mdb-card *ngFor="let solution of solutions" class="card" style="margin-bottom: 25px">
+        <mdb-card-body>
+          <mdb-card-title>
+            <h4>{{solution.name}}</h4>
+            <p>Status: <span class="status {{solution.status | lowercase}}">&nbsp;{{solution.status}}&nbsp;</span></p>
+          </mdb-card-title>
+          <mdb-card-text>
+            User comments: {{solution.comments ? solution.comments : 'User didn\'t left any comment!'}}
+          </mdb-card-text>
+          <button
+            [routerLink]="['/review-submissions/problem/', solution._id | trim | lowercase]"
+            mdbBtn
+            color="primary"
+            mdbWavesEffect
+          >
+            Review
+          </button>
+        </mdb-card-body>
+      </mdb-card>
+      <span *ngIf="solutions.length === 0" class="pending-message">No pending solution submissions.</span>
+    </div>
+  </div>
+</div>
+
