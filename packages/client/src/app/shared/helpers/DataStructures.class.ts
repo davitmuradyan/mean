@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -8,44 +8,44 @@ export class DataStructures {
     const stack = [];
     return {
       insert(item) {
-        stack.push(item)
+        stack.push(item);
       },
       remove() {
-        return stack.pop()
+        return stack.pop();
       },
       peek() {
-        return stack[stack.length - 1]
+        return stack[stack.length - 1];
       },
       length() {
-        return stack.length
+        return stack.length;
       },
       isEmpty() {
-        return stack.length === 0
+        return stack.length === 0;
       },
       stack
-    }
+    };
   }
 
   createQueue() {
     const queue = [];
     return {
       enqueue(item) {
-        queue.unshift(item)
+        queue.unshift(item);
       },
       dequeue() {
-        queue.pop()
+        queue.pop();
       },
       peek() {
-        return queue[queue.length - 1]
+        return queue[queue.length - 1];
       },
       len() {
-        return queue.length
+        return queue.length;
       },
       isEmpty() {
-        return queue.length === 0
+        return queue.length === 0;
       },
       queue
-    }
+    };
   }
 
   createPriorityQueue() {
@@ -55,38 +55,38 @@ export class DataStructures {
     return {
       enqueue(item, isHighPriority = false) {
         const queue = isHighPriority ? highPriorityQueue : lowPriorityQueue;
-        queue.enqueue(item)
+        queue.enqueue(item);
       },
       dequeue() {
         if (!highPriorityQueue.isEmpty()) {
-          return highPriorityQueue.dequeue()
+          return highPriorityQueue.dequeue();
         }
 
-        return lowPriorityQueue.dequeue()
+        return lowPriorityQueue.dequeue();
       },
       peek() {
         if (!highPriorityQueue.isEmpty()) {
-          return highPriorityQueue.peek()
+          return highPriorityQueue.peek();
         }
 
-        return lowPriorityQueue.peek()
+        return lowPriorityQueue.peek();
       },
       len() {
-        return highPriorityQueue.len() + lowPriorityQueue.len()
+        return highPriorityQueue.len() + lowPriorityQueue.len();
       },
       isEmpty() {
-        return highPriorityQueue.isEmpty() && lowPriorityQueue.isEmpty()
+        return highPriorityQueue.isEmpty() && lowPriorityQueue.isEmpty();
       },
       highPriorityQueue,
       lowPriorityQueue,
-    }
+    };
   }
 
   createNode(value) {
     return {
       value,
       next: null
-    }
+    };
   }
 
   createLinkedList() {
@@ -135,7 +135,7 @@ export class DataStructures {
         while (current) {
           if (current.next === this.tail) {
             penultimate = current;
-            break
+            break;
           }
 
           current = current.next;
@@ -208,11 +208,11 @@ export class DataStructures {
 
         while (current) {
           values.push(current.value);
-          current = current.next
+          current = current.next;
         }
 
         return values;
       }
-    }
+    };
   }
 }

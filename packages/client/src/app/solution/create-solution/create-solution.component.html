@@ -1,0 +1,184 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <h1>Create a solution for some problem in existing courses</h1>
+  </div>
+  <div #alert class="alert alert-{{alertClass}} alert-dismissible fade show" role="alert" *ngIf="message">
+    <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    {{message}}
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <!--Form Start-->
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <!--Select Course Start-->
+        <div class="form-group">
+          <label for="courseName">For which course is the solution?</label>
+          <select
+            class="browser-default custom-select"
+            id="courseName"
+            formControlName="courseName"
+          >
+            <option *ngFor="let course of courses" [value]="course._id">{{course.courseName}}</option>
+          </select>
+        </div>
+        <!--Select Course End-->
+        <!--Problem Name Start-->
+        <div class="form-group">
+          <label for="problem">Name of the problem:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="problem"
+            placeholder="Problem name"
+            formControlName="problem"
+            [ngClass]="{'is-invalid': form.get('problem').invalid && form.get('problem').touched}"
+          >
+          <span *ngIf="form.get('problem').invalid && form.get('problem').touched">
+            <span
+              *ngIf="form.get('problem').errors['required']"
+              class="invalid-feedback"
+              style="display: block"
+            >
+              Problem name can't be blank
+            </span>
+          </span>
+        </div>
+        <!--Problem Name End-->
+        <!--Function Name Start-->
+        <div class="form-group">
+          <label for="functionName">Name of the Function:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="functionName"
+            placeholder="Function name"
+            formControlName="functionName"
+            [ngClass]="{'is-invalid': form.get('functionName').invalid && form.get('functionName').touched}"
+          >
+          <span *ngIf="form.get('functionName').invalid && form.get('functionName').touched">
+            <span
+              *ngIf="form.get('functionName').errors['required']"
+              class="invalid-feedback"
+              style="display: block"
+            >
+              Function name can't be blank
+            </span>
+          </span>
+        </div>
+        <!--Function Name End-->
+        <!--Number Of Parameters Start-->
+        <div class="form-group">
+          <label for="numberOfInputs">Number of parameters:</label>
+          <input
+            type="number"
+            min="1"
+            class="form-control"
+            id="numberOfInputs"
+            placeholder="Number of parameters"
+            formControlName="numberOfInputs"
+            [ngClass]="{'is-invalid': form.get('numberOfInputs').invalid && form.get('numberOfInputs').touched}"
+          >
+          <span *ngIf="form.get('numberOfInputs').invalid && form.get('numberOfInputs').touched">
+            <span
+              *ngIf="form.get('numberOfInputs').errors['required']"
+              class="invalid-feedback"
+              style="display: block"
+            >
+              Parameters number can't be blank
+            </span>
+          </span>
+        </div>
+        <!--Number Of Parameters End-->
+        <!--Names Of Parameters Start-->
+        <div class="form-group">
+          <label for="parameters">Names of parameters(comma separated):</label>
+          <input
+            type="text"
+            class="form-control"
+            id="parameters"
+            placeholder="Parameter names"
+            formControlName="parameters"
+            [ngClass]="{'is-invalid': form.get('parameters').invalid && form.get('parameters').touched}"
+          >
+          <span *ngIf="form.get('parameters').invalid && form.get('parameters').touched">
+            <span
+              *ngIf="form.get('parameters').errors['required']"
+              class="invalid-feedback"
+              style="display: block"
+            >
+              Parameters can't be blank
+            </span>
+          </span>
+        </div>
+        <!--Names Of Parameters End-->
+        <!--Test Case Input Start-->
+        <div class="form-group">
+          <label for="testCaseInput">Write one test case input:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="testCaseInput"
+            placeholder="Test case input"
+            formControlName="testCaseInput"
+            [ngClass]="{'is-invalid': form.get('testCaseInput').invalid && form.get('testCaseInput').touched}"
+          >
+          <span *ngIf="form.get('testCaseInput').invalid && form.get('testCaseInput').touched">
+            <span
+              *ngIf="form.get('testCaseInput').errors['required']"
+              class="invalid-feedback"
+              style="display: block"
+            >
+              Test Case input can't be blank
+            </span>
+          </span>
+        </div>
+        <!--Test Case Input End-->
+        <!--Test Case Output Start-->
+        <div class="form-group">
+          <label for="testCaseOutput">Write one test case output:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="testCaseOutput"
+            placeholder="Test case output"
+            formControlName="testCaseOutput"
+            [ngClass]="{'is-invalid': form.get('testCaseOutput').invalid && form.get('testCaseOutput').touched}"
+          >
+          <span *ngIf="form.get('testCaseOutput').invalid && form.get('testCaseOutput').touched">
+            <span
+              *ngIf="form.get('testCaseOutput').errors['required']"
+              class="invalid-feedback"
+              style="display: block"
+            >
+              Test Case output can't be blank
+            </span>
+          </span>
+        </div>
+        <!--Test Case Output End-->
+        <!--Solution Start-->
+        <div class="form-group">
+          <label for="solution">Write the solution function here (in JavaScript):</label>
+          <ngx-monaco-editor id="solution" class="form-control" [options]="editorOptions" formControlName="solution"></ngx-monaco-editor>
+        </div>
+        <!--Solution End-->
+        <!--Comments Start-->
+        <div class="form-group">
+          <label for="comments">If you have additional comments, write them here:</label>
+          <textarea
+            type="text"
+            class="form-control md-textarea"
+            id="comments"
+            placeholder="Additional comments"
+            formControlName="comments"
+            mdbInput
+          ></textarea>
+        </div>
+        <!--Comments ENd-->
+        <button type="submit" class="btn btn-default" [disabled]="form.invalid">Create course</button>
+      </form>
+      <!--Form End-->
+    </div>
+  </div>
+</div>

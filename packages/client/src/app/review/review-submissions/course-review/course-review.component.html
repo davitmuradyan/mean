@@ -1,0 +1,84 @@
+<div class="container" *ngIf="course">
+  <hr>
+  <div class="row justify-content-mf-center">
+    <div class="col-md">
+      <h1>Course name: <span class="bold">{{ course.courseName }}</span></h1>
+      <p>Status: <span class="status {{course.status | lowercase}}">&nbsp;{{course.status}}&nbsp;</span></p>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md">
+      <h4>Suggested problems:
+        <span *ngFor="let problem of course.problems; let i = index">
+          {{ problem }}{{ i !== course.problems.length - 1 ? ',' : '' }}
+        </span>
+      </h4>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md">
+      <h4>Does this course need database? {{ course.needDB ? 'Yes' : 'No' }}</h4>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md">
+      <h4>User comments: {{ course.comments ? course.comments : 'User didn\'t left any comment.' }}</h4>
+    </div>
+  </div>
+  <hr>
+  <button mdbBtn mdbWavesEffect color="success" (click)="accept()">Accept and leave feedback</button>
+  <button mdbBtn mdbWavesEffect color="danger" (click)="reject()">Reject and leave feedback</button>
+</div>
+
+
+<div
+  mdbModal
+  #frame="mdbModal"
+  class="modal fade top"
+  id="frameModalTop"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-notify modal-{{modalType}}" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p class="heading lead">{{modalTitle}} Course</p>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+      <!--Body-->
+      <div class="modal-body">
+        <div class="text-center">
+          <i class="fa fa-{{modalIcon}} fa-4x mb-3 animated rotateIn"></i>
+          <hr>
+          <label for="feedback">Your feedback:</label>
+          <textarea [(ngModel)]="feedback" id="feedback" class="form-control"></textarea>
+        </div>
+      </div>
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <button
+          class="btn btn-{{modalType}} waves-effect"
+          type="button"
+          mdbBtn
+          mdbWavesEffect
+          [routerLink]="['/review/submissions']"
+          (click)="submit()"
+        >
+          Send feedback
+        </button>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+

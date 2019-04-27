@@ -1,0 +1,99 @@
+<div class="container" *ngIf="solution$">
+  <div class="row justify-content-md-center">
+    <h3>{{solution$.name | uppercase}}</h3>
+    <span class="status {{solution$.status | lowercase}}">&nbsp;{{solution$.status}}&nbsp;</span>
+  </div>
+  <div class="row">
+    <div class="col-lg">
+      <label for="solution">Solution code:</label>
+      <ngx-monaco-editor
+        id="solution"
+        class="form-control"
+        style="min-height: 500px"
+        [options]="editorOptions"
+        [(ngModel)]="solution$.solution"
+      >
+      </ngx-monaco-editor>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 25px">
+    <div class="col-lg">
+      <span>Feedback: {{ solution$.comments ? solution$.comments : 'You don\'t have any feedback yet.' }} </span>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-lg">
+      <h4>Parameters: </h4>
+      <span *ngFor="let param of solution$.parameters; let i=index;">
+        <label [for]="param">{{param}}:</label>
+        <input [id]="param" class="form-control" style="max-width: 200px" [(ngModel)]="solution$.testCaseInput[i]"/>
+      </span>
+    </div>
+    <div class="col-lg">
+      <h4>Expected output: </h4>
+      <span>
+        <label for="output">output:</label>
+          <input id="output" class="form-control" style="max-width: 200px" [(ngModel)]="solution$.testCaseOutput"/>
+      </span>
+    </div>
+  </div>
+  <button class="btn btn-default" style="float: right" (click)="testSolution()">Test Code</button>
+  <div *ngIf="alertMessage" class="alert alert-{{testCaseClass}}" style="margin-top: 70px">
+    Test case {{testCasePass ? 'passed' : 'failed'}}:
+    the inputs were {{solution$.testCaseInput | addSpace}} with expected output {{solution$.testCaseOutput}}
+    {{',' + !testCasePass ? 'your output was ' + functionValue : ''}}
+  </div>
+  <hr style="margin-top: 80px">
+  <button mdbBtn mdbWavesEffect color="success" (click)="accept()">Accept and leave feedback</button>
+  <button mdbBtn mdbWavesEffect color="danger" (click)="reject()">Reject and leave feedback</button>
+</div>
+
+
+<div
+  mdbModal
+  #frame="mdbModal"
+  class="modal fade top"
+  id="frameModalTop"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-notify modal-{{modalType}}" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p class="heading lead">{{modalTitle}} Solution</p>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+      <!--Body-->
+      <div class="modal-body">
+        <div class="text-center">
+          <i class="fa fa-{{modalIcon}} fa-4x mb-3 animated rotateIn"></i>
+          <hr>
+          <label for="feedback">Your feedback:</label>
+          <textarea [(ngModel)]="feedback" id="feedback" class="form-control"></textarea>
+        </div>
+      </div>
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <button
+          class="btn btn-{{modalType}} waves-effect"
+          type="button"
+          mdbBtn
+          mdbWavesEffect
+          [routerLink]="['/review/submissions']"
+          (click)="submit()"
+        >
+          Send feedback
+        </button>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
