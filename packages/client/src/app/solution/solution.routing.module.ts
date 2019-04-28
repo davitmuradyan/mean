@@ -4,11 +4,13 @@ import { CreateSolutionComponent } from './create-solution/create-solution.compo
 import { AuthGuardService } from '../common-shared/guards/authGuard.service';
 import { ProblemSubmissionsComponent } from './problem-submissions/problem-submissions.component';
 import { AuthLayoutComponent } from '../common-shared/layouts/auth-layout/auth-layout.component';
+import { ViewSolutionComponent } from './problem-submissions/view-solution/view-solution.component';
 
 const routes: Routes = [
   {path: '', component: AuthLayoutComponent, children: [
     {path: 'create', component: CreateSolutionComponent, canActivate: [AuthGuardService]},
     {path: 'submissions', component: ProblemSubmissionsComponent, canActivate: [AuthGuardService]},
+    {path: 'submissions/:id', component: ViewSolutionComponent, canActivate: [AuthGuardService]},
   ]},
 ];
 
