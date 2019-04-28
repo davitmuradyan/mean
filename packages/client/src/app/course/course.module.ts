@@ -14,6 +14,7 @@ import { CourseSubmissionsComponent } from './course-submissions/course-submissi
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonSharedModule } from '../common-shared/common-shared.module';
+import { ClipboardModule } from 'ngx-clipboard';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { CommonSharedModule } from '../common-shared/common-shared.module';
     ReactiveFormsModule,
     MDBBootstrapModule.forRoot(),
     FontAwesomeModule,
+    ClipboardModule,
   ]
 })
 export class CourseModule { }

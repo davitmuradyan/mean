@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 
 const authRoutes = require('./routes/auth');
 const statRoutes = require('./routes/stat');
@@ -25,5 +26,13 @@ app.use(authRoutes);
 app.use('/dataset', statRoutes);
 app.use('/course', courseRoutes);
 app.use('/solution', solutionRoutes);
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('../client/dist/client'));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, '..', 'client', 'dist', 'client', 'index.html'))
+    });
+}
 
 module.exports = app;

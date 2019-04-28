@@ -10,6 +10,7 @@ export interface User {
 }
 
 export interface Stack {
+  stack: any;
   insert: any;
   remove: any;
   peek: any;
@@ -18,6 +19,7 @@ export interface Stack {
 }
 
 export interface Queue {
+  queue: any;
   enqueue: any;
   dequeue: any;
   peek: any;

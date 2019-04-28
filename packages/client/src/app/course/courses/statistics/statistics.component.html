@@ -41,7 +41,17 @@
       </span>
       <div *ngIf="hidden" style="max-height: 100px">
         <div class="alert alert-primary" *ngFor="let d of datasets" >
-          <div class="overflow">{{ d.data }}</div>
+          <div
+            class="overflow"
+            style="cursor: pointer"
+            [mdbTooltip]="'Copy'"
+            triggers="hover"
+            placement="bottom"
+            ngxClipboard
+            [cbContent]="d.data"
+          >
+            {{ d.data }}
+          </div>
           <button
             class="btn btn-sm btn-danger fa fa-remove positioning"
             (click)="remove(d._id)"

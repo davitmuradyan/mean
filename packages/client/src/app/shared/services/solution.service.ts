@@ -15,8 +15,8 @@ export class SolutionService {
     return this.http.post<any>(`${baseUrl}/solution`, solution);
   }
 
-  fetch(): Observable<any> {
-    return this.http.get<any>(`${baseUrl}/solution`);
+  fetch(offset = 0): Observable<any> {
+    return this.http.get<any>(`${baseUrl}/solution?offset=${offset}`);
   }
 
   getSingleSolution(id): Observable<any> {

@@ -2,28 +2,28 @@ const Course = require('../models/course.model');
 
 module.exports.createCourse = async (req, res, next) => {
   try {
-      const { courseName, problems, needDB, comments } = req.body;
-      const course = await Course.findOne({courseName});
-      if (course) {
-          res.status(409).json({
-              message: `Course with title ${courseName} already exists.`
-          });
-          return;
-      }
-      const newCourse = await new Course({
-          courseName,
-          problems,
-          needDB,
-          comments,
-          userCreated: req.user._id,
-          status: 'Pending',
-      }).save();
-      res.status(201).json({
-          message: `Course with title ${newCourse.courseName} created successfully!`
+    const { courseName, problems, needDB, comments } = req.body;
+    const course = await Course.findOne({courseName});
+    if (course) {
+      res.status(409).json({
+        message: `Course with title ${courseName} already exists.`
       });
-      next();
+      return;
+    }
+    const newCourse = await new Course({
+      courseName,
+      problems,
+      needDB,
+      comments,
+      userCreated: req.user._id,
+      status: 'Pending',
+    }).save();
+    res.status(201).json({
+      message: `Course with title ${newCourse.courseName} created successfully!`
+    });
+    next();
   }  catch (error) {
-      throw error;
+    throw error;
   }
 };
 
@@ -35,8 +35,8 @@ module.exports.getAllCourses = async (req, res, next) => {
       res.status(200).json({courses, length: count});
       next();
     } else {
-        res.status(404).json({message: 'You have not created any course.'});
-        next();
+      res.status(404).json({message: 'You have not created any course.'});
+      next();
     }
   } catch (e) {
     throw e;
@@ -61,9 +61,9 @@ module.exports.updateCourse = async (req, res, next) => {
   try {
     const { courseName, comments, needDB, problems, status, feedback } = req.body;
     const course = await Course.findOneAndUpdate(
-        { _id: req.params._id },
-        { courseName, comments, needDB, problems, status, feedback },
-        { new: true });
+      { _id: req.params._id },
+      { courseName, comments, needDB, problems, status, feedback },
+      { new: true });
     res.status(200).json(course);
     next();
   } catch (e) {

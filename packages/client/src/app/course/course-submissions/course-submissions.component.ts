@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CoursesService } from '../../shared/services/courses.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { Courses } from '../../common-shared/interfaces';
 
 @Component({
   selector: 'app-course-submissions',
@@ -10,14 +11,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CourseSubmissionsComponent implements OnInit, OnDestroy {
 
-  courses = {};
+  courses: Courses;
   pagination = [];
   coursesSub$: Subscription;
 
   constructor(private courseService: CoursesService, private router: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this. coursesSub$ = this.router.queryParams.subscribe(params => {
+    this.coursesSub$ = this.router.queryParams.subscribe(params => {
       this.courseService.fetch(params['offset']).subscribe(data => {
         this.courses = data;
         const numberOfPages = Math.ceil(data.length / 5);
