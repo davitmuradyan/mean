@@ -139,3 +139,19 @@ module.exports.editprofile = async (req, res) => {
     throw e
   }
 };
+
+module.exports.contact = async (req, res) => {
+  try {
+    const data = {
+      from: req.body.contactFormEmail,
+      to: '82051215@mail.ru',
+      subject: req.body.contactFormSubjects,
+      html: `<div>email from: ${req.body.contactFormName}, email: ${req.body.contactFormEmail}
+      <hr>message: ${req.body.contactFormMessage}</div>`,
+    };
+    await mailer.sendMail('', data);
+    res.status(200).json({message: 'message sent successfully.'});
+  } catch (e) {
+    res.status(500).json(e);
+  }
+};

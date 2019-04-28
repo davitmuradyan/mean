@@ -36,7 +36,7 @@ export class ReviewSubmissionsComponent implements OnDestroy {
 
   loadSolutions(): void {
     this.sub2$ = this.solutionsService.fetch().subscribe(solutions => {
-      this.solutions = solutions.filter(solution => solution.status === STATUS_PENDING);
+      this.solutions = solutions.solutions.filter(solution => solution.status === STATUS_PENDING);
     }, error => {
       console.log(error);
     });

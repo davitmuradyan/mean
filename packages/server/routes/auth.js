@@ -15,5 +15,6 @@ router.put(
   upload.single('image'),
   authController.editprofile
 );
+router.post('/contact', authController.contact);
 
 module.exports = router;
