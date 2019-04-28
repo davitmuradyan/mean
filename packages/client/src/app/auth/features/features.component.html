@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <h3>Have a new idea or want to help make something better?</h3>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-md-6">
+      <h4>You can submit a solution to our existing courses</h4>
+      <button class="btn btn-default" (click)="submit('solution/create')">
+        Submit Solution
+      </button>
+    </div>
+    <div class="col-md-6">
+      <h4>Or you can propose adding new course</h4>
+      <button class="btn btn-default" (click)="submit('course/create')">
+        Propose new Course
+      </button>
+    </div>
+  </div>
+</div>
+
+<div
+  mdbModal
+  #frame="mdbModal"
+  class="modal fade top"
+  id="frameModalTop"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-notify modal-danger" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p class="heading lead">Please sign in first!</p>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+          <span aria-hidden="true" class="white-text">&times;</span>
+        </button>
+      </div>
+      <!--Body-->
+      <div class="modal-body">
+        <app-login [fromModal]="redirectUrl"></app-login>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
