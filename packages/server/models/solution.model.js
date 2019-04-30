@@ -47,6 +47,9 @@ const Solution = new Schema({
         type: String,
         default: 'pending',
     },
+    feedback: {
+        type: String,
+    }
 });
 
 module.exports = mongoose.model('Solution', Solution);

@@ -65,6 +65,7 @@ export interface Solution {
   testCaseInput: any;
   testCaseOutput: string;
   userSubmitted: string;
+  feedback: string;
   _id: string;
 }
 

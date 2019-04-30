@@ -1,3 +1,91 @@
-<span *ngIf="course">
-  {{course.courseName}}
-</span>
+<div class="container" *ngIf="course; else loading">
+  <div class="row justify-content-md-center">
+    <h1>Update your submitted course</h1>
+  </div>
+  <div #alert class="alert alert-{{alertClass}} alert-dismissible fade show" role="alert" *ngIf="message">
+    <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    {{message}}
+  </div>
+  <div class="row justify-content-md-center">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      Status: <span class="status {{course.status | lowercase}}">&nbsp;{{course.status}}&nbsp;</span>
+      <div class="form-group">
+        <label for="courseName">Course Name:</label>
+        <input
+          type="text"
+          class="form-control"
+          id="courseName"
+          placeholder="Course name"
+          formControlName="courseName"
+          [ngClass]="{'is-invalid': form.get('courseName').invalid && form.get('courseName').touched}"
+        >
+        <span *ngIf="form.get('courseName').invalid && form.get('courseName').touched">
+          <span
+            *ngIf="form.get('courseName').errors['required']"
+            class="invalid-feedback"
+            style="display: block"
+          >
+            Course Name can't be blank
+          </span>
+        </span>
+      </div>
+      <div class="form-group">
+        <label for="problems">Problems that this course should solve (minimum 3, or it will be rejected):</label>
+        <input
+          type="text"
+          class="form-control"
+          id="problems"
+          placeholder="Problems"
+          formControlName="problems"
+          [ngClass]="{'is-invalid': form.get('problems').invalid && form.get('problems').touched}"
+        >
+        <span *ngIf="form.get('problems').invalid && form.get('problems').touched">
+            <span
+              *ngIf="form.get('problems').errors['required']"
+              class="invalid-feedback"
+              style="display: block"
+            >
+              Problems can't be blank
+            </span>
+          </span>
+      </div>
+      <div class="form-group">
+        <label for="problems">Will there be a reusable data, which needs to be saved to database?</label>
+        <div class="custom-control custom-radio">
+          <input type="radio" class="custom-control-input" id="defaultChecked" name="needDB" checked mdbInput formControlName="needDB" [value]="true">
+          <label class="custom-control-label" for="defaultChecked">Yes</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input type="radio" class="custom-control-input" id="defaultUnchecked" name="needDB" mdbInput formControlName="needDB" [value]="false">
+          <label class="custom-control-label" for="defaultUnchecked">No</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="comments">Your comments:</label>
+        <textarea
+          type="text"
+          class="form-control md-textarea"
+          id="comments"
+          placeholder="Additional comments"
+          formControlName="comments"
+          mdbInput
+        ></textarea>
+      </div>
+      <div class="form-group">
+        Feedback from admin:
+        <hr>
+        <samp>{{course.feedback || 'No feedback provided yet'}}</samp>
+      </div>
+      <button type="submit" class="btn btn-default" [disabled]="form.invalid">Update course</button>
+    </form>
+  </div>
+</div>
+<ng-template #loading>
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <app-loader></app-loader>
+    </div>
+  </div>
+</ng-template>

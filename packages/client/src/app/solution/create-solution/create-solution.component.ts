@@ -26,18 +26,18 @@ export class CreateSolutionComponent implements OnInit, OnDestroy {
     this.courseSub$ = this.courseService.fetch()
       .subscribe(data => {
         this.courses = data.courses;
+        this.form = new FormGroup({
+          courseName: new FormControl(this.courses[0]._id),
+          problem: new FormControl(null, [Validators.required]),
+          comments: new FormControl(null),
+          functionName: new FormControl(null, [Validators.required]),
+          numberOfInputs: new FormControl(null, [Validators.required]),
+          parameters: new FormControl(null, [Validators.required]),
+          testCaseInput: new FormControl(null, [Validators.required]),
+          testCaseOutput: new FormControl(null, [Validators.required]),
+          solution: new FormControl(null, [Validators.required]),
+        });
       }, error => console.log(error));
-    this.form = new FormGroup({
-      courseName: new FormControl(null),
-      problem: new FormControl(null, [Validators.required]),
-      comments: new FormControl(null),
-      functionName: new FormControl(null, [Validators.required]),
-      numberOfInputs: new FormControl(null, [Validators.required]),
-      parameters: new FormControl(null, [Validators.required]),
-      testCaseInput: new FormControl(null, [Validators.required]),
-      testCaseOutput: new FormControl(null, [Validators.required]),
-      solution: new FormControl(null, [Validators.required]),
-    });
   }
 
   onSubmit() {

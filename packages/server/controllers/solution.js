@@ -65,7 +65,7 @@ module.exports.updateSolution = async (req, res, next) => {
   try {
     const {
       course,
-      name,
+      problem,
       solution,
       parameters,
       numberOfInputs,
@@ -74,12 +74,13 @@ module.exports.updateSolution = async (req, res, next) => {
       functionName,
       comments,
       status,
+      feedback,
     } = req.body;
     const solutionNew = await Solution.findOneAndUpdate(
       { _id: req.params.id },
       {
         course,
-        name,
+        name: problem || name,
         solution,
         parameters,
         numberOfInputs,
@@ -88,6 +89,7 @@ module.exports.updateSolution = async (req, res, next) => {
         functionName,
         comments,
         status,
+        feedback,
       },
       { new: true }
     );
