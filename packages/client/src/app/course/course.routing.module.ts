@@ -10,6 +10,7 @@ import { CreateCourseComponent } from './create-course/create-course.component';
 import { AuthGuardService } from '../common-shared/guards/authGuard.service';
 import { CourseSubmissionsComponent } from './course-submissions/course-submissions.component';
 import { AuthLayoutComponent } from '../common-shared/layouts/auth-layout/auth-layout.component';
+import { ViewCourseComponent } from './course-submissions/view-course/view-course.component';
 
 const routes: Routes = [
   {path: '', component: AuthLayoutComponent, children: [
@@ -20,7 +21,8 @@ const routes: Routes = [
     {path: 'data-structures', component: DataStructuresComponent},
     {path: 'mechanics', component: MechanicsComponent},
     {path: 'create', component: CreateCourseComponent, canActivate: [AuthGuardService]},
-    {path: 'submissions', component: CourseSubmissionsComponent},
+    {path: 'submissions', component: CourseSubmissionsComponent, canActivate: [AuthGuardService]},
+    {path: 'submissions/:id', component: ViewCourseComponent, canActivate: [AuthGuardService]},
   ]}
 ];
 

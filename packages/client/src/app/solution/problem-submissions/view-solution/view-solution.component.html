@@ -1,6 +1,6 @@
-<div class="container">
-  <div class="row justify-content-center">
-    <h1>Create a solution for some problem in existing courses</h1>
+<div class="container" *ngIf="solution; else loading">
+  <div class="row justify-content-md-center">
+    <h1>Update your submitted solution</h1>
   </div>
   <div #alert class="alert alert-{{alertClass}} alert-dismissible fade show" role="alert" *ngIf="message">
     <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
@@ -12,15 +12,16 @@
     <div class="col-lg-6">
       <!--Form Start-->
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        Status: <span class="status {{solution.status | lowercase}}">&nbsp;{{solution.status}}&nbsp;</span>
         <!--Select Course Start-->
         <div class="form-group">
           <label for="courseName">For which course is the solution?</label>
           <select
             class="browser-default custom-select"
             id="courseName"
-            formControlName="courseName"
+            formControlName="course"
           >
-            <option *ngFor="let course of courses" [value]="course._id">{{course.courseName}}</option>
+            <option *ngFor="let course of courses.courses" [value]="course._id">{{course.courseName}}</option>
           </select>
         </div>
         <!--Select Course End-->
@@ -165,7 +166,7 @@
         <!--Solution End-->
         <!--Comments Start-->
         <div class="form-group">
-          <label for="comments">If you have additional comments, write them here:</label>
+          <label for="comments">Your comments:</label>
           <textarea
             type="text"
             class="form-control md-textarea"
@@ -175,10 +176,22 @@
             mdbInput
           ></textarea>
         </div>
+        <div class="form-group">
+          Feedback from admin:
+          <hr>
+          <samp>{{solution.feedback || 'No feedback provided yet'}}</samp>
+        </div>
         <!--Comments ENd-->
-        <button type="submit" class="btn btn-default" [disabled]="form.invalid">Create solution</button>
+        <button type="submit" class="btn btn-default" [disabled]="form.invalid">Update solution</button>
       </form>
       <!--Form End-->
     </div>
   </div>
 </div>
+<ng-template #loading>
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <app-loader></app-loader>
+    </div>
+  </div>
+</ng-template>

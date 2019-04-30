@@ -11,6 +11,8 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { FeaturesComponent } from './features/features.component';
 import { AuthLayoutComponent } from '../common-shared/layouts/auth-layout/auth-layout.component';
 import { HomePageComponent } from '../home-page/home-page.component';
+import { AboutComponent } from './about/about.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 const routes: Routes = [
   {path: '', component: AuthLayoutComponent, children: [
@@ -20,6 +22,8 @@ const routes: Routes = [
     {path: 'main', component: MainComponent, canActivate: [AuthGuardService]},
     {path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuardService]},
     {path: 'features', component: FeaturesComponent},
+    {path: 'about', component: AboutComponent},
+    {path: 'contact-us', component: ContactUsComponent},
   ]},
   {path: 'email-verification/:authToken', component: VerifyEmailComponent},
 ];

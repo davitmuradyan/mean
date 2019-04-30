@@ -7,46 +7,26 @@
     </mdb-navbar-brand>
     <links>
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/main']">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/features']">Features</a>
-        </li>
-        <li class="nav-item" routerLinkActive="active">
-          <a
-            [routerLink]="['/course']"
-            class="nav-link waves-light"
-            mdbWavesEffect
-          >
-            Courses
+        <li class="nav-item" routerLinkActive="active" *ngFor="let navLink of navLinks">
+          <a class="nav-link waves-light" mdbWavesEffect [routerLink]="navLink.route">
+            {{navLink.name}}
           </a>
         </li>
-        <li class="nav-item dropdown" *ngIf="isAuth" dropdown>
+        <li class="nav-item dropdown" *ngIf="isAuth" dropdown routerLinkActive="active">
           <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
             Submissions
             <span class="caret"></span>
           </a>
           <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
             <a
+              *ngFor="let link of dropdownLinks"
               class="dropdown-item waves-light"
               mdbWavesEffect
-              [routerLink]="['/course', 'submissions']"
-              [queryParams]="{ offset: '0' }"
+              [routerLink]="link.route"
+              [queryParams]="link.queryParam"
             >
-              Course submissions
+              {{link.name}}
             </a>
-            <a
-              class="dropdown-item waves-light"
-              mdbWavesEffect
-              [routerLink]="['/solution', 'submissions']"
-              [queryParams]="{ offset: '0' }"
-            >
-              Problem submissions
-            </a>
-            <a [routerLink]="['/review/submissions']" class="dropdown-item waves-light" mdbWavesEffect href="#">Review submissions</a>
-            <div class="divider dropdown-divider"></div>
-            <a class="dropdown-item waves-light" mdbWavesEffect href="#">Feedback</a>
           </div>
         </li>
       </ul>
@@ -89,20 +69,8 @@
       <hr class="clearfix w-100 d-md-none pb-3">
       <div class="col-md-3 mb-md-0 mb-3">
         <ul class="list-unstyled">
-          <li>
-            <a [routerLink]="['/course', 'statistics']">Statistics</a>
-          </li>
-          <li>
-            <a [routerLink]="['/course', 'numerical']">Numerical Analysis</a>
-          </li>
-          <li>
-            <a [routerLink]="['/course', 'calc3']">Calculus 3</a>
-          </li>
-          <li>
-            <a [routerLink]="['/course', 'data-structures']">Data structures</a>
-          </li>
-          <li>
-            <a [routerLink]="['/course', 'mechanics']">Mechanics</a>
+          <li *ngFor="let course of courses">
+            <a [routerLink]="course.route">{{course.name}}</a>
           </li>
         </ul>
         </div>

@@ -6,7 +6,7 @@ const verifyURL = cryptoRandomString(16);
 
 module.exports = {
   verifyURL,
-  sendMail: (userEmail) => {
+  sendMail: (userEmail, data = null) => {
     nodemailer.createTestAccount((err, account) => {
       let transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -24,6 +24,15 @@ module.exports = {
         html: `Please confirm your account by clicking the following link: 
         <a href="http://localhost:4200/email-verification/${verifyURL}" target="_blank">Verify my account</a>`
       };
+
+      if (data) {
+        mailOptions = {
+          from: data.from,
+          to: data.to,
+          subject: data.subject,
+          html: data.html,
+        }
+      }
       
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {

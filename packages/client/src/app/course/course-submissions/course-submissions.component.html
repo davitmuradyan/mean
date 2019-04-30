@@ -17,7 +17,13 @@
           Feedback: {{course.feedback ? course.feedback : 'You don\'t have a feedback yet'}}
         </mdb-card-text>
 
-        <a href="#" mdbBtn color="primary" mdbWavesEffect>View</a>
+        <button
+          [routerLink]="['/course', 'submissions', course._id]"
+          mdbBtn color="primary"
+          mdbWavesEffect
+        >
+          View
+        </button>
       </mdb-card-body>
     </mdb-card>
   </div>

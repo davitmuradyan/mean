@@ -11,6 +11,8 @@ import { MainComponent } from './main/main.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { FeaturesComponent } from './features/features.component';
 import { CommonSharedModule } from '../common-shared/common-shared.module';
+import { AboutComponent } from './about/about.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { CommonSharedModule } from '../common-shared/common-shared.module';
     MainComponent,
     EditProfileComponent,
     FeaturesComponent,
+    AboutComponent,
+    ContactUsComponent,
   ],
   imports: [
     CommonModule,

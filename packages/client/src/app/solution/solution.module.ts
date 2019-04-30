@@ -7,11 +7,13 @@ import { CreateSolutionComponent } from './create-solution/create-solution.compo
 import { ProblemSubmissionsComponent } from './problem-submissions/problem-submissions.component';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ViewSolutionComponent } from './problem-submissions/view-solution/view-solution.component';
 
 @NgModule({
   declarations: [
     CreateSolutionComponent,
     ProblemSubmissionsComponent,
+    ViewSolutionComponent,
   ],
   imports: [
     CommonModule,

@@ -12,7 +12,7 @@
         <mdb-card-text>
           Feedback: {{solution.feedback ? solution.feedback : 'You don\'t have a feedback yet'}}
         </mdb-card-text>
-        <button mdbBtn color="primary" mdbWavesEffect>View</button>
+        <button [routerLink]="['/solution', 'submissions', solution._id]" mdbBtn color="primary" mdbWavesEffect>View</button>
       </mdb-card-body>
     </mdb-card>
   </div>

@@ -16,7 +16,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.authService.getUser();
-    this.image = `http://localhost:3000/${this.user.imgSrc}`;
+    this.image = `http://localhost:3000/${this.user.imgSrc || 'uploads/placeholder.png'}`;
   }
 
   logout(): void {

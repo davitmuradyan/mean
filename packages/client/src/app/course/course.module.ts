@@ -15,6 +15,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonSharedModule } from '../common-shared/common-shared.module';
 import { ClipboardModule } from 'ngx-clipboard';
+import { ViewCourseComponent } from './course-submissions/view-course/view-course.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ClipboardModule } from 'ngx-clipboard';
     DataStructuresComponent,
     MechanicsComponent,
     CreateCourseComponent,
-    CourseSubmissionsComponent
+    CourseSubmissionsComponent,
+    ViewCourseComponent,
   ],
   imports: [
     CommonModule,
