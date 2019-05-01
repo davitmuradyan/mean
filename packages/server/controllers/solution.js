@@ -39,13 +39,8 @@ module.exports.getSolutions = async (req, res, next) => {
   try {
     const solutions = await Solution.find({userSubmitted: req.user._id}).skip(+req.query.offset).limit(5);
     const count = await Solution.count();
-    if (solutions.length > 0) {
-      res.status(200).json({solutions, length: count});
-      next();
-    } else {
-      res.status(404).json({message: 'You have not created any course.'});
-      next()
-    }
+    res.status(200).json({solutions, length: count});
+    next();
   } catch (e) {
     throw e;
   }
