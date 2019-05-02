@@ -22,7 +22,6 @@ export class AuthLayoutComponent implements OnDestroy, DoCheck {
   dropdownLinks = [
     { name: 'Course submissions', route: ['/course', 'submissions'], queryParam: { offset: '0' } },
     { name: 'Problem submissions', route: ['/solution', 'submissions'], queryParam: { offset: '0' } },
-    { name: 'Review submissions', route: ['/review', 'submissions'], queryParam: {} },
   ];
   navLinks = [
     { name: 'Home', route: ['/main'] },

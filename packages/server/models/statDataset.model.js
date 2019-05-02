@@ -10,6 +10,10 @@ const statDataset = new Schema({
     ref: 'User',
     type: Schema.Types.ObjectId,
     required: true
+  },
+  course: {
+    ref: 'Course',
+    type: Schema.Types.ObjectId,
   }
 });
 

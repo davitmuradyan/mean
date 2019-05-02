@@ -1,10 +1,96 @@
 <div class="container" *ngIf="solutions; else loading">
-  <div class="row justify-content-md-center">
+  <div class="row justify-content-end" *ngIf="course.needDB">
+    <div class="col-lg-4 hide-small" style="position: absolute; left: 20px;">
+      <h3>Manage your Data sets</h3>
+      <h5>Add new Data set</h5>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="dataSetToSave"
+        (keyup)="onKeyUp($event)"
+      >
+      <span
+        *ngIf="message"
+        class="invalid-feedback"
+        style="display: block;"
+      >
+        {{ message }}
+      </span>
+      <button
+        class="btn btn-default"
+        (click)="save()"
+        [disabled]="!canSaveDataset"
+      >
+        Save
+      </button>
+      <h5>View my Data sets</h5>
+      <button
+        class="btn btn-default"
+        (click)="showHide()"
+        [disabled]="datasets.length === 0"
+      >
+        {{hidden ? 'Hide' : 'Show'}}
+      </button>
+      <span
+        *ngIf="datasets.length === 0"
+      >
+        You don't have any dataset saved.
+      </span>
+      <div *ngIf="hidden" style="max-height: 100px">
+        <div class="alert alert-primary" *ngFor="let d of datasets" >
+          <div
+            class="overflow"
+            style="cursor: pointer"
+            [mdbTooltip]="'Copy'"
+            triggers="hover"
+            placement="bottom"
+            ngxClipboard
+            [cbContent]="d.data"
+          >
+            {{ d.data }}
+          </div>
+          <button
+            class="btn btn-sm btn-danger fa fa-remove positioning"
+            (click)="remove(d._id)"
+          >
+          </button>
+          <button
+            class="btn btn-sm btn-primary fa fa-edit positioning"
+            (click)="edit(d)"
+          >
+          </button>
+          <button
+            class="btn btn-sm btn-success fa fa-check positioning"
+            (click)="update(d)"
+            *ngIf="d.editMode"
+            [disabled]="!canUpdateDataset"
+          >
+          </button>
+          <input
+            type="text"
+            class="form-control"
+            [value]="d.data"
+            *ngIf="d.editMode"
+            #newData
+            (keyup)="onKeyUp($event)"
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-md-end">
     <div class="col-lg-8" *ngFor="let solution of solutions.solutions; let i = index;">
       <h3>{{solution.name}}</h3>
       <div class="form-group">
         <label for="mean">Calculate the {{solution.name}}:</label>
-        <input type="text" class="form-control" id="mean" [(ngModel)]="solution.testCaseInput">
+        <input
+          *ngFor="let inp of solution.testCaseInput; let i = index; trackBy:trackByFn"
+          type="text"
+          class="form-control"
+          id="mean"
+          [(ngModel)]="solution.testCaseInput[i]"
+          style="margin-bottom: 15px"
+        >
         <button
           class="btn btn-default"
           mdbBtn

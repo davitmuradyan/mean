@@ -3,11 +3,46 @@
     <h1>Guides to follow before submitting a solution</h1>
   </div>
   <div class="row justify-content-md-center">
-    <h3>
-      Solution format:
-    </h3>
+    You need to follow the guideline in order to have successfully submitted solution. Currently we are supporting 3 types of user inputs.
+    You need to write your code, assuming that user will enter one of these 3 types. It can be either an array of integers(1,2,3,4), it can be
+    just a single integer(1 or 5.3) or it can be a function. <strong>Note:&nbsp;</strong> if your case is the third one, you should be careful to parse
+    the user input correctly. Here you can also find the examples.
+  </div>
+  <hr>
+  <div class="row justify-content-md-start">
+    Other points you should consider:
+    <ul>
+      <li>Name of the function must be the same both in input and in the code.</li>
+      <li>Your function must have exactly the same number of parameters as you mention in the number of parameters input</li>
+      <li>The names of parameters must be the same both in code and in the input</li>
+      <li>Test case input should be in the format, by which users are going to write it</li>
+      <li>Your function must take the test case input, process it and return the test case output</li>
+      <li>If the number of parameters is more than 1 you should split them with pipe |</li>
+    </ul>
+    Example:
+    <input class="form-control" type="text" value="5 | 6">
   </div>
   <div class="row justify-content-md-center">
+    <h3>Take an example of sum calculation</h3>
+  </div>
+  <div class="row justify-content-md-center">
+    <code>
+      function calculateSum(set) {{ '{' }}
+      <br>
+      &nbsp;&nbsp; const arr = set.split(',');
+      <br>
+      &nbsp;&nbsp; const sum = arr.reduce((acc, cur) => acc + cur);
+      <br>
+      &nbsp;&nbsp; return sum;
+      <br>
+      }
+    </code>
+  </div>
+  <div class="row justify-content-md-center">
+    So you need to split user input as it will be comma separated numbers. After splitting you calculate the sum and return it.
+  </div>
+  <div class="row justify-content-md-center">
+    Feel free to &nbsp; <a [routerLink]="['/contact-us']"><u>contact us</u></a> &nbsp; if you have any question.
   </div>
   <div class="row justify-content-md-center">
     <button [routerLink]="['/solution/create']" class="btn btn-default">Back to submission</button>

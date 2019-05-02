@@ -6,14 +6,11 @@ const { JWT_SECRET_KEY } = require('../constants/constants');
 
 module.exports.login = async (req, res) => {
   try {
-    if (req.body.username === undefined) {
-      throw 'username can\'t be blank'
-    }
     const candidate = await User.findOne({username: req.body.username});
     if (!candidate) {
       res.status(404).json({
           message: `Username ${req.body.username} not found`
-      })
+      });
     }
     else {
       if (!bcryptjs.compareSync(req.body.password, candidate.password)) {
@@ -101,7 +98,8 @@ module.exports.checkEmail = async (req, res) => {
   if (candidate) {
     res.status(409).json({
       message: `User with ${req.body.email} email already exists`
-    })
+    });
+    return;
   }
   res.status(200).json({
     message: 'Free email'

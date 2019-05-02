@@ -1,4 +1,7 @@
 <div class="container" *ngIf="solution$">
+  <div *ngIf="reviewMessage" class="alert alert-info" role="alert">
+    {{reviewMessage}}
+  </div>
   <div class="row justify-content-md-center">
     <h3>{{solution$.name | uppercase}}</h3>
     <span class="status {{solution$.status | lowercase}}">&nbsp;{{solution$.status}}&nbsp;</span>
@@ -18,7 +21,7 @@
   </div>
   <div class="row" style="margin-top: 25px">
     <div class="col-lg">
-      <span>Feedback: {{ solution$.comments ? solution$.comments : 'You don\'t have any feedback yet.' }} </span>
+      <span>User comments: {{ solution$.comments ? solution$.comments : 'User didn\'t left any comment' }} </span>
     </div>
   </div>
   <hr>
@@ -45,7 +48,7 @@
     {{',' + !testCasePass ? 'your output was ' + functionValue : ''}}
   </div>
   <hr style="margin-top: 80px">
-  <button mdbBtn mdbWavesEffect color="success" (click)="accept()">Accept and leave feedback</button>
+  <button [disabled]="!testCasePass" mdbBtn mdbWavesEffect color="success" (click)="accept()">Accept and leave feedback</button>
   <button mdbBtn mdbWavesEffect color="danger" (click)="reject()">Reject and leave feedback</button>
 </div>
 
@@ -87,7 +90,6 @@
           type="button"
           mdbBtn
           mdbWavesEffect
-          [routerLink]="['/review/submissions']"
           (click)="submit()"
         >
           Send feedback

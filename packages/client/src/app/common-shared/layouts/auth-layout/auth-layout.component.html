@@ -18,14 +18,23 @@
             <span class="caret"></span>
           </a>
           <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+            <span *ngFor="let link of dropdownLinks">
+              <a
+                class="dropdown-item waves-light"
+                mdbWavesEffect
+                [routerLink]="link.route"
+                [queryParams]="link.queryParam"
+              >
+                {{ link.name }}
+              </a>
+            </span>
             <a
-              *ngFor="let link of dropdownLinks"
+              *ngIf="user && user.type === 'admin'"
               class="dropdown-item waves-light"
               mdbWavesEffect
-              [routerLink]="link.route"
-              [queryParams]="link.queryParam"
+              [routerLink]="['/review', 'submissions']"
             >
-              {{link.name}}
+              Review submissions
             </a>
           </div>
         </li>

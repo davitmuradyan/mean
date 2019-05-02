@@ -23,7 +23,7 @@ export class CourseSubmissionsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.coursesSub$ = this.activatedRoute.queryParams.subscribe(params => {
       this.offset = params['offset'];
-      this.courseService.fetch(params['offset']).subscribe(data => {
+      this.courseService.getUserCourses(params['offset']).subscribe(data => {
         this.courses = data;
         const numberOfPages = Math.ceil(data.length / 5);
         for (let i = 1; i <= numberOfPages; i++) {

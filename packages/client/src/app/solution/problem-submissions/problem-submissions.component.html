@@ -2,8 +2,8 @@
   <div class="row justify-content-md-center">
     <h1>My submitted problems</h1>
   </div>
-  <div class="row justify-content-md-center" *ngIf="solutions$; else loading">
-    <mdb-card *ngFor="let solution of solutions$.solutions" class="card">
+  <div class="row justify-content-md-center" *ngIf="solutions; else loading">
+    <mdb-card *ngFor="let solution of solutions.solutions" class="card">
       <mdb-card-body>
         <mdb-card-title>
           <h4>{{solution.name}}</h4>
@@ -16,7 +16,7 @@
       </mdb-card-body>
     </mdb-card>
   </div>
-  <div class="row justify-content-md-center" *ngIf="solutions$ && solutions$.solutions.length > 0">
+  <div class="row justify-content-md-center" *ngIf="solutions && solutions.solutions.length > 0">
     <ul class="pagination pagination-circle pg-blue">
       <li class="page-item" [ngClass]="disableLast ? 'disabled' : ''">
         <a class="page-link" aria-label="Previous" mdbWavesEffect (click)="changeOffset(true)">
@@ -43,7 +43,7 @@
       </li>
     </ul>
   </div>
-  <div class="row justify-content-md-center" *ngIf="solutions$ && solutions$.solutions.length === 0">
+  <div class="row justify-content-md-center" *ngIf="solutions && solutions.solutions.length === 0">
     <h4 style="font-style: italic; color: darkgray">You don't have any submitted problem</h4>
   </div>
 </div>

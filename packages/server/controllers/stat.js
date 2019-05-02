@@ -17,6 +17,7 @@ module.exports.addDataset = async (req, res) => {
       });
       const dataset = await new StatDataset({
         data: req.body.dataset,
+        course: req.body.courseId,
         user: req.user._id
       }).save();
       res.status(201).json({
@@ -36,7 +37,8 @@ module.exports.getAll = async (req, res) => {
   try {
     if (req.user) {
       const dataSet = await StatDataset.find({
-        user: req.user._id
+        user: req.user._id,
+        course: req.query.courseId,
       });
       res.status(200).json(dataSet);
     }

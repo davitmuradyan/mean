@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SolutionService } from '../../shared/services/solution.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Solutions } from '../../common-shared/interfaces';
 
 @Component({
   selector: 'app-problem-submissions',
@@ -10,7 +11,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ProblemSubmissionsComponent implements OnInit {
 
-  solutions$: Subscription;
+  solutions: Solutions;
+  solSub$: Subscription;
   pagination = [];
   offset: number;
   disableNext = false;
@@ -18,11 +20,11 @@ export class ProblemSubmissionsComponent implements OnInit {
 
   constructor(private solutionService: SolutionService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
-  ngOnInit() {
-    this.activatedRoute.queryParams.subscribe(params => {
+  ngOnInit(): void {
+    this.solSub$ = this.activatedRoute.queryParams.subscribe(params => {
       this.offset = params['offset'];
       this.solutionService.fetch(params['offset']).subscribe(solutions => {
-        this.solutions$ = solutions;
+        this.solutions = solutions;
         const numberOfPages = Math.ceil(solutions.length / 5);
         for (let i = 1; i <= numberOfPages; i++) {
           if (!this.pagination[i - 1]) {
@@ -37,9 +39,6 @@ export class ProblemSubmissionsComponent implements OnInit {
             this.disableLast = true;
           }
         }
-        // Future functions evaluating
-        // const sol = new Function(`return ${solutions[5].solution}`);
-        // console.log(+sol()([1, 2, 3, 4, 5, 6]).toFixed(2));
       });
     });
 

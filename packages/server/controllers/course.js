@@ -28,9 +28,20 @@ module.exports.createCourse = async (req, res, next) => {
   }
 };
 
-module.exports.getAllCourses = async (req, res, next) => {
+module.exports.getUserCourses = async (req, res, next) => {
   try {
     const courses = await Course.find({userCreated: req.user._id}).skip(+req.query.offset).limit(5);
+    const count = await Course.count();
+    res.status(200).json({courses, length: count});
+    next();
+  } catch (e) {
+    res.status(500).json(e);
+  }
+};
+
+module.exports.getAllCourses = async (req, res, next) => {
+  try {
+    const courses = await Course.find().skip(+req.query.offset).limit(5);
     const count = await Course.count();
     res.status(200).json({courses, length: count});
     next();

@@ -11,12 +11,12 @@ const { baseUrl } = environment;
 export class StatService {
   constructor(private http: HttpClient) {}
 
-  fetch(): Observable<any> {
-    return this.http.get<any>(`${baseUrl}/dataset`);
+  fetch(courseId = ''): Observable<any> {
+    return this.http.get<any>(`${baseUrl}/dataset?courseId=${courseId}`);
   }
 
-  create(dataset): Observable<any> {
-    return this.http.post(`${baseUrl}/dataset`, {dataset});
+  create(dataset, courseId = null): Observable<any> {
+    return this.http.post(`${baseUrl}/dataset`, {dataset, courseId});
   }
 
   remove(id): Observable<any> {

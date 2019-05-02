@@ -22,7 +22,7 @@ module.exports.createSolution = async (req, res, next) => {
       functionName, comments,
       numberOfInputs,
       parameters: parameters.split(','),
-      testCaseInput, testCaseOutput,
+      testCaseInput: testCaseInput.split('|'), testCaseOutput,
       solution, userSubmitted: req.user._id,
       status: 'pending',
     }).save();
@@ -61,6 +61,7 @@ module.exports.updateSolution = async (req, res, next) => {
     const {
       course,
       problem,
+      name,
       solution,
       parameters,
       numberOfInputs,
@@ -98,7 +99,8 @@ module.exports.updateSolution = async (req, res, next) => {
 module.exports.getSolutionsByCourse = async (req, res, next) => {
   try {
     const solutions = await Solution.find({ course: req.params.id });
-    res.status(200).json({solutions});
+    const filtered = solutions.filter(item => item.status === 'approved');
+    res.status(200).json({solutions: filtered});
     next();
   } catch (e) {
     res.status(500).json(e);

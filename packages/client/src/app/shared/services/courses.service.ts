@@ -27,4 +27,8 @@ export class CoursesService {
   update(course: Course): Observable<Course> {
     return  this.http.put<Course>(`${baseUrl}/course/${course._id}`, course);
   }
+
+  getUserCourses(offset = 0): Observable<Courses> {
+    return this.http.get<Courses>(`${baseUrl}/course/user?offset=${offset}`);
+  }
 }
