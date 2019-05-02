@@ -94,3 +94,13 @@ module.exports.updateSolution = async (req, res, next) => {
     res.status(500).json(e);
   }
 };
+
+module.exports.getSolutionsByCourse = async (req, res, next) => {
+  try {
+    const solutions = await Solution.find({ course: req.params.id });
+    res.status(200).json({solutions});
+    next();
+  } catch (e) {
+    res.status(500).json(e);
+  }
+};

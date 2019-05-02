@@ -1,0 +1,29 @@
+<div class="container" *ngIf="solutions; else loading">
+  <div class="row justify-content-md-center">
+    <div class="col-lg-8" *ngFor="let solution of solutions.solutions; let i = index;">
+      <h3>{{solution.name}}</h3>
+      <div class="form-group">
+        <label for="mean">Calculate the {{solution.name}}:</label>
+        <input type="text" class="form-control" id="mean" [(ngModel)]="solution.testCaseInput">
+        <button
+          class="btn btn-default"
+          mdbBtn
+          mdbWavesEffect
+          (click)="convertFunc(solution)"
+        >
+          Calculate
+        </button>
+        <span *ngIf="solution.testCaseOutput">
+        Output is {{solution.testCaseOutput}}
+      </span>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #loading>
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <app-loader></app-loader>
+    </div>
+  </div>
+</ng-template>

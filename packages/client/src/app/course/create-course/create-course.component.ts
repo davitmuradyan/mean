@@ -24,6 +24,7 @@ export class CreateCourseComponent implements OnInit, OnDestroy {
       problems: new FormControl(null, [Validators.required]),
       needDB: new FormControl(true, [Validators.required]),
       comments: new FormControl(null),
+      description: new FormControl(null, [Validators.required]),
     });
   }
 

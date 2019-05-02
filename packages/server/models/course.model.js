@@ -20,6 +20,10 @@ const Course = new Schema({
     feedback: {
       type: String,
     },
+    description: {
+      type: String,
+      required: true,
+    },
     userCreated: {
         ref: 'User',
         type: Schema.Types.ObjectId,

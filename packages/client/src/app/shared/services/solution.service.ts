@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { Solutions } from '../../common-shared/interfaces';
 
 const { baseUrl } = environment;
 
@@ -25,5 +26,9 @@ export class SolutionService {
 
   update(solution): Observable<any> {
     return this.http.put(`${baseUrl}/solution/${solution._id}`, solution);
+  }
+
+  getSolutionsByCourse(courseId: string): Observable<Solutions> {
+    return this.http.get<Solutions>(`${baseUrl}/solution/course/${courseId}`);
   }
 }

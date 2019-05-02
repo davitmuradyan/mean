@@ -2,7 +2,7 @@ const Course = require('../models/course.model');
 
 module.exports.createCourse = async (req, res, next) => {
   try {
-    const { courseName, problems, needDB, comments } = req.body;
+    const { courseName, problems, needDB, comments, description } = req.body;
     const course = await Course.findOne({courseName});
     if (course) {
       res.status(409).json({
@@ -15,6 +15,7 @@ module.exports.createCourse = async (req, res, next) => {
       problems,
       needDB,
       comments,
+      description,
       userCreated: req.user._id,
       status: 'pending',
     }).save();
@@ -54,10 +55,10 @@ module.exports.getSingleCourse = async (req, res, next) => {
 
 module.exports.updateCourse = async (req, res, next) => {
   try {
-    const { courseName, comments, needDB, problems, status, feedback } = req.body;
+    const { courseName, comments, needDB, problems, status, feedback, description } = req.body;
     const course = await Course.findOneAndUpdate(
       { _id: req.params._id },
-      { courseName, comments, needDB, problems, status, feedback },
+      { courseName, comments, needDB, problems, status, feedback, description },
       { new: true });
     res.status(200).json(course);
     next();

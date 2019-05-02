@@ -8,7 +8,7 @@
     </button>
     {{message}}
   </div>
-  <div class="row justify-content-center" *ngIf="form">
+  <div class="row justify-content-center" *ngIf="form; else loading">
     <div class="col-lg-6">
       <!--Form Start-->
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -160,6 +160,12 @@
         <!--Solution Start-->
         <div class="form-group">
           <label for="solution">Write the solution function here (in JavaScript):</label>
+          <label>
+            <strong>Note:</strong> Make sure you are aware of submitting
+            <a [routerLink]="['/solution/guide']">
+              <u>solution guideline</u>
+            </a>
+          </label>
           <ngx-monaco-editor id="solution" class="form-control" [options]="editorOptions" formControlName="solution"></ngx-monaco-editor>
         </div>
         <!--Solution End-->
@@ -182,3 +188,10 @@
     </div>
   </div>
 </div>
+<ng-template #loading>
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <app-loader></app-loader>
+    </div>
+  </div>
+</ng-template>

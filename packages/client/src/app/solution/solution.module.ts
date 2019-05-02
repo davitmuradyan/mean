@@ -8,12 +8,14 @@ import { ProblemSubmissionsComponent } from './problem-submissions/problem-submi
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ViewSolutionComponent } from './problem-submissions/view-solution/view-solution.component';
+import { GuideComponent } from './guide/guide.component';
 
 @NgModule({
   declarations: [
     CreateSolutionComponent,
     ProblemSubmissionsComponent,
     ViewSolutionComponent,
+    GuideComponent,
   ],
   imports: [
     CommonModule,

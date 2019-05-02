@@ -6,7 +6,7 @@
       </h3>
     </div> 
   </div>
-  <div class="row">
+  <div class="row" *ngIf="courses">
     <div class="col-md-4">
       <button class="btn btn-info mleft15" [routerLink]="['/course', 'statistics']">Statistics</button>
       <div class="col-sm-12 maxWidth300">
@@ -35,6 +35,12 @@
       <button class="btn btn-info mleft15" [routerLink]="['/course', 'mechanics']">Mechanics</button>
       <div class="col-sm-12 maxWidth300">
         <p>In this section you can find solution for mechanics problem</p>
+      </div>
+    </div>
+    <div class="col-md-4" *ngFor="let course of courses.courses">
+      <button class="btn btn-info mleft15" [routerLink]="['/course', course._id]">{{course.courseName}}</button>
+      <div class="col-sm-12 maxWidth300">
+        <p>{{course.description}}</p>
       </div>
     </div>
   </div>

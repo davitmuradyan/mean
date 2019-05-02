@@ -77,6 +77,7 @@ export interface Course {
   problems: string[];
   status: string;
   userCreated: string;
+  description: string;
   _id: string;
 }
 
