@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { AuthRoutingModule } from './auth.routing.module';
@@ -13,6 +13,7 @@ import { FeaturesComponent } from './features/features.component';
 import { CommonSharedModule } from '../common-shared/common-shared.module';
 import { AboutComponent } from './about/about.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
     FeaturesComponent,
     AboutComponent,
     ContactUsComponent,
+    UsersComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +33,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
     ReactiveFormsModule,
     CommonSharedModule,
     MDBBootstrapModule.forRoot(),
+    FormsModule,
   ]
 })
 export class AuthModule { }

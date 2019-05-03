@@ -153,3 +153,26 @@ module.exports.contact = async (req, res) => {
     res.status(500).json(e);
   }
 };
+
+module.exports.getUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).json(users);
+  } catch (e) {
+    res.status(500).json(e)
+  }
+};
+
+module.exports.updatePermission = async (req, res) => {
+  try {
+    console.log(req.body.type)
+    const user = await User.findOneAndUpdate(
+      { _id: req.body._id },
+      { type: req.body.type },
+      { new: true }
+    );
+    res.status(200).json(user);
+  } catch (e) {
+    res.status(500).json(e);
+  }
+};

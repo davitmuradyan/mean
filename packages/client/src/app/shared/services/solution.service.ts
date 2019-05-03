@@ -20,6 +20,10 @@ export class SolutionService {
     return this.http.get<any>(`${baseUrl}/solution?offset=${offset}`);
   }
 
+  getUserSolutions(offset = 0): Observable<Solutions> {
+    return this.http.get<Solutions>(`${baseUrl}/solution/user?offset=${offset}`);
+  }
+
   getSingleSolution(id): Observable<any> {
     return this.http.get(`${baseUrl}/solution/${id}`);
   }

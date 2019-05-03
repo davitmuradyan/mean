@@ -29,7 +29,7 @@
               </a>
             </span>
             <a
-              *ngIf="user && user.type === 'admin'"
+              *ngIf="user && (user.type === 'admin' || user.type === 'super-admin')"
               class="dropdown-item waves-light"
               mdbWavesEffect
               [routerLink]="['/review', 'submissions']"
@@ -37,6 +37,11 @@
               Review submissions
             </a>
           </div>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a *ngIf="user && user.type === 'super-admin'" class="nav-link waves-light" mdbWavesEffect [routerLink]="['/users']">
+            Users
+          </a>
         </li>
       </ul>
       <div class="md-form mt-0" *ngIf="!isAuth">

@@ -1,12 +1,14 @@
 export interface User {
-    username: String;
-    email?: String;
-    password: String;
-    firstname?: String;
-    lastname?: String;
-    id?: String;
+    username: string;
+    email?: string;
+    password: string;
+    firstname?: string;
+    lastname?: string;
+    id?: string;
     dateRegistered?: Date;
-    imgSrc: String;
+    imgSrc: string;
+    type?: string;
+    blocked?: boolean;
 }
 
 export interface Stack {

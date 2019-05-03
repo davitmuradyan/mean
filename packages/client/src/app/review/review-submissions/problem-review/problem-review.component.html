@@ -44,7 +44,7 @@
   <button class="btn btn-default" style="float: right" (click)="testSolution()">Test Code</button>
   <div *ngIf="alertMessage" class="alert alert-{{testCaseClass}}" style="margin-top: 70px">
     Test case {{testCasePass ? 'passed' : 'failed'}}:
-    the inputs were {{solution$.testCaseInput | addSpace}} with expected output {{solution$.testCaseOutput}}
+    the inputs were {{inputValues}} with expected output {{solution$.testCaseOutput}}
     {{',' + !testCasePass ? 'your output was ' + functionValue : ''}}
   </div>
   <hr style="margin-top: 80px">

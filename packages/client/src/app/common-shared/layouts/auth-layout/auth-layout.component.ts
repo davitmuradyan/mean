@@ -47,6 +47,7 @@ export class AuthLayoutComponent implements OnDestroy, DoCheck {
   }
 
   logout() {
+    this.user = null;
     this.authService.logout();
     this.router.navigate(['/']);
   }

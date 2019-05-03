@@ -18,6 +18,7 @@ export class ProblemReviewComponent implements OnInit, OnDestroy {
   solution$: Solution;
   functionValue: number;
   editorOptions = {theme: 'vs-dark', language: 'typescript'};
+  inputValues = '';
   testCaseClass = '';
   modalType = '';
   modalIcon = '';
@@ -37,6 +38,7 @@ export class ProblemReviewComponent implements OnInit, OnDestroy {
   }
 
   testSolution(): void {
+    this.inputValues = this.solution$.testCaseInput.toString();
     const sol = new Function(`return ${this.solution$.solution}`);
     this.functionValue = +sol()(...this.solution$.testCaseInput);
     if (this.functionValue === +this.solution$.testCaseOutput) {

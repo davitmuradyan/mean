@@ -23,7 +23,7 @@ export class ProblemSubmissionsComponent implements OnInit {
   ngOnInit(): void {
     this.solSub$ = this.activatedRoute.queryParams.subscribe(params => {
       this.offset = params['offset'];
-      this.solutionService.fetch(params['offset']).subscribe(solutions => {
+      this.solutionService.getUserSolutions(params['offset']).subscribe(solutions => {
         this.solutions = solutions;
         const numberOfPages = Math.ceil(solutions.length / 5);
         for (let i = 1; i <= numberOfPages; i++) {
