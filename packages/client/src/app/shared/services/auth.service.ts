@@ -32,6 +32,14 @@ export class AuthService {
     return this.http.post<any>(`${baseUrl}/checkusername`, {username});
   }
 
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${baseUrl}/users`);
+  }
+
+  updatePermission(user: User): Observable<User> {
+    return this.http.put<User>(`${baseUrl}/update-permission`, user);
+  }
+
   editProfile(user, image?: File) {
     const fd = new FormData();
     if (image) {

@@ -52,9 +52,9 @@ export class CourseReviewComponent implements OnInit, OnDestroy {
   }
 
   submit() {
-    const { _id, comments, needDB, problems, courseName, userCreated } = this.course;
+    const { _id, comments, needDB, problems, courseName, userCreated, description } = this.course;
     this.coursesService.update({
-      _id, comments, needDB, problems,
+      _id, comments, needDB, problems, description,
       courseName, feedback: this.feedback,
       userCreated, status: this.modalType === 'success' ? 'approved' : 'rejected' }).subscribe(course => {
         this.course = course;

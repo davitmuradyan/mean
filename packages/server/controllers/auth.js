@@ -6,14 +6,11 @@ const { JWT_SECRET_KEY } = require('../constants/constants');
 
 module.exports.login = async (req, res) => {
   try {
-    if (req.body.username === undefined) {
-      throw 'username can\'t be blank'
-    }
     const candidate = await User.findOne({username: req.body.username});
     if (!candidate) {
       res.status(404).json({
           message: `Username ${req.body.username} not found`
-      })
+      });
     }
     else {
       if (!bcryptjs.compareSync(req.body.password, candidate.password)) {
@@ -101,7 +98,8 @@ module.exports.checkEmail = async (req, res) => {
   if (candidate) {
     res.status(409).json({
       message: `User with ${req.body.email} email already exists`
-    })
+    });
+    return;
   }
   res.status(200).json({
     message: 'Free email'
@@ -151,6 +149,29 @@ module.exports.contact = async (req, res) => {
     };
     await mailer.sendMail('', data);
     res.status(200).json({message: 'message sent successfully.'});
+  } catch (e) {
+    res.status(500).json(e);
+  }
+};
+
+module.exports.getUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).json(users);
+  } catch (e) {
+    res.status(500).json(e)
+  }
+};
+
+module.exports.updatePermission = async (req, res) => {
+  try {
+    console.log(req.body.type)
+    const user = await User.findOneAndUpdate(
+      { _id: req.body._id },
+      { type: req.body.type },
+      { new: true }
+    );
+    res.status(200).json(user);
   } catch (e) {
     res.status(500).json(e);
   }

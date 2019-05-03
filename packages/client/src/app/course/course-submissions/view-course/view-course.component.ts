@@ -34,6 +34,7 @@ export class ViewCourseComponent implements OnInit, OnDestroy {
           problems: new FormControl(this.course.problems, [Validators.required]),
           needDB: new FormControl(this.course.needDB, [Validators.required]),
           comments: new FormControl(this.course.comments),
+          description: new FormControl(null, [Validators.required]),
         });
       });
     });

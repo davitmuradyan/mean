@@ -38,6 +38,10 @@ const User = new Schema({
         type: String,
         required: false
     },
+    blocked: {
+      type: Boolean,
+      default: false,
+    },
     type: {
       type: String,
       required: true,

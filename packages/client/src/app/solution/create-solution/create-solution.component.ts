@@ -22,7 +22,7 @@ export class CreateSolutionComponent implements OnInit, OnDestroy {
 
   constructor(private courseService: CoursesService, private solutionService: SolutionService) {  }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.courseSub$ = this.courseService.fetch()
       .subscribe(data => {
         this.courses = data.courses;
@@ -40,8 +40,7 @@ export class CreateSolutionComponent implements OnInit, OnDestroy {
       }, error => console.log(error));
   }
 
-  onSubmit() {
-    this.form.value.testCaseInput = this.form.value.testCaseInput.split(' ');
+  onSubmit(): void {
     this.solCreateSub$ = this.solutionService.create(this.form.value)
       .subscribe(courseMessage => {
         this.alertClass = 'success';
@@ -53,7 +52,7 @@ export class CreateSolutionComponent implements OnInit, OnDestroy {
       });
   }
 
-  closeAlert() {
+  closeAlert(): void {
     this.message = null;
     this.alert.nativeElement.classList.remove('show');
   }

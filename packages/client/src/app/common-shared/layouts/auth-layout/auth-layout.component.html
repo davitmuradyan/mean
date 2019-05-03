@@ -18,16 +18,30 @@
             <span class="caret"></span>
           </a>
           <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+            <span *ngFor="let link of dropdownLinks">
+              <a
+                class="dropdown-item waves-light"
+                mdbWavesEffect
+                [routerLink]="link.route"
+                [queryParams]="link.queryParam"
+              >
+                {{ link.name }}
+              </a>
+            </span>
             <a
-              *ngFor="let link of dropdownLinks"
+              *ngIf="user && (user.type === 'admin' || user.type === 'super-admin')"
               class="dropdown-item waves-light"
               mdbWavesEffect
-              [routerLink]="link.route"
-              [queryParams]="link.queryParam"
+              [routerLink]="['/review', 'submissions']"
             >
-              {{link.name}}
+              Review submissions
             </a>
           </div>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a *ngIf="user && user.type === 'super-admin'" class="nav-link waves-light" mdbWavesEffect [routerLink]="['/users']">
+            Users
+          </a>
         </li>
       </ul>
       <div class="md-form mt-0" *ngIf="!isAuth">
@@ -48,7 +62,7 @@
           <img [src]="image" alt="dsasa" class="nav-image">
         </a>
         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/']">My profile</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/main']">My profile</a>
           <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['/settings']">Settings</a>
           <div class="divider dropdown-divider"></div>
           <a class="dropdown-item waves-light" mdbWavesEffect (click)="logout()">Logout</a>

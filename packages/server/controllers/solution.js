@@ -22,7 +22,7 @@ module.exports.createSolution = async (req, res, next) => {
       functionName, comments,
       numberOfInputs,
       parameters: parameters.split(','),
-      testCaseInput, testCaseOutput,
+      testCaseInput: testCaseInput.split('|'), testCaseOutput,
       solution, userSubmitted: req.user._id,
       status: 'pending',
     }).save();
@@ -35,19 +35,23 @@ module.exports.createSolution = async (req, res, next) => {
   }
 };
 
-module.exports.getSolutions = async (req, res, next) => {
+module.exports.getSolutions = async (req, res) => {
+  try {
+    const solutions = await Solution.find().skip(+req.query.offset).limit(5);
+    const count = await Solution.count();
+    res.status(200).json({solutions, length: count});
+  } catch (e) {
+    throw e;
+  }
+};
+
+module.exports.getUserSolutions = async (req, res) => {
   try {
     const solutions = await Solution.find({userSubmitted: req.user._id}).skip(+req.query.offset).limit(5);
     const count = await Solution.count();
-    if (solutions.length > 0) {
-      res.status(200).json({solutions, length: count});
-      next();
-    } else {
-      res.status(404).json({message: 'You have not created any course.'});
-      next()
-    }
+    res.status(200).json({solutions, length: count});
   } catch (e) {
-    throw e;
+    res.status(500).json(e);
   }
 };
 
@@ -61,11 +65,12 @@ module.exports.getSingle = async (req, res, next) => {
   }
 };
 
-module.exports.updateSolution = async (req, res, next) => {
+module.exports.updateSolution = async (req, res) => {
   try {
     const {
       course,
       problem,
+      name,
       solution,
       parameters,
       numberOfInputs,
@@ -94,7 +99,16 @@ module.exports.updateSolution = async (req, res, next) => {
       { new: true }
     );
     res.status(200).json(solutionNew);
-    next();
+  } catch (e) {
+    res.status(500).json(e);
+  }
+};
+
+module.exports.getSolutionsByCourse = async (req, res,) => {
+  try {
+    const solutions = await Solution.find({ course: req.params.id });
+    const filtered = solutions.filter(item => item.status === 'approved');
+    res.status(200).json({solutions: filtered});
   } catch (e) {
     res.status(500).json(e);
   }
