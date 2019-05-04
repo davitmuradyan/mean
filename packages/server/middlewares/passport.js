@@ -1,6 +1,6 @@
 const jwtStrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
-const { JWT_SECRET_KEY } = require('../constants/constants');
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || '';
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const options = {

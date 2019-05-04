@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 const cryptoRandomString = require('crypto-random-string');
-const { EMAIL, PASSWORD } = require('../constants/dev.credentials');
+const { EMAIL, PASSWORD } = process.env;
 
 const verifyURL = cryptoRandomString(16);
 
@@ -11,8 +11,8 @@ module.exports = {
       const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-          user: EMAIL,
-          pass: PASSWORD
+          user: EMAIL || '',
+          pass: PASSWORD || '',
         }
       });
 

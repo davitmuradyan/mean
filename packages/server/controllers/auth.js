@@ -2,7 +2,7 @@ const User = require('../models/user.model');
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const mailer = require('../utils/mailer');
-const { JWT_SECRET_KEY } = require('../constants/constants');
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || '';
 const {
   UserNotFoundError,
   IncorrectCredentialsError,
