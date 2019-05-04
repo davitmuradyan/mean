@@ -3,8 +3,9 @@ module.exports = (req, res, next) => {
     res.status(403).json({
       message: "Permission denied"
     });
+
     return;
   }
   res.status(200);
-  next()
+  next();
 };

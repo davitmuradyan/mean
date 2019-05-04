@@ -5,21 +5,21 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const options = {
   secretOrKey: JWT_SECRET_KEY,
-  jwtFromRequest : ExtractJWT.fromAuthHeaderAsBearerToken()
+  jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken()
 };
 
-module.exports = passport => {
-  passport.use(new jwtStrategy(options,
+module.exports = (passport) => {
+  passport.use(new jwtStrategy(
+    options,
     async (payload, done) => {
-      try {
-        const user = await User.findById(payload._id).select("_id username type");
-        if (user)
-          done(null, payload);
-        else
-          done(null, false);
-      } catch (e) {
-        throw e;
+      const user = await User.findById(payload._id).select("_id username type");
+
+      if (user) {
+        done(null, payload);
+      } else {
+        done(null, false);
       }
-    })
-  )
+
+    }
+  ));
 };

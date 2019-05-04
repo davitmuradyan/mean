@@ -1,87 +1,84 @@
 const Course = require('../models/course.model');
+const {
+  CourseNotFoundError,
+  CourseAlreadyExistsError,
+} = require('../errors/CourseErrors');
 
 module.exports.createCourse = async (req, res, next) => {
-  try {
-    const { courseName, problems, needDB, comments, description } = req.body;
-    const course = await Course.findOne({courseName});
-    if (course) {
-      res.status(409).json({
-        message: `Course with title ${courseName} already exists.`
-      });
-      return;
-    }
-    const newCourse = await new Course({
-      courseName,
-      problems,
-      needDB,
-      comments,
-      description,
-      userCreated: req.user._id,
-      status: 'pending',
-    }).save();
-    res.status(201).json({
-      message: `Course with title ${newCourse.courseName} created successfully!`
-    });
-    next();
-  }  catch (e) {
-    res.status(500).json(e);
+  const { courseName, problems, needDB, comments, description } = req.body;
+  const course = await Course.findOne({courseName});
+
+  if (course) {
+    return next(new CourseAlreadyExistsError(courseName));
   }
+  const newCourse = await new Course({
+    courseName,
+    problems,
+    needDB,
+    comments,
+    description,
+    userCreated: req.user._id,
+    status: 'pending',
+  }).save();
+
+  res.status(201).json({
+    message: `Course with title ${newCourse.courseName} created successfully!`
+  });
 };
 
 module.exports.getUserCourses = async (req, res, next) => {
-  try {
-    const courses = await Course.find({userCreated: req.user._id}).skip(+req.query.offset).limit(5);
-    const count = await Course.count();
-    res.status(200).json({courses, length: count});
-    next();
-  } catch (e) {
-    res.status(500).json(e);
-  }
+  const courses = await Course.find({userCreated: req.user._id}).skip(Number(req.query.offset)).
+    limit(5);
+  const count = await Course.count();
+
+  res.status(200).json({courses,
+    length: count});
+  next();
+
 };
 
 module.exports.getAllCourses = async (req, res, next) => {
-  try {
-    const courses = await Course.find().skip(+req.query.offset).limit(5);
-    const count = await Course.count();
-    res.status(200).json({courses, length: count});
-    next();
-  } catch (e) {
-    res.status(500).json(e);
+  const courses = await Course.find().skip(Number(req.query.offset)).
+    limit(5);
+
+  if (!courses) {
+    return next(new CourseNotFoundError());
   }
+  const count = await Course.countDocuments();
+
+  res.status(200).json({courses,
+    length: count});
 };
 
 module.exports.getSingleCourse = async (req, res, next) => {
-  try {
-    const course = await Course.findById(req.params._id);
-    if (course) {
-      res.status(200).json(course);
-      next();
-    } else {
-      res.status(404).json({ message: 'Course not found' })
-    }
-  } catch (e) {
-    res.status(500).json(e)
+  const course = await Course.findOne({_id: req.params.id});
+
+  if (!course) {
+    return next(new CourseNotFoundError(req.params.id));
   }
+  res.status(200).json(course);
 };
 
 module.exports.updateCourse = async (req, res, next) => {
-  try {
-    const { courseName, comments, needDB, problems, status, feedback, description } = req.body;
-    const course = await Course.findOneAndUpdate(
-      { _id: req.params._id },
-      { courseName, comments, needDB, problems, status, feedback, description },
-      { new: true });
-    res.status(200).json(course);
-    next();
-  } catch (e) {
-    res.status(500).json(e)
-  }
+  const { courseName, comments, needDB, problems, status, feedback, description } = req.body;
+  const course = await Course.findOneAndUpdate(
+    { _id: req.params.id },
+    { courseName,
+      comments,
+      needDB,
+      problems,
+      status,
+      feedback,
+      description },
+    { new: true }
+  );
+
+  res.status(200).json(course);
+  next();
 };
 
-module.exports.deleteCourse = async (req, res, next) => {
-  try {
-
-  } catch (e) {
-    res.status(500).json(e)
-  }
-};
+/*
+ * Module.exports.deleteCourse = async (req, res, next) => {
+ *
+ * };
+ */

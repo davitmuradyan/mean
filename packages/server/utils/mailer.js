@@ -8,14 +8,14 @@ module.exports = {
   verifyURL,
   sendMail: (userEmail, data = null) => {
     nodemailer.createTestAccount((err, account) => {
-      let transporter = nodemailer.createTransport({
+      const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
           user: EMAIL,
           pass: PASSWORD
         }
       });
-  
+
       let mailOptions = {
         from: 'Your Name',
         to: userEmail,
@@ -31,22 +31,22 @@ module.exports = {
           to: data.to,
           subject: data.subject,
           html: data.html,
-        }
+        };
       }
-      
+
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-          return console.log(error)
+          return console.log(error);
         }
       });
-  
-      transporter.verify(function(error, success) {
+
+      transporter.verify((error, success) => {
         if (error) {
-          throw error
+          throw error;
         } else {
-          console.log('Server is ready to take our messages', success)
+          console.log('Server is ready to take our messages', success);
         }
-     })
-  })
+      });
+    });
   }
 };
