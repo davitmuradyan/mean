@@ -7,9 +7,8 @@ $ npm i -g lerna
 $ npm install
 $ lerna bootstrap
 ```
-Go to `packages/server/constants` and create `dev.credentials.js` file,
-copy the content from `prod.credentials.js` and fill your credentials there,
-in order to be able to send mails from the application.
+Go to `env` and create `.env` file,
+copy the content from `.env.example` and fill your credentials there.
 When everything finished, run: 
 ```sh
 $ npm run dev:all

@@ -21,6 +21,7 @@ export class DynamicCourseComponent implements OnInit {
   solutionsMap = new Map();
   dataSetToSave;
   message = '';
+  errorMessage = '';
   course: Course;
   datasets = [];
 
@@ -58,6 +59,8 @@ export class DynamicCourseComponent implements OnInit {
           set.editMode = false;
           this.datasets.push(set);
         });
+      }, (error) => {
+        this.errorMessage = error.error.message;
       });
     });
   }
@@ -78,7 +81,6 @@ export class DynamicCourseComponent implements OnInit {
 
   fetch(): void {
     this.datasets = [];
-    console.log(this.course)
     this.fetchSub$ = this.statService.fetch(this.course._id)
       .subscribe((data) => {
         data.map(set => {
