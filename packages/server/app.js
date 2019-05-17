@@ -21,7 +21,7 @@ app.use(authRoutes);
 app.use('/dataset', statRoutes);
 app.use('/course', courseRoutes);
 app.use('/solution', solutionRoutes);
-app.use((err, req, res, next) => errorHandler(err, req, res, next));
+app.use(errorHandler);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('../client/dist/client'));

@@ -76,8 +76,4 @@ const errorHandler = (err, req, res, next) => {
 
 module.exports = {
   errorHandler,
-  UserErrors,
-  CourseErrors,
-  SolutionErrors,
-  DatasetErrors,
 };

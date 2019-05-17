@@ -24,6 +24,7 @@ module.exports.createCourse = async (req, res, next) => {
   res.status(201).json({
     message: `Course with title ${newCourse.courseName} created successfully!`
   });
+  return next(null);
 };
 
 module.exports.getUserCourses = async (req, res, next) => {
@@ -33,8 +34,7 @@ module.exports.getUserCourses = async (req, res, next) => {
 
   res.status(200).json({courses,
     length: count});
-  next();
-
+  return next(null);
 };
 
 module.exports.getAllCourses = async (req, res, next) => {
@@ -48,6 +48,7 @@ module.exports.getAllCourses = async (req, res, next) => {
 
   res.status(200).json({courses,
     length: count});
+  return next(null);
 };
 
 module.exports.getSingleCourse = async (req, res, next) => {
@@ -57,6 +58,7 @@ module.exports.getSingleCourse = async (req, res, next) => {
     return next(new CourseNotFoundError(req.params.id));
   }
   res.status(200).json(course);
+  return next(null);
 };
 
 module.exports.updateCourse = async (req, res, next) => {
@@ -74,7 +76,7 @@ module.exports.updateCourse = async (req, res, next) => {
   );
 
   res.status(200).json(course);
-  next();
+  return next(null);
 };
 
 /*

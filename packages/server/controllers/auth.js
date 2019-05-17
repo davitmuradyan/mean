@@ -60,9 +60,10 @@ module.exports.register = async (req, res, next) => {
 
   await mailer.sendMail(req.body.email);
   res.status(201).json(user);
+  return next(null);
 };
 
-module.exports.verifyEmail = async (req, res) => {
+module.exports.verifyEmail = async (req, res, next) => {
   const user = await User.findOneAndUpdate(
     {authToken: req.params.authToken},
     req.body,
@@ -80,6 +81,7 @@ module.exports.verifyEmail = async (req, res) => {
   };
 
   res.status(200).json(newUser);
+  return next(null);
 };
 
 module.exports.checkEmail = async (req, res, next) => {
@@ -91,6 +93,7 @@ module.exports.checkEmail = async (req, res, next) => {
   res.status(200).json({
     message: 'Free email'
   });
+  return next(null);
 };
 
 module.exports.checkUsername = async (req, res, next) => {
@@ -102,9 +105,10 @@ module.exports.checkUsername = async (req, res, next) => {
   res.status(200).json({
     message: 'Free username'
   });
+  return next(null);
 };
 
-module.exports.editprofile = async (req, res) => {
+module.exports.editprofile = async (req, res, next) => {
   const user = await User.findById(req.user._id);
   const updatedUser = await User.findOneAndUpdate(req.user._id, {
     firstname: req.body.firstname,
@@ -116,9 +120,10 @@ module.exports.editprofile = async (req, res) => {
   }, { new: true });
 
   res.status(200).json(updatedUser);
+  return next(null);
 };
 
-module.exports.contact = async (req, res) => {
+module.exports.contact = async (req, res, next) => {
   const data = {
     from: req.body.contactFormEmail,
     to: '82051215@mail.ru',
@@ -129,15 +134,17 @@ module.exports.contact = async (req, res) => {
 
   await mailer.sendMail('', data);
   res.status(200).json({message: 'message sent successfully.'});
+  return next(null);
 };
 
-module.exports.getUsers = async (req, res) => {
+module.exports.getUsers = async (req, res, next) => {
   const users = await User.find();
 
   res.status(200).json(users);
+  return next(null);
 };
 
-module.exports.updatePermission = async (req, res) => {
+module.exports.updatePermission = async (req, res, next) => {
   const user = await User.findOneAndUpdate(
     { _id: req.body._id },
     { type: req.body.type },
@@ -145,4 +152,5 @@ module.exports.updatePermission = async (req, res) => {
   );
 
   res.status(200).json(user);
+  return next(null);
 };

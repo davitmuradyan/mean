@@ -34,16 +34,17 @@ module.exports.createSolution = async (req, res, next) => {
   res.status(201).json({
     message: `Solution with title ${newSolution.functionName} created successfully!`
   });
-  next();
+  return next(null);
 };
 
-module.exports.getSolutions = async (req, res) => {
+module.exports.getSolutions = async (req, res, next) => {
   const solutions = await Solution.find().skip(Number(req.query.offset)).
     limit(5);
   const count = await Solution.count();
 
   res.status(200).json({solutions,
     length: count});
+  return next(null);
 };
 
 module.exports.getUserSolutions = async (req, res) => {
@@ -53,6 +54,7 @@ module.exports.getUserSolutions = async (req, res) => {
 
   res.status(200).json({solutions,
     length: count});
+  return next(null);
 };
 
 module.exports.getSingle = async (req, res, next) => {
@@ -62,9 +64,10 @@ module.exports.getSingle = async (req, res, next) => {
     return next(new SolutionNotFoundError(req.params.id));
   }
   res.status(200).json(solution);
+  return next(null);
 };
 
-module.exports.updateSolution = async (req, res) => {
+module.exports.updateSolution = async (req, res, next) => {
   const {
     course,
     problem,
@@ -98,12 +101,13 @@ module.exports.updateSolution = async (req, res) => {
   );
 
   res.status(200).json(solutionNew);
+  return next(null);
 };
 
-module.exports.getSolutionsByCourse = async (req, res,) => {
+module.exports.getSolutionsByCourse = async (req, res, next) => {
   const solutions = await Solution.find({ course: req.params.id });
   const filtered = solutions.filter((item) => item.status === 'approved');
 
   res.status(200).json({solutions: filtered});
-
+  return next(null);
 };

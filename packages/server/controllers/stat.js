@@ -2,7 +2,7 @@ const StatDataset = require('../models/statDataset.model');
 const { DatasetValidationError, DatasetNotFoundError } = require('../errors/DatasetErrors');
 
 module.exports.addDataset = async (req, res, next) => {
-  if (req.body.dataset.length === 0) {
+  if (!req.body.dataset.length) {
     return next(new DatasetValidationError('Dataset can\'t be empty.'));
   }
   req.body.dataset.forEach((item) => {
@@ -20,6 +20,7 @@ module.exports.addDataset = async (req, res, next) => {
     dataset,
     message: `Dataset ${dataset.data} added successfully. You can use this dataset later.`
   });
+  return next(null);
 };
 
 module.exports.getAll = async (req, res) => {
@@ -29,6 +30,7 @@ module.exports.getAll = async (req, res) => {
   });
 
   res.status(200).json(dataSet);
+  return next(null);
 };
 
 module.exports.getSingle = async (req, res, next) => {
@@ -38,6 +40,7 @@ module.exports.getSingle = async (req, res, next) => {
     return next(new DatasetNotFoundError(req.params.id));
   }
   res.status(200).json(dataSet);
+  return next(null);
 };
 
 module.exports.update = async (req, res, next) => {
@@ -57,12 +60,14 @@ module.exports.update = async (req, res, next) => {
   );
 
   res.status(200).json(newDataset);
+  return next(null);
 };
 
-module.exports.remove = async (req, res) => {
+module.exports.remove = async (req, res, next) => {
   const dataset = await StatDataset.findOneAndRemove({
     _id: req.params.id
   });
 
   res.status(204).json(dataset);
+  return next(null);
 };
