@@ -3,6 +3,7 @@ const {
   CourseNotFoundError,
   CourseAlreadyExistsError,
 } = require('../errors/CourseErrors');
+const { STATUSES: { STATUS_PENDING } } = require('../constants');
 
 module.exports.createCourse = async (req, res, next) => {
   try {
@@ -19,7 +20,7 @@ module.exports.createCourse = async (req, res, next) => {
       comments,
       description,
       userCreated: req.user._id,
-      status: 'pending',
+      status: STATUS_PENDING,
     }).save();
 
     res.status(201).json({

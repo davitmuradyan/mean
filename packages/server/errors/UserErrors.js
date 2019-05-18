@@ -29,8 +29,8 @@ class ForbiddenError extends Error {
 }
 
 class UserIsBlockedError extends Error {
-  constructor (username) {
-    super(`The account with username ${username} is blocked`);
+  constructor () {
+    super(`Your account is blocked, please contact us if you have any questions.`);
   }
 }
 

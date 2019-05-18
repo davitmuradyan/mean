@@ -1,47 +1,69 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../../shared/services/auth.service';
 import { User } from '../../common-shared/interfaces';
 import { ModalDirective } from 'angular-bootstrap-md';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, OnDestroy {
 
   users: User[];
-  roles = [
-    {name: 'Student', value: 'student'},
-    {name: 'Admin', value: 'admin'},
-    {name: 'Super Admin', value: 'super-admin'},
-  ];
   currentUser: User;
+  type = '';
+  updateSub$: Subscription;
+  blockUserSub$: Subscription;
+  getUsersSub$: Subscription;
 
   @ViewChild('frame') frame: ModalDirective;
+  @ViewChild('frame1') frame1: ModalDirective;
+
   constructor(private authService: AuthService) { }
 
-  ngOnInit() {
-    this.authService.getUsers().subscribe(users => {
+  ngOnInit(): void {
+    this.fetch();
+  }
+
+  fetch() {
+    this.getUsersSub$ = this.authService.getUsers().subscribe(users => {
       this.users = users;
     });
   }
 
-  openModal(user: User) {
+  openModal(user: User): void {
     this.currentUser = user;
     this.frame.show();
   }
 
-  updatePerm(user: User) {
-    this.authService.updatePermission(user).subscribe(updatedUser => {
-      console.log(updatedUser);
-    }, error1 => {
-      console.log(error1);
+  updatePerm(user: User): void {
+    user.type = this.type;
+    this.updateSub$ = this.authService.updatePermission(user).subscribe(() => {
+      this.frame.hide();
+    }, error => {
+      console.log(error);
     });
   }
 
-  onChange(role) {
-    console.log(role);
+  blockUserModal(user: User): void {
+    this.currentUser = user;
+    this.frame1.show();
+  }
+
+  blockUser(user: User) {
+    this.blockUserSub$ = this.authService.blockUser(user).subscribe(() => {
+      this.frame1.hide();
+      this.fetch();
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.updateSub$) { this.updateSub$.unsubscribe(); }
+    if (this.blockUserSub$) { this.blockUserSub$.unsubscribe(); }
   }
 
 }

@@ -9,6 +9,7 @@ export interface User {
     imgSrc: string;
     type?: string;
     blocked?: boolean;
+    _id?: string;
 }
 
 export interface Stack {

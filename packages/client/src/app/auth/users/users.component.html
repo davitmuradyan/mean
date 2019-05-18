@@ -25,8 +25,29 @@
       <td>{{user.type}}</td>
       <td>{{user.blocked}}</td>
       <td>
-        <button mdbBtn color="success" size="sm" mdbWavesEffect type="button" class="m-0" (click)="openModal(user)">Permissions</button>
-        <button mdbBtn color="danger" size="sm" mdbWavesEffect type="button" class="m-0" style="margin-left: 5px !important;">Block</button>
+        <button
+          mdbBtn
+          color="success"
+          size="sm"
+          mdbWavesEffect
+          type="button"
+          class="m-0"
+          (click)="openModal(user)"
+        >
+          Permissions
+        </button>
+        <button
+          mdbBtn
+          [color]="user.blocked ? 'primary' : 'danger'"
+          size="sm"
+          mdbWavesEffect
+          type="button"
+          class="m-0"
+          style="margin-left: 5px !important;"
+          (click)="blockUserModal(user)"
+        >
+          {{ user.blocked ? 'Unblock' : 'Block' }}
+        </button>
       </td>
     </tr>
     </tbody>
@@ -48,13 +69,41 @@
           <hr>
           Update permission for <strong>{{currentUser.username}}</strong>
           <hr>
-          <select class="browser-default custom-select">
-            <option *ngFor="let role of roles" [value]="role.value">{{role.name}}</option>
+          <select class="browser-default custom-select" [(ngModel)]="type">
+            <option value="super-admin">Super Admin</option>
+            <option value="admin">Admin</option>
+            <option value="student">Student</option>
           </select>
         </div>
       </div>
       <div class="modal-footer d-flex justify-content-center">
         <button mdbBtn color="default" class="waves-light" mdbWavesEffect (click)="updatePerm(currentUser)">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div mdbModal #frame1="mdbModal" class="modal fade left" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div *ngIf="currentUser" class="modal-dialog modal-notify  modal-{{currentUser.blocked ? 'success' : 'danger'}}" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold" style="color: white;">
+          Are you sure you want to {{currentUser.blocked ? 'unblock' : 'block' }} this user?
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div class="md-form mb-4">
+          <button
+            mdbBtn
+            (click)="blockUser(currentUser)"
+            class="waves-light btn btn-{{currentUser.blocked ? 'success' : 'danger'}}"
+            mdbWavesEffect
+          >
+            Yes, I'm sure
+          </button>
+          <button mdbBtn color="primary" class="waves-light" mdbWavesEffect (click)="frame1.hide()">No</button>
+        </div>
       </div>
     </div>
   </div>

@@ -40,6 +40,10 @@ export class AuthService {
     return this.http.put<User>(`${baseUrl}/update-permission`, user);
   }
 
+  blockUser(user: User): Observable<User> {
+    return this.http.put<User>(`${baseUrl}/block`, { userId: user._id, blocked: user.blocked });
+  }
+
   editProfile(user, image?: File) {
     const fd = new FormData();
     if (image) {

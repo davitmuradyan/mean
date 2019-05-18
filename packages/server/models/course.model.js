@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const { STATUSES: { STATUS_PENDING } } = require('../constants');
 
 const Course = new Schema({
   courseName: {
@@ -31,7 +32,7 @@ const Course = new Schema({
   },
   status: {
     type: String,
-    default: 'pending'
+    default: STATUS_PENDING,
   }
 });
 
