@@ -8,7 +8,8 @@
     "client:dev": "cd packages/client && npm run start",
     "build:client": "cd packages/client && npm run build --prod",
     "dev:all": "npm-run-all --parallel server:dev client:dev",
-    "start" : "cd packages/server && npm run start"
+    "start" : "cd packages/server && npm run start",
+    "heroku-prebuild": "lerna bootstrap"
   },
   "repository": {
     "type": "git",
