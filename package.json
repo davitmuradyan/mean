@@ -9,7 +9,7 @@
     "build:client": "cd packages/client && npm run build --prod",
     "dev:all": "npm-run-all --parallel server:dev client:dev",
     "start" : "cd packages/server && npm run start",
-    "heroku-prebuild": "lerna exec npm install && npm i @angular/cli -g",
+    "heroku-prebuild": "npm i lerna -g && lerna exec npm install && npm i @angular/cli -g",
     "postinstall": "npm run build:client"
   },
   "repository": {
