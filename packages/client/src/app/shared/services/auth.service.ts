@@ -44,6 +44,10 @@ export class AuthService {
     return this.http.put<User>(`${baseUrl}/block`, { userId: user._id, blocked: user.blocked });
   }
 
+  changePassword(form): Observable<{message: string}> {
+    return this.http.post<any>(`${baseUrl}/change-password`, form);
+  }
+
   editProfile(user, image?: File) {
     const fd = new FormData();
     if (image) {

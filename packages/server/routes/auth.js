@@ -9,6 +9,7 @@ router.post('/login', authController.login);
 router.post('/register', authController.register);
 router.post('/checkemail', authController.checkEmail);
 router.post('/checkusername', authController.checkUsername);
+router.post('/change-password', passport.authenticate('jwt', { session: false }), authController.changePassword);
 router.put('/verify-email/:authToken', authController.verifyEmail);
 router.put(
   '/edit-profile',

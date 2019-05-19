@@ -36,7 +36,7 @@
       <span *ngIf="courses.courses.length === 0" class="pending-message">No pending course submissions.</span>
     </div>
     <div *ngIf="solutions" class="col-md-6 {{!courses ? 'offset-md-6' : '' }}">
-      <mdb-card *ngFor="let solution of solutions" class="card" style="margin-bottom: 25px">
+      <mdb-card *ngFor="let solution of solutions" class="card" style="margin-bottom: 10px">
         <mdb-card-body>
           <mdb-card-title>
             <h4>{{solution.name}}</h4>

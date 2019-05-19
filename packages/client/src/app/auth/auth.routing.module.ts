@@ -15,6 +15,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { UsersComponent } from './users/users.component';
 import { SuperAdminGuard } from '../common-shared/guards/superAdmin.guard';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
   {path: '', component: AuthLayoutComponent, children: [
@@ -23,6 +24,7 @@ const routes: Routes = [
     {path: 'login', component: LoginComponent, canActivate: [LoginGuardService]},
     {path: 'main', component: MainComponent, canActivate: [AuthGuardService]},
     {path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuardService]},
+    {path: 'settings', component: SettingsComponent, canActivate: [AuthGuardService]},
     {path: 'users', component: UsersComponent, canActivate: [SuperAdminGuard]},
     {path: 'features', component: FeaturesComponent},
     {path: 'about', component: AboutComponent},

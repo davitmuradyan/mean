@@ -14,6 +14,7 @@ import { CommonSharedModule } from '../common-shared/common-shared.module';
 import { AboutComponent } from './about/about.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { UsersComponent } from './users/users.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { UsersComponent } from './users/users.component';
     AboutComponent,
     ContactUsComponent,
     UsersComponent,
+    SettingsComponent,
   ],
   imports: [
     CommonModule,
