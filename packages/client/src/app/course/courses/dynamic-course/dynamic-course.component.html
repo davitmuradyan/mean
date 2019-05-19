@@ -82,15 +82,18 @@
     <div class="col-lg-8" *ngFor="let solution of solutions.solutions; let i = index;">
       <h3>{{solution.name}}</h3>
       <div class="form-group">
-        <label for="mean">Calculate the {{solution.name}}:</label>
-        <input
-          *ngFor="let inp of solution.testCaseInput; let i = index; trackBy:trackByFn"
-          type="text"
-          class="form-control"
-          id="mean"
-          [(ngModel)]="solution.testCaseInput[i]"
-          style="margin-bottom: 15px"
-        >
+        <label for="mean">Calculate the {{solution.name}}</label>
+        <div *ngFor="let inp of solution.testCaseInput; let i = index; trackBy:trackByFn">
+          <label [for]="i + solution.name">{{solution.parameters[i]}}:</label>
+          <input
+            [id]="i + solution.name"
+            type="text"
+            class="form-control"
+            id="mean"
+            [(ngModel)]="solution.testCaseInput[i]"
+            style="margin-bottom: 15px"
+          >
+        </div>
         <button
           class="btn btn-default"
           mdbBtn

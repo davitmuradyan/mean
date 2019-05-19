@@ -22,7 +22,6 @@ export class CoursesComponent implements OnInit {
     this.fetchSub$ = this.courseService.fetch().subscribe(data => {
       this.courses = data;
       this.courses.courses = this.courses.courses.filter(course => course.status === STATUS_APPROVED);
-      console.log(this.courses.courses)
     }, err => {
       console.log(err);
     });
