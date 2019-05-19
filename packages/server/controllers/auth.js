@@ -211,3 +211,25 @@ module.exports.blockUser = async (req, res, next) => {
     return next(error);
   }
 };
+
+module.exports.changePassword = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user._id);
+
+    if (!bcryptjs.compareSync(req.body.oldPassword, user.password)) {
+      return next(new IncorrectCredentialsError());
+    }
+    if (req.body.newPassword !== req.body.confirmPassword) {
+      return next(new IncorrectCredentialsError());
+    }
+
+    await User.findOneAndUpdate(
+      { _id: req.user._id },
+      { password: bcryptjs.hashSync(req.body.newPassword, 4), }
+    );
+    res.status(200).json({ message: 'Password updated successfully.' })
+  } catch (error) {
+    console.log(error)
+    return next(error);
+  }
+};

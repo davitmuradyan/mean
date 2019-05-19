@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <h1>Change password</h1>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <div class="alert alert-success" role="alert" style="margin-top: 10px;" *ngIf="passwordUpdated">
+        Your password has been updated successfully!
+      </div>
+      <app-loader *ngIf="loading"></app-loader>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="oldPassword">Old password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="oldPassword"
+            placeholder="Old Password"
+            formControlName="oldPassword"
+            [ngClass]="{'is-invalid': form.get('oldPassword').invalid && form.get('oldPassword').touched}"
+          >
+          <span
+            *ngIf="form.get('oldPassword').invalid && form.get('oldPassword').touched"
+            class="invalid-feedback"
+            style="display: block"
+          >
+              Old Password can't be blank
+            </span>
+        </div>
+        <div class="form-group">
+          <label for="newPassword">New Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="newPassword"
+            placeholder="New Password"
+            formControlName="newPassword"
+            [ngClass]="{'is-invalid': form.get('newPassword').invalid && form.get('newPassword').touched}"
+          >
+          <span
+            *ngIf="form.get('newPassword').invalid && form.get('newPassword').touched && form.get('newPassword').hasError('required')"
+            class="invalid-feedback"
+            style="display: block"
+          >
+            New Password can't be blank
+          </span>
+          <span
+            *ngIf="form.get('newPassword').touched && form.get('newPassword').hasError('minlength')"
+            class="invalid-feedback"
+            style="display: block"
+          >
+            Password can't be less than {{form.get('newPassword').errors['minlength']['requiredLength']}}
+            Currently it is {{form.get('newPassword').errors['minlength']['actualLength']}}
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="confirmPassword"
+            placeholder="Confirm Password"
+            formControlName="confirmPassword"
+            [ngClass]="{'is-invalid': form.get('confirmPassword').invalid && form.get('confirmPassword').touched}"
+          >
+          <span
+            *ngIf="
+              form.get('confirmPassword').invalid
+              && form.get('confirmPassword').touched
+              && form.get('confirmPassword')?.hasError('required')
+            "
+            class="invalid-feedback"
+            style="display: block"
+          >
+            Confirm Password can't be blank
+          </span>
+          <span *ngIf="form.get('confirmPassword')?.hasError('confirm')" class="invalid-feedback">
+            Password is inconsistent!
+          </span>
+        </div>
+        <button type="submit" class="btn btn-default" [disabled]="form.invalid || loading">Update My password</button>
+      </form>
+    </div>
+  </div>
+</div>
