@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const { USER_TYPES: { USER_TYPE_STUDENT } } = require('../constants');
 
 const User = new Schema({
   username: {
@@ -45,7 +46,7 @@ const User = new Schema({
   type: {
     type: String,
     required: true,
-    default: 'student'
+    default: USER_TYPE_STUDENT,
   },
 });
 

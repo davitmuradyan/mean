@@ -29,6 +29,6 @@ export class CoursesService {
   }
 
   getUserCourses(offset = 0): Observable<Courses> {
-    return this.http.get<Courses>(`${baseUrl}/course/user?offset=${offset}`);
+    return this.http.get<Courses>(`${baseUrl}/course/all/user?offset=${offset}`);
   }
 }

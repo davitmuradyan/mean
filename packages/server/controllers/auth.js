@@ -8,6 +8,7 @@ const {
   IncorrectCredentialsError,
   AccountIsNotVerifiedError,
   UserAlreadyExistsError,
+  UserIsBlockedError,
 } = require('../errors/UserErrors');
 
 module.exports.login = async (req, res, next) => {
@@ -22,6 +23,9 @@ module.exports.login = async (req, res, next) => {
     }
     if (candidate.verified === false) {
       return next(new AccountIsNotVerifiedError());
+    }
+    if (candidate.blocked) {
+      return next (new UserIsBlockedError());
     }
     const accessToken = jwt.sign({
       username: candidate.username,
@@ -183,6 +187,21 @@ module.exports.updatePermission = async (req, res, next) => {
     const user = await User.findOneAndUpdate(
       { _id: req.body._id },
       { type: req.body.type },
+      { new: true }
+    );
+
+    res.status(200).json(user);
+    return next(null);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+module.exports.blockUser = async (req, res, next) => {
+  try {
+    const user = await User.findOneAndUpdate(
+      { _id: req.body.userId },
+      { blocked: !req.body.blocked },
       { new: true }
     );
 

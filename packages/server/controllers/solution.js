@@ -3,6 +3,7 @@ const {
   SolutionAlreadyExistsError,
   SolutionNotFoundError
 } = require('../errors/SolutionErrors');
+const { STATUSES: { STATUS_PENDING, STATUS_APPROVED } } = require('../constants');
 
 module.exports.createSolution = async (req, res, next) => {
   try {
@@ -29,7 +30,7 @@ module.exports.createSolution = async (req, res, next) => {
       testCaseOutput,
       solution,
       userSubmitted: req.user._id,
-      status: 'pending',
+      status: STATUS_PENDING,
     }).save();
 
     res.status(201).json({
@@ -127,7 +128,7 @@ module.exports.updateSolution = async (req, res, next) => {
 module.exports.getSolutionsByCourse = async (req, res, next) => {
   try {
     const solutions = await Solution.find({ course: req.params.id });
-    const filtered = solutions.filter((item) => item.status === 'approved');
+    const filtered = solutions.filter((item) => item.status === STATUS_APPROVED);
 
     res.status(200).json({solutions: filtered});
     return next(null);

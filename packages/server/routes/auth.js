@@ -29,5 +29,11 @@ router.put(
   checkSuperAdmin,
   authController.updatePermission
 );
+router.put(
+  '/block',
+  passport.authenticate('jwt', { session: false }),
+  checkSuperAdmin,
+  authController.blockUser
+);
 
 module.exports = router;
