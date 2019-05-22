@@ -1,7 +1,7 @@
 const Solution = require('../models/solution.model');
 const {
   SolutionAlreadyExistsError,
-  SolutionNotFoundError
+  SolutionNotFoundError,
 } = require('../errors/SolutionErrors');
 const { STATUSES: { STATUS_PENDING, STATUS_APPROVED } } = require('../constants');
 
@@ -36,6 +36,7 @@ module.exports.createSolution = async (req, res, next) => {
     res.status(201).json({
       message: `Solution with title ${newSolution.functionName} created successfully!`
     });
+
     return next(null);
   } catch (error) {
     return next(error);
@@ -50,6 +51,7 @@ module.exports.getSolutions = async (req, res, next) => {
 
     res.status(200).json({solutions,
       length: count});
+
     return next(null);
   } catch (error) {
     return next(error);
@@ -64,6 +66,7 @@ module.exports.getUserSolutions = async (req, res, next) => {
 
     res.status(200).json({solutions,
       length: count});
+
     return next(null);
   } catch (error) {
     return next(error);
@@ -78,6 +81,7 @@ module.exports.getSingle = async (req, res, next) => {
       return next(new SolutionNotFoundError(req.params.id));
     }
     res.status(200).json(solution);
+
     return next(null);
   } catch (error) {
     return next(error);
@@ -119,6 +123,7 @@ module.exports.updateSolution = async (req, res, next) => {
     );
 
     res.status(200).json(solutionNew);
+
     return next(null);
   } catch (error) {
     return next(error);
@@ -131,6 +136,21 @@ module.exports.getSolutionsByCourse = async (req, res, next) => {
     const filtered = solutions.filter((item) => item.status === STATUS_APPROVED);
 
     res.status(200).json({solutions: filtered});
+
+    return next(null);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+module.exports.getReviewSolutions = async (req, res, next) => {
+  try {
+    const solutions = await Solution.find({ status: STATUS_PENDING }).limit(5);
+    const count = await Solution.count({ status: STATUS_PENDING });
+
+    res.status(200).json({solutions,
+      length: count});
+
     return next(null);
   } catch (error) {
     return next(error);

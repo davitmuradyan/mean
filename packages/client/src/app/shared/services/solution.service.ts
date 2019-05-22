@@ -35,4 +35,8 @@ export class SolutionService {
   getSolutionsByCourse(courseId: string): Observable<Solutions> {
     return this.http.get<Solutions>(`${baseUrl}/solution/course/${courseId}`);
   }
+
+  getReviewSolutions(): Observable<Solutions> {
+    return this.http.get<Solutions>(`${baseUrl}/solution/all/review`);
+  }
 }

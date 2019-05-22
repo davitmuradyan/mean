@@ -26,30 +26,32 @@ module.exports.createCourse = async (req, res, next) => {
     res.status(201).json({
       message: `Course with title ${newCourse.courseName} created successfully!`
     });
+
     return next(null);
   } catch (error) {
-    return next(error)
+    return next(error);
   }
 };
 
 module.exports.getUserCourses = async (req, res, next) => {
   try {
     const courses = await Course.find({userCreated: req.user._id}).skip(Number(req.query.offset)).
-    limit(5);
-    const count = await Course.count();
+      limit(5);
+    const count = await Course.count({ userCreated: req.user._id });
 
     res.status(200).json({courses,
       length: count});
+
     return next(null);
   } catch (error) {
-    return next(error)
+    return next(error);
   }
 };
 
 module.exports.getAllCourses = async (req, res, next) => {
   try {
     const courses = await Course.find().skip(Number(req.query.offset)).
-    limit(5);
+      limit(5);
 
     if (!courses) {
       return next(new CourseNotFoundError());
@@ -58,9 +60,28 @@ module.exports.getAllCourses = async (req, res, next) => {
 
     res.status(200).json({courses,
       length: count});
+
     return next(null);
   } catch (error) {
-    return next(error)
+    return next(error);
+  }
+};
+
+module.exports.getReviewCourses = async (req, res, next) => {
+  try {
+    const courses = await Course.find({ status: STATUS_PENDING }).limit(5);
+
+    if (!courses) {
+      return next(new CourseNotFoundError());
+    }
+    const count = await Course.countDocuments({ status: STATUS_PENDING });
+
+    res.status(200).json({courses,
+      length: count});
+
+    return next(null);
+  } catch (error) {
+    return next(error);
   }
 };
 
@@ -72,9 +93,10 @@ module.exports.getSingleCourse = async (req, res, next) => {
       return next(new CourseNotFoundError(req.params.id));
     }
     res.status(200).json(course);
+
     return next(null);
   } catch (error) {
-    return next(error)
+    return next(error);
   }
 };
 
@@ -94,9 +116,10 @@ module.exports.updateCourse = async (req, res, next) => {
     );
 
     res.status(200).json(course);
+
     return next(null);
   } catch (error) {
-    return next(error)
+    return next(error);
   }
 };
 
