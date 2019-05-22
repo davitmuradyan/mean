@@ -4,6 +4,7 @@ import { SolutionService } from '../../shared/services/solution.service';
 import { Subscription } from 'rxjs';
 import { Courses, Solution } from '../../common-shared/interfaces';
 import { STATUSES } from '../../shared/constants/index';
+import { ActivatedRoute, Router } from '@angular/router';
 
 const { STATUS_PENDING } = STATUSES;
 
@@ -19,23 +20,21 @@ export class ReviewSubmissionsComponent implements OnDestroy {
   courses: Courses;
   solutions: Solution[];
 
-  constructor(private coursesService: CoursesService, private solutionsService: SolutionService) { }
+  constructor(
+    private coursesService: CoursesService,
+    private solutionsService: SolutionService,
+    ) { }
 
   loadCourses(): void {
-    this.sub1$ = this.coursesService.fetch().subscribe(courses => {
-      this.courses = {
-        courses: courses.courses.filter(course => {
-          return course.status === STATUS_PENDING;
-        }),
-        length: courses.length,
-      };
-    }, error => {
-      console.log(error);
-    });
+      this.sub1$ = this.coursesService.getReviewCourses().subscribe(courses => {
+        this.courses = courses;
+      }, error => {
+        console.log(error);
+      });
   }
 
   loadSolutions(): void {
-    this.sub2$ = this.solutionsService.fetch().subscribe(solutions => {
+    this.sub2$ = this.solutionsService.getReviewSolutions().subscribe(solutions => {
       this.solutions = solutions.solutions.filter(solution => solution.status === STATUS_PENDING);
     }, error => {
       console.log(error);

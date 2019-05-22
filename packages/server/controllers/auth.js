@@ -25,7 +25,7 @@ module.exports.login = async (req, res, next) => {
       return next(new AccountIsNotVerifiedError());
     }
     if (candidate.blocked) {
-      return next (new UserIsBlockedError());
+      return next(new UserIsBlockedError());
     }
     const accessToken = jwt.sign({
       username: candidate.username,
@@ -43,6 +43,7 @@ module.exports.login = async (req, res, next) => {
       imgSrc: candidate.imgSrc,
       type: candidate.type,
     });
+
     return next(null);
   } catch (error) {
     return next(error);
@@ -52,9 +53,9 @@ module.exports.login = async (req, res, next) => {
 module.exports.register = async (req, res, next) => {
   try {
     const candidate = await User.findOne({$or: [
-        {username: req.body.username},
-        {email: req.body.email}
-      ]});
+      { username: req.body.username },
+      { email: req.body.email }
+    ]});
 
     if (candidate) {
       return next(new UserAlreadyExistsError(req.body.username));
@@ -70,6 +71,7 @@ module.exports.register = async (req, res, next) => {
 
     await mailer.sendMail(req.body.email);
     res.status(201).json(user);
+
     return next(null);
   } catch (error) {
     return next(error);
@@ -83,7 +85,9 @@ module.exports.verifyEmail = async (req, res, next) => {
       req.body,
     );
     const accessToken = jwt.sign({
-      username: user.username
+      username: user.username,
+      _id: user._id,
+      type: user.type,
     }, JWT_SECRET_KEY, { expiresIn: "6 hours"});
     const newUser = {
       accessToken,
@@ -91,10 +95,11 @@ module.exports.verifyEmail = async (req, res, next) => {
       username: user.username,
       firstname: user.firstname,
       lastname: user.lastname,
-      id: user._id
+      id: user._id,
     };
 
     res.status(200).json(newUser);
+
     return next(null);
   } catch (error) {
     return next(error);
@@ -111,6 +116,7 @@ module.exports.checkEmail = async (req, res, next) => {
     res.status(200).json({
       message: 'Free email'
     });
+
     return next(null);
   } catch (error) {
     return next(error);
@@ -127,6 +133,7 @@ module.exports.checkUsername = async (req, res, next) => {
     res.status(200).json({
       message: 'Free username'
     });
+
     return next(null);
   } catch (error) {
     return next(error);
@@ -147,6 +154,7 @@ module.exports.editprofile = async (req, res, next) => {
     }, { new: true });
 
     res.status(200).json(updatedUser);
+
     return next(null);
   } catch (error) {
     return next(error);
@@ -165,6 +173,7 @@ module.exports.contact = async (req, res, next) => {
 
     await mailer.sendMail('', data);
     res.status(200).json({message: 'message sent successfully.'});
+
     return next(null);
   } catch (error) {
     return next(error);
@@ -176,6 +185,7 @@ module.exports.getUsers = async (req, res, next) => {
     const users = await User.find();
 
     res.status(200).json(users);
+
     return next(null);
   } catch (error) {
     return next(error);
@@ -191,6 +201,7 @@ module.exports.updatePermission = async (req, res, next) => {
     );
 
     res.status(200).json(user);
+
     return next(null);
   } catch (error) {
     return next(error);
@@ -206,6 +217,7 @@ module.exports.blockUser = async (req, res, next) => {
     );
 
     res.status(200).json(user);
+
     return next(null);
   } catch (error) {
     return next(error);
@@ -227,9 +239,10 @@ module.exports.changePassword = async (req, res, next) => {
       { _id: req.user._id },
       { password: bcryptjs.hashSync(req.body.newPassword, 4), }
     );
-    res.status(200).json({ message: 'Password updated successfully.' })
+    res.status(200).json({ message: 'Password updated successfully.' });
+
+    return next(null);
   } catch (error) {
-    console.log(error)
     return next(error);
   }
 };
